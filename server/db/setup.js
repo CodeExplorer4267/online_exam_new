@@ -93,6 +93,26 @@ export const createMarksTable=async()=>{
    }
 }
 
+export const createMarksSubmitTable=async()=>{
+     try {
+       await pool.query(
+        `
+        CREATE TABLE IF NOT EXISTS marks_submit(
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          student_id INT,
+          exam_id INT,
+          isSubmitted BOOLEAN DEFAULT FALSE,
+          FOREIGN KEY (student_id) REFERENCES users(id),
+          FOREIGN KEY (exam_id) REFERENCES exams(id)
+        )
+        `
+       )
+       console.log("Marks submit table created or already exists")
+     } catch (error) {
+        console.log("Error while creating submitTable",error)
+     }
+}
+
 export default createUsersTable;
 
 //g

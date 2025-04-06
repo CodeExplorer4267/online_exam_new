@@ -1,6 +1,6 @@
 import express from 'express';
 import { getStudentList, login, register } from '../controller/userController.js';
-import { createExam, getAllAnswers, getAttemptedStudents, getEachStudentAnswer, submitMarks } from '../controller/teacherController.js';
+import { createExam, getAllAnswers, getAttemptedStudents, getEachStudentAnswer, getMarksSubmitOrNot, submitMarks } from '../controller/teacherController.js';
 import { deleteExam, getAllExams, getAllQuestions, submitExam } from '../controller/studentController.js';
 import { getStudentMarks } from '../controller/studentController.js';
 
@@ -22,6 +22,7 @@ router.get('/answers/attempted/:examId',getAttemptedStudents) //done
 router.get('/answers/:examId/:studentId',getEachStudentAnswer) //done
 router.post('/update-marks',submitMarks)
 
+router.get('/marks-submit-or-not/:examId/:studentId',getMarksSubmitOrNot)
 router.get("/student-marks/:studentId", getStudentMarks);
 
 export default router;

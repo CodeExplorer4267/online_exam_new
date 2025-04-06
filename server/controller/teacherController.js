@@ -52,8 +52,10 @@ export const submitMarks=async(req,res)=>{
             return res.status(400).json({ success: false, error: "Missing required fields" });
         }
         const MarksQuery="INSERT INTO marks(student_id,exam_id,exam_marks) VALUES (?,?,?)"
+        const SubmitQuery="INSERT INTO marks_submit(student_id,exam_id,isSubmitted) VALUES (?,?,?)"
         const [marksResult]=await pool.query(MarksQuery,[studentId,examId,marks])
-        res.status(201).json({success:true,message:"Marks uploaded successfully",marksId:marksResult.insertId})
+        const [submitResult]=await pool.query(SubmitQuery,[studentId,examId,true])
+        res.status(201).json({success:true,message:"Marks uploaded successfully",marksId:marksResult.insertId,submitId:submitResult.insertId})
     } catch (error) {
         res.status(400).json({success:false,error:error.message})
     }
@@ -97,6 +99,27 @@ export const getEachStudentAnswer=async(req,res)=>{
             return res.status(200).json({message:'No answer found'})
         }
         res.status(200).json({success:true,answers})
+    } catch (error) {
+        res.status(400).json({success:false,error:error.message})
+    }
+}
+
+export const getMarksSubmitOrNot=async(req,res)=>{
+    try {
+        const {examId,studentId}=req.params;
+        if(!examId || !studentId){
+            return res.status(400).json({success:false,message:"examId and studentId are required"})
+        }
+        const query=`
+            SELECT isSubmitted
+            FROM marks_submit
+            WHERE exam_id=? AND student_id=?
+        `
+        const [marksSubmit]=await pool.query(query,[examId,studentId])
+        if(marksSubmit.length==0){
+            return res.status(200).json({message:'No answer found'})
+        }
+        res.status(200).json({success:true,marksSubmit})
     } catch (error) {
         res.status(400).json({success:false,error:error.message})
     }

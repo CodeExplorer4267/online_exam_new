@@ -2,7 +2,7 @@
 import express, { Router } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import createUsersTable, { createAnswersTable } from './db/setup.js';
+import createUsersTable, { createAnswersTable, createMarksSubmitTable } from './db/setup.js';
 import router from './routes/Router.js';
 import { createExamsTable,createQuestionsTable,createMarksTable } from './db/setup.js';
 dotenv.config();
@@ -27,6 +27,8 @@ createExamsTable();
 createQuestionsTable();
 createAnswersTable()
 createMarksTable()
+createMarksSubmitTable()
+
 // Public route
 app.get('/', (req, res) => {
   res.send('Hello');
