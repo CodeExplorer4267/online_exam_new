@@ -1,0 +1,34 @@
+
+.create_exam_container{
+    width: 80%;
+}
+#teacher_create_exam{
+    text-align: center;
+    font-size: 1.7rem;
+    color: #00203f;
+}
+.exam_name_dur{
+    display:flex;
+    width:60%;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    gap:20px;
+}
+.question_container{
+    display: flex;
+    gap:10px;
+    margin: 10px auto;
+    width:70%;
+}
+.create_exam_btn{
+    width:100px;
+    height:30px;
+    margin:4px auto;
+}
+.btns{
+    width: 25%;
+    display: flex;
+    margin:4px auto;
+    padding:6px;
+}

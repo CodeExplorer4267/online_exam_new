@@ -1,0 +1,23 @@
+.sidebar-teacher{
+    width:18%;
+    background-color:#ADEFD1FF;
+    min-height: 100vh;
+    border-right: 3px solid black;
+}
+.options{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-size: 1.3rem;
+    padding:5px;
+}
+.options .option{
+    padding:6px;
+    border:2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.active{
+    background-color: #00203FFF;
+    color:#ADEFD1FF
+}

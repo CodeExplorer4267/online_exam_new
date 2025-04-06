@@ -1,0 +1,27 @@
+input{
+    height: 25px;
+  width: 80%;
+  margin: 0px auto;
+  padding:7px;
+  border: 1px solid black;
+  border-radius: 15px;
+}
+#register_btn{
+  height: 50px;
+  width: 120px;
+  background-color: #6b2097;
+  color: white;
+  border-radius: 10px;
+  margin: 10px auto;
+}
+.register_login{
+   font-size: 17px;
+   font-weight: bold;
+   text-align: center;
+}
+.login{
+   color:#6b2097;
+}
+p{
+  cursor:pointer
+}

@@ -1,0 +1,13 @@
+.container{
+    height: 75px;
+     display:flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+     padding:20px;
+  }
+  body{
+    background: white;
+  }
+  
+  

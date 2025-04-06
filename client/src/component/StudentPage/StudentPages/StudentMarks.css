@@ -1,0 +1,47 @@
+.marks-container {
+    background-color: #f4f7fc;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .marks-heading {
+    text-align: center;
+    font-size: 2rem;
+    color: #4a90e2;
+    margin-bottom: 20px;
+  }
+  
+  .marks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .marks-table th, .marks-table td {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .marks-table th {
+    background-color: #4a90e2;
+    color: white;
+  }
+  
+  .marks-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .marks-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .no-marks {
+    text-align: center;
+    color: #888;
+    font-size: 1.2rem;
+  }
+  

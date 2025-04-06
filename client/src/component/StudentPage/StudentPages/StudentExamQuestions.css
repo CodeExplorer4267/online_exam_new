@@ -1,0 +1,80 @@
+/* General container styling */
+.exam-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    padding: 20px;
+    width: 80%;
+  }
+  
+  /* Title styling */
+  .exam-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Question box */
+  .question-box {
+    width: 90%;
+    max-width: 700px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Each question */
+  .question-card {
+    background: #ffffff;
+    border: 1px solid #02092e;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .question-card:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Question text */
+  .question-text {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  .question-number {
+    font-weight: bold;
+    color: #3498db;
+  }
+  
+  /* Input field */
+  .answer-input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #02143d;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s ease-in-out;
+  }
+  
+  .answer-input:focus {
+    border: 1px solid #3498db;
+  }
+  
+  /* Loading text */
+  .loading-text {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+  }
+  

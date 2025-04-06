@@ -1,0 +1,39 @@
+.student-list-container {
+    width: 80%;
+    text-align: center;
+  }
+  
+  .student-table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 5px auto;
+  }
+  
+  .student-table th, .student-table td {
+    border: 1px solid black;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .student-table th {
+    background-color: #00203FFF;
+    color: #ADEFD1FF;
+  }
+  
+  .student-table tr:nth-child(even) {
+    background-color: #dcfdff;
+  }
+  
+  .student-table tr:hover {
+    background-color: #ddd;
+  }
+#student_report{
+    height:30px;
+    width:75px;
+    border-radius: 10px;
+    padding:4px;
+    background-color: red;
+    color:white;
+    border:1px solid black;
+}

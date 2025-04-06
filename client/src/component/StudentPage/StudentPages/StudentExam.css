@@ -1,0 +1,25 @@
+.exam-table{
+    width: 60%;
+    border-collapse: collapse;
+    margin: 5px auto;
+}
+.stu-exam-container{
+    width: 100%;
+}
+.exam-table th,.exam-table td{
+    border: 1px solid black;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+.exam-table th{
+    background-color: #00203FFF;
+    color: #ADEFD1FF;
+}
+.exam-table tr:nth-child(even) {
+    background-color: #dcfdff;
+  }
+  
+  .exam-table tr:hover {
+    background-color: #ddd;
+  }

@@ -1,0 +1,33 @@
+.each_stu_ans_container{
+    width: 81%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.each_stu_ans_table{
+    width:80%;
+    margin:10px auto;
+    border-collapse: collapse;
+}
+.each_stu_ans_table th, .each_stu_ans_table td {
+    border: 1px solid black;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+.each_stu_ans_table th {
+    background-color: #00203FFF;
+    color: #ADEFD1FF;
+}
+.each_stu_ans_table tr:nth-child(even) {
+    background-color: #dcfdff;
+  }
+  
+  .each_stu_ans_table tr:hover {
+    background-color: #ddd;
+  }
+.marks_for_each_student{
+    width:150px;
+    text-align: center;
+}

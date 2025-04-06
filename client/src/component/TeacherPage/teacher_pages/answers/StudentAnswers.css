@@ -1,0 +1,80 @@
+/* Student Answers Page Styling */
+.student-answers-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  /* Title Styling */
+  .student-answers-container h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  /* Exam & Student ID Info */
+  .student-answers-container p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Table Styling */
+  .answers-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  .answers-table th, .answers-table td {
+    padding: 12px;
+  border: 1.5px solid #000;
+  text-align: center;
+}
+  
+  .answers-table th {
+    background-color: #00203FFF;
+    color: #ADEFD1FF;
+    font-size: 16px;
+  }
+  
+  .answers-table tr:nth-child(even) {
+    background-color: rgb(212, 247, 231);
+  }
+  
+  .answers-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Marks Input Field */
+  .marks-input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  /* Submit Button */
+  .submit-marks-btn {
+    margin-top: 20px;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .submit-marks-btn:hover {
+    background-color: #218838;
+  }
+  
