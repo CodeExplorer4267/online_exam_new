@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./StudentResult.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const StudentResult = () => {
   const currentStudentId = localStorage.getItem("studentId");
   const [Exams, setExams] = useState([]);
+  const navigate=useNavigate()
 
   useEffect(() => {
     axios.get("http://localhost:5000/online-exam/exams").then((res) => {
@@ -51,6 +53,8 @@ const StudentResult = () => {
                         color: "#ADEFD1FF",
                         borderRadius: "10px",
                         cursor: "pointer",
+                      }} onClick={()=>{
+                         navigate('/student/stu-result/'+exam.id+'/'+currentStudentId)
                       }}
                     >
                       View

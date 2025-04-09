@@ -46,31 +46,7 @@ export const submitExam=async(req,res)=>{
         res.status(404).json({success:false,message:error.message})
     }
 }
-//get marks
-export const getStudentMarks = async (req, res) => {
-    try {
-        const { studentId } = req.params;
 
-        if (!studentId) {
-            return res.status(400).json({ success: false, error: "Student ID is required" });
-        }
-
-        const query = `
-             SELECT e.name AS exam_name, m.exam_marks AS total_marks
-            FROM marks m
-            JOIN exams e ON m.exam_id = e.id
-            WHERE m.student_id = ?;
-        `;
-
-        const [results] = await pool.query(query, [studentId]);
-
-        res.status(200).json({ success: true, data: results });
-
-    } catch (error) {
-        console.error("Error fetching student marks:", error);
-        res.status(500).json({ success: false, error: error.message });
-    }
-};
 //delete a single exam
 export const deleteExam=async(req,res)=>{
     const {id}=req.params;

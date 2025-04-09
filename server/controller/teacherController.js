@@ -124,3 +124,25 @@ export const getMarksSubmitOrNot=async(req,res)=>{
         res.status(400).json({success:false,error:error.message})
     }
 }
+
+//get a particular student marks
+export const getStudentMarks=async(req,res)=>{
+    try {
+        const {studentId,examId}=req.params;
+        if(!studentId){
+            return res.status(400).json({success:false,message:"studentId is required"})
+        }
+        const query=`
+        SELECT exam_marks
+        FROM marks
+        WHERE student_id=? AND exam_id=?
+        `
+        const [marks]=await pool.query(query,[studentId,examId])
+        if(marks.length==0){
+            return res.status(200).json({message:'No marks found'})
+        }
+        res.status(200).json({success:true,marks})
+    } catch (error) {
+        res.status(400).json({success:false,error:error.message})
+    }
+}
