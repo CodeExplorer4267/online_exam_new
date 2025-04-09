@@ -1,0 +1,29 @@
+.student_result_container{
+    width: 81%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.res_exam_table{
+    width: 60%;
+    border-collapse: collapse;
+    margin: 5px auto;
+}
+.res_exam_table th,.res_exam_table td{
+    border: 1px solid black;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+.res_exam_table th{
+    background-color: #00203FFF;
+    color: #ADEFD1FF;
+}
+.res_exam_table tr:nth-child(even) {
+    background-color: #dcfdff;
+  }
+  
+  .res_exam_table tr:hover {
+    background-color: #ddd;
+  }

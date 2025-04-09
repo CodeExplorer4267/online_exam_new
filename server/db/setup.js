@@ -102,8 +102,8 @@ export const createMarksSubmitTable=async()=>{
           student_id INT,
           exam_id INT,
           isSubmitted BOOLEAN DEFAULT FALSE,
-          FOREIGN KEY (student_id) REFERENCES users(id),
-          FOREIGN KEY (exam_id) REFERENCES exams(id)
+          FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
+          FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE        
         )
         `
        )
@@ -115,4 +115,4 @@ export const createMarksSubmitTable=async()=>{
 
 export default createUsersTable;
 
-//g
+//ON DELETE CASCADE is a referential action in SQL that is used in foreign key constraints. It ensures that when a row in the parent table (the table being referenced) is deleted, all related rows in the child table (the table containing the foreign key) are automatically deleted as well.
