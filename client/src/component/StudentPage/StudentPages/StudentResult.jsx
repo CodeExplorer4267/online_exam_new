@@ -54,7 +54,11 @@ const StudentResult = () => {
                         borderRadius: "10px",
                         cursor: "pointer",
                       }} onClick={()=>{
-                         navigate('/student/stu-result/'+exam.id+'/'+currentStudentId)
+                         navigate('/student/stu-result/'+exam.id+'/'+currentStudentId,{
+                          state:{
+                            exam_total_marks:exam.total_Marks
+                          }
+                         })
                       }}
                     >
                       View
