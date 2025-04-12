@@ -13,7 +13,9 @@ const Result = () => {
     }, []);
 
     return (
-        <div className='stu-exam-container'>
+        <div className='stu-exam-container' style={{
+            width:"81%",
+        }}>
             <h2 style={{
               textAlign:"center",
               fontSize:"1.7rem"

@@ -159,7 +159,7 @@ const EachStudentAnswer = () => {
           </tbody>
         </table>
         <div className="marks_for_each_student">
-          <p
+          <p    
             style={{
               fontSize: "20px",
               fontWeight: "bold",

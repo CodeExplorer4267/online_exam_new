@@ -12,7 +12,9 @@ const PORT = process.env.PORT || 5000;
  
 // Enable CORS for a specific origin
 const corsOptions = { 
-  origin: ['http://localhost:5000','http://localhost:5173','http://localhost:5174'],
+  origin: ['http://localhost:5173', 'http://localhost:5174'], // Add allowed origins
+  credentials: true, // Allow credentials
+  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
 };
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));

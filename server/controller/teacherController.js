@@ -3,7 +3,9 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import db from '../db/db.js'; 
 import e from 'express';
-
+import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
 //to create exam
 export const createExam = async (req, res) => {
     try {
@@ -145,4 +147,42 @@ export const getStudentMarks=async(req,res)=>{
     } catch (error) {
         res.status(400).json({success:false,error:error.message})
     }
+}
+//ai question generation
+export const generateQuestion=async(req,res)=>{
+    const {topic,totalmarks,difficulty}=req.body;
+    const marks=parseInt(totalmarks)
+    if(!topic || isNaN(marks) || !difficulty){
+        return res.status(400).json({success:false,message:"topic, totalmarks and difficulty are required"})
+    }
+    const prompt = `
+Generate an exam paper on "${topic}" for ${totalmarks} marks.
+Difficulty level: ${difficulty}.
+Question only contains short answer questions.
+Make sure to include the marks for each question.
+Ensure the total adds up to ${totalmarks}.
+Make sure to include the answer for each question.
+`;
+   try {
+    const response = await axios.post(
+        "https://openrouter.ai/api/v1/chat/completions",
+        {
+          model: "mistralai/mistral-7b-instruct",
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.7,
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${process.env.OPENROUTER_KEY}`,
+                "HTTP-Referer": "http://localhost:5000", // change based on your app domain
+                "Content-Type": "application/json"
+              },
+        }
+      );
+  
+      res.json({ questionPaper: response.data.choices[0].message.content });
+   } catch (error) {
+    console.error("Error from OpenAI API:", error.response?.data || error.message);
+    res.status(400).json({ success: false, error: error.message });
+   }
 }
