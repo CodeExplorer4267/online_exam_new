@@ -5,6 +5,7 @@ import cors from 'cors';
 import createUsersTable, { createAnswersTable, createMarksSubmitTable } from './db/setup.js';
 import router from './routes/Router.js';
 import { createExamsTable,createQuestionsTable,createMarksTable } from './db/setup.js';
+import socketIO from 'socket.io';
 dotenv.config();
 
 const app = express();
@@ -30,6 +31,18 @@ createQuestionsTable();
 createAnswersTable()
 createMarksTable()
 createMarksSubmitTable()
+
+// Create a Socket.IO server
+//Add this before the app.get() block
+socketIO.on('connection', (socket) => {
+  console.log(`⚡: ${socket.id} user just connected!`);
+  socket.on('disconnect', () => {
+    console.log('🔥: A user disconnected');
+  });
+});
+//From the code snippet above, the socket.io("connection") function establishes a connection with the React app, then creates a unique ID for each socket and logs the ID to the console whenever a user visits the web page.
+
+// When you refresh or close the web page, the socket fires the disconnect event showing that a user has disconnected from the socket.
 
 // Public route
 app.get('/', (req, res) => {
