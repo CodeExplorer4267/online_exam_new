@@ -71,7 +71,7 @@ io.on('connection',(socket)=>{
 //This block listens for a private chat message being sent from one user to another.
     socket.on('send_message',async({senderId,receiverId,message})=>{
         const query=`
-         INSERT INTO messages(sender_id,reciever_id,message) VALUES(?,?,?)
+         INSERT INTO messages(sender_id,receiver_id,message) VALUES(?,?,?)
          `
          const [result]=await pool.query(query,[senderId,receiverId,message]);
         //  Now you're checking:

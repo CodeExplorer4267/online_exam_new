@@ -28,7 +28,7 @@ const TeacherPage = () => {
                  <Route path="result/attempted/:examId" element={<Answers_indi/>}/>
                  <Route path="result/attempted/:examId/answer/:studentId" element={<EachStudentAnswer/>}/>
                  <Route path="question-generator" element={<Generate/>}/>
-                 <Route path="chat" element={<Chat/>}/>
+                 <Route path="chat" element={<Chat userId={22} receiverId={21}/>}/>
               </Routes>
         </div>
     </div>

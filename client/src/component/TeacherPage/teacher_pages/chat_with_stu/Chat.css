@@ -1,6 +1,33 @@
 .chat-container{
     width:81%;
+}
+.chat-heading{
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 1rem 0;
+   text-align: center;
+}
+.chat-input{
+    width:40%;
+    height:35px;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+    margin:10px 10px;
+}
+.send-message{
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
+
+}
+.chat-send-btn{
+    height: 40px;
+    width: 100px;
+    background-color: #0fe155;  
+    color:whitesmoke;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
 }
