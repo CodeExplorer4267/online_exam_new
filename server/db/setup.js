@@ -113,6 +113,25 @@ export const createMarksSubmitTable=async()=>{
      }
 }
 
+export const createMessageTable=async()=>{
+     try {
+       await pool.query(`
+         CREATE TABLE IF NOT EXISTS messages (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  sender_id INT,
+  receiver_id INT,
+  message TEXT,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (sender_id) REFERENCES users(id),
+  FOREIGN KEY (receiver_id) REFERENCES users(id)
+);
+        `)
+        console.log("Mesaage table created or already exists")
+     } catch (error) {
+        console.log("Error while creating message table",error)
+     }
+}
+
 export default createUsersTable;
 
 //ON DELETE CASCADE is a referential action in SQL that is used in foreign key constraints. It ensures that when a row in the parent table (the table being referenced) is deleted, all related rows in the child table (the table containing the foreign key) are automatically deleted as well.
