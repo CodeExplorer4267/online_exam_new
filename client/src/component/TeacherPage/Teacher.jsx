@@ -11,6 +11,7 @@ import StudentAnswers from "./teacher_pages/answers/StudentAnswers";
 import Answers_indi from "./teacher_pages/answers/answers_indivitual/Answers_indi";
 import EachStudentAnswer from "./teacher_pages/answers/answer_stu_indi/EachStudentAnswer";
 import Generate from "./teacher_pages/AI_Q_generator/Generate";
+import Chat from "./teacher_pages/chat_with_stu/Chat";
 
 
 const TeacherPage = () => {
@@ -27,6 +28,7 @@ const TeacherPage = () => {
                  <Route path="result/attempted/:examId" element={<Answers_indi/>}/>
                  <Route path="result/attempted/:examId/answer/:studentId" element={<EachStudentAnswer/>}/>
                  <Route path="question-generator" element={<Generate/>}/>
+                 <Route path="chat" element={<Chat/>}/>
               </Routes>
         </div>
     </div>
