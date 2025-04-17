@@ -186,3 +186,25 @@ Make sure to include the answer for each question.
     res.status(400).json({ success: false, error: error.message });
    }
 }
+
+export const getAllMessages=async(req,res)=>{
+    const {userId,receiverId}=req.params;
+    if(!userId || !receiverId){
+        return res.status(400).json({success:false,message:"userId and receiverId are required"})
+    }
+    try {
+        const query=`
+       SELECT * FROM messages 
+     WHERE (sender_id = ? AND receiver_id = ?) 
+     OR (sender_id = ? AND receiver_id = ?)
+     ORDER BY timestamp ASC
+        `
+        const [messages]=await pool.query(query,[userId,receiverId,receiverId,userId])
+        if(messages.length==0){
+            return res.status(200).json({message:'No messages found'})
+        }
+        res.status(201).json({success:true,messages})
+    } catch (error) {
+        res.status(400).json({success:false,message:error.message})
+    }
+}

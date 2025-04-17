@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Chat.css";
 import io from "socket.io-client";
-
+import axios from "axios";
 const socket = io.connect("http://localhost:5000");
 const Chat = ({ userId, receiverId }) => {
   const [messages, setmessages] = useState([]);
@@ -13,6 +13,16 @@ const Chat = ({ userId, receiverId }) => {
     socket.on("receive_message", (data) => {
       setmessages((prev) => [...prev, data]);
     });
+
+    //fetch previous messages
+    axios.get(`http://localhost:5000/online-exam/get-all-messages/${userId}/${receiverId}`)
+    .then((res)=>{
+      setmessages(res.data.messages)
+    })
+    .catch((err)=>{
+      console.log("Error while fetching messages",err)
+    })
+    // return socket.disconnect(); //cleanup function to disconnect the socket when the component unmounts
   }, []);
 
   useEffect(() => {
@@ -34,7 +44,6 @@ const Chat = ({ userId, receiverId }) => {
     setmessages((prev) => [...prev, { ...messageData, timestamp: new Date() }]);
     setmsg("");
   };
-
   return (
     <div className="chat-container">
       <h3 className="chat-heading">Chat with user ID : {receiverId}</h3>
@@ -47,29 +56,65 @@ const Chat = ({ userId, receiverId }) => {
           border: "1px solid gray",
           borderRadius: "20px",
           margin: "10px auto",
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          padding: "20px",
+          backgroundColor: "#f0f2f5"
         }}
       >
-        {messages.map((m, i) => (
-          <p
-            key={i}
-            style={{ textAlign: m.senderId === userId ? "right" : "left" }}
-          >
-            {m.message}
-          </p>
-        ))}
+        {messages.map((m, i) => {
+          const isSender = m.sender_id === userId;
+          return (
+            <div
+              key={i}
+              style={{
+                alignSelf: isSender ? "flex-end" : "flex-start",
+                backgroundColor: isSender ? "#dcf8c6" : "#ffffff",
+                padding: "10px 15px",
+                borderRadius: "15px",
+                maxWidth: "70%",
+                boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
+                wordWrap: "break-word",
+                position: "relative"
+              }}
+            >
+              {m.message}
+            </div>
+          );
+        })}
       </div>
-      <div className="send-message">
+      <div className="send-message" style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
         <input
           value={msg}
           onChange={(e) => setmsg(e.target.value)}
           className="chat-input"
+          style={{
+            padding: "10px",
+            width: "60%",
+            borderRadius: "20px",
+            border: "1px solid #ccc",
+            marginRight: "10px"
+          }}
         />
-        <button onClick={sendMessage} className="chat-send-btn">
+        <button
+          onClick={sendMessage}
+          className="chat-send-btn"
+          style={{
+            padding: "10px 20px",
+            borderRadius: "20px",
+            backgroundColor: "#0b93f6",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer"
+          }}
+        >
           Send
         </button>
       </div>
     </div>
   );
+  
 };
 
 export default Chat;

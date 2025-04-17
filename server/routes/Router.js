@@ -1,6 +1,6 @@
 import express from 'express';
 import { getStudentList, login, register } from '../controller/userController.js';
-import { createExam, generateQuestion, getAllAnswers, getAttemptedStudents, getEachStudentAnswer, getMarksSubmitOrNot, getStudentMarks, submitMarks } from '../controller/teacherController.js';
+import { createExam, generateQuestion, getAllAnswers, getAllMessages, getAttemptedStudents, getEachStudentAnswer, getMarksSubmitOrNot, getStudentMarks, submitMarks } from '../controller/teacherController.js';
 import { deleteExam, getAllExams, getAllQuestions, submitExam } from '../controller/studentController.js';
 
 const router=express.Router();
@@ -21,6 +21,8 @@ router.get('/answers/:examId/:studentId',getEachStudentAnswer) //done
 router.post('/update-marks',submitMarks)
 // router.post('/generate',generateQuestion)
 router.post('/generate',generateQuestion)
+router.get('/get-all-messages/:userId/:receiverId',getAllMessages)
+
 
 
 router.delete('/exam/:id',deleteExam)  //done
