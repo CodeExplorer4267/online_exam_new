@@ -1,0 +1,15 @@
+.available-stu img{
+   height:35px;
+}
+.available-student-chat-container{
+    width:30%;
+    height:100vh;
+    border-right: 1px solid black;
+    padding: 3px;
+}
+.available-stu{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 14px;
+}

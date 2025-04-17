@@ -95,7 +95,7 @@ export const login=async(req,res)=>{
 //get the studentlist
 export const getStudentList=async(req,res)=>{
    try {
-     const [students]=await pool.query('SELECT username,email FROM users WHERE role=?',['student'])
+     const [students]=await pool.query('SELECT id,username,email FROM users WHERE role=?',['student'])
      if(students.length===0){
         res.status(200).json({message:'No student found'})
      }

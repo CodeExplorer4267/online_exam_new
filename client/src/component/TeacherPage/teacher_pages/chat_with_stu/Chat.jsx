@@ -3,19 +3,20 @@ import "./Chat.css";
 import io from "socket.io-client";
 import axios from "axios";
 const socket = io.connect("http://localhost:5000");
-const Chat = ({ userId, receiverId }) => {
+const Chat = () => {
+  const { studentId, teacherId } = useParams();
   const [messages, setmessages] = useState([]);
   const [msg, setmsg] = useState("");
   const messageRef = useRef(null);
 
   useEffect(() => {
-    socket.emit("register", userId); //register the user with the socket id
+    socket.emit("register", teacherId); //register the user with the socket id
     socket.on("receive_message", (data) => {
       setmessages((prev) => [...prev, data]);
     });
 
     //fetch previous messages
-    axios.get(`http://localhost:5000/online-exam/get-all-messages/${userId}/${receiverId}`)
+    axios.get(`http://localhost:5000/online-exam/get-all-messages/${teacherId}/${studentId}`)
     .then((res)=>{
       setmessages(res.data.messages)
     })
@@ -36,8 +37,8 @@ const Chat = ({ userId, receiverId }) => {
       return;
     }
     const messageData = {
-      senderId: userId,
-      receiverId,
+      senderId: teacherId,
+      receiverId:studentId,
       message: msg,
     };
     socket.emit("send_message", messageData); //emit the message to the server
@@ -46,7 +47,7 @@ const Chat = ({ userId, receiverId }) => {
   };
   return (
     <div className="chat-container">
-      <h3 className="chat-heading">Chat with user ID : {receiverId}</h3>
+      <h3 className="chat-heading">Chat with user ID : {studentId}</h3>
       <div
         ref={messageRef}
         style={{
@@ -64,7 +65,7 @@ const Chat = ({ userId, receiverId }) => {
         }}
       >
         {messages.map((m, i) => {
-          const isSender = m.sender_id === userId;
+          const isSender = m.sender_id === teacherId;
           return (
             <div
               key={i}
