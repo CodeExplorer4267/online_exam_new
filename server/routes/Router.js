@@ -19,9 +19,9 @@ router.post('/createExam',createExam)  //done
 router.get('/answers/attempted/:examId',getAttemptedStudents) //done
 router.get('/answers/:examId/:studentId',getEachStudentAnswer) //done
 router.post('/update-marks',submitMarks)
-// router.post('/generate',generateQuestion)
 router.post('/generate',generateQuestion)
 router.get('/get-all-messages/:userId/:receiverId',getAllMessages)
+
 
 
 
