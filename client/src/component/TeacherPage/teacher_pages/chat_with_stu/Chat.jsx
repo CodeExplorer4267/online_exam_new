@@ -2,15 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Chat.css";
 import io from "socket.io-client";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 const socket = io.connect("http://localhost:5000");
 const Chat = () => {
   const { studentId, teacherId } = useParams();
   const [messages, setmessages] = useState([]);
+  const userId=teacherId;
   const [msg, setmsg] = useState("");
   const messageRef = useRef(null);
-
   useEffect(() => {
-    socket.emit("register", teacherId); //register the user with the socket id
+    socket.emit("register", userId); //register the user with the socket id
     socket.on("receive_message", (data) => {
       setmessages((prev) => [...prev, data]);
     });
@@ -18,6 +19,7 @@ const Chat = () => {
     //fetch previous messages
     axios.get(`http://localhost:5000/online-exam/get-all-messages/${teacherId}/${studentId}`)
     .then((res)=>{
+      // console.log(res.data)
       setmessages(res.data.messages)
     })
     .catch((err)=>{
@@ -25,7 +27,6 @@ const Chat = () => {
     })
     // return socket.disconnect(); //cleanup function to disconnect the socket when the component unmounts
   }, []);
-
   useEffect(() => {
     if (messageRef.current) {
       messageRef.current.scrollTop = messageRef.current.scrollHeight;
@@ -65,7 +66,7 @@ const Chat = () => {
         }}
       >
         {messages.map((m, i) => {
-          const isSender = m.sender_id === teacherId;
+          const isSender = m.senderId === teacherId || m.sender_id === teacherId;;
           return (
             <div
               key={i}

@@ -9,7 +9,7 @@ const Chat_container = () => {
      <div className="chat-container">
         <Chat_sidebar/>
         <Routes>
-           <Route path='chat/:studentId/:teacherId' element={<Chat/>}/>
+           <Route path='/:studentId/:teacherId' element={<Chat/>}/>
         </Routes>
      </div>
     </>

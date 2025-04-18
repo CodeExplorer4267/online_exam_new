@@ -188,9 +188,9 @@ Make sure to include the answer for each question.
 }
 
 export const getAllMessages=async(req,res)=>{
-    const {userId,receiverId}=req.params;
-    if(!userId || !receiverId){
-        return res.status(400).json({success:false,message:"userId and receiverId are required"})
+    const {teacherId,studentId}=req.params;
+    if(!teacherId || !studentId){
+        return res.status(400).json({success:false,message:"teacherId and studentId are required"})
     }
     try {
         const query=`
@@ -199,7 +199,7 @@ export const getAllMessages=async(req,res)=>{
      OR (sender_id = ? AND receiver_id = ?)
      ORDER BY timestamp ASC
         `
-        const [messages]=await pool.query(query,[userId,receiverId,receiverId,userId])
+        const [messages]=await pool.query(query,[teacherId,studentId,studentId,teacherId])
         if(messages.length==0){
             return res.status(200).json({message:'No messages found'})
         }
