@@ -20,7 +20,7 @@ const Chat = () => {
     axios.get(`http://localhost:5000/online-exam/get-all-messages/${teacherId}/${studentId}`)
     .then((res)=>{
       console.log("Previous messages",res.data?.messages)
-      setmessages(res.data?.messages);
+      setmessages(Array.isArray(res.data?.messages) ? res.data.messages : []);
     })
     .catch((err)=>{
       console.log("Error while fetching messages",err)
@@ -43,7 +43,7 @@ const Chat = () => {
       message: msg,
     };
     socket.emit("send_message", messageData); //emit the message to the server
-    setmessages((prev) => [...prev, { ...messageData, timestamp: new Date() }]);
+    setmessages((prev = []) => [...prev, { ...messageData, timestamp: new Date() }]);
     setmsg("");
   };
   return (
@@ -66,7 +66,8 @@ const Chat = () => {
         }}
       >
         {messages?.map((m, i) => {
-          const isSender =  m.sender_id === teacherId;;
+          const isSender = (m.senderId?.toString() === teacherId?.toString()) || (m.sender_id?.toString() === teacherId?.toString());
+
           return (
             <div
               key={i}

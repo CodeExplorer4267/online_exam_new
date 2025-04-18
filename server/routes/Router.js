@@ -1,7 +1,7 @@
 import express from 'express';
 import { getStudentList, login, register } from '../controller/userController.js';
 import { createExam, generateQuestion, getAllAnswers, getAllMessages, getAttemptedStudents, getEachStudentAnswer, getMarksSubmitOrNot, getStudentMarks, submitMarks } from '../controller/teacherController.js';
-import { deleteExam, getAllExams, getAllQuestions, submitExam } from '../controller/studentController.js';
+import { deleteExam, getAllExams, getAllQuestions, getAllTeachers, submitExam } from '../controller/studentController.js';
 
 const router=express.Router();
 
@@ -9,7 +9,7 @@ const router=express.Router();
 router.post('/register',register) //done
 router.post('/login',login)  //done
 router.get('/exams',getAllExams)  //done
-
+router.get('/get-teachers',getAllTeachers)
 //student routes
 
 
