@@ -19,14 +19,14 @@ const Chat = () => {
     //fetch previous messages
     axios.get(`http://localhost:5000/online-exam/get-all-messages/${teacherId}/${studentId}`)
     .then((res)=>{
-      // console.log(res.data)
-      setmessages(res.data.messages)
+      console.log("Previous messages",res.data?.messages)
+      setmessages(res.data?.messages);
     })
     .catch((err)=>{
       console.log("Error while fetching messages",err)
     })
     // return socket.disconnect(); //cleanup function to disconnect the socket when the component unmounts
-  }, []);
+  }, [studentId,teacherId]);
   useEffect(() => {
     if (messageRef.current) {
       messageRef.current.scrollTop = messageRef.current.scrollHeight;
@@ -53,7 +53,7 @@ const Chat = () => {
         ref={messageRef}
         style={{
           height: "500px",
-          width: "500px",
+          width: "700px",
           overflowY: "scroll",
           border: "1px solid gray",
           borderRadius: "20px",
@@ -65,8 +65,8 @@ const Chat = () => {
           backgroundColor: "#f0f2f5"
         }}
       >
-        {messages.map((m, i) => {
-          const isSender = m.senderId === teacherId || m.sender_id === teacherId;;
+        {messages?.map((m, i) => {
+          const isSender =  m.sender_id === teacherId;;
           return (
             <div
               key={i}

@@ -9,7 +9,6 @@ const Answers_indi = () => {
     useEffect(()=>{
         axios.get(`http://localhost:5000/online-exam/answers/attempted/${examId}`)
         .then((res)=>{
-            console.log(res.data.students)
             setattempted(res.data.students)
         })
         .catch((err)=>{

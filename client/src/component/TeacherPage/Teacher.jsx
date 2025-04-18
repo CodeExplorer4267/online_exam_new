@@ -1,7 +1,7 @@
 import React from "react";
 import NavbarTeacher from "./NavbarTea/NavbarTeacher";
 import SidebarTeacher from "./SidebarTea/SidebarTeacher";
-import { Route, Routes } from "react-router-dom";
+import { Route, Router, Routes } from "react-router-dom";
 import StudentList from "./teacher_pages/studentList/StudentList"
 import CreateExam from "./teacher_pages/createExam/CreateExam"
 
@@ -28,7 +28,7 @@ const TeacherPage = () => {
                  <Route path="result/attempted/:examId" element={<Answers_indi/>}/>
                  <Route path="result/attempted/:examId/answer/:studentId" element={<EachStudentAnswer/>}/>
                  <Route path="question-generator" element={<Generate/>}/>
-                 <Route path="/chat/*" element={<Chat_container/>}/>
+                 <Route path="chat/*" element={<Chat_container/>}/>
               </Routes>
         </div>
     </div>
