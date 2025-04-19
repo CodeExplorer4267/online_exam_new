@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import io from "socket.io-client";
@@ -38,11 +38,91 @@ const Stuchat = () => {
     }
   }, [messages]);
 
+  const sendMessage = () => {
+    if (msg.trim() === "") {
+      return;
+    }
+    const messageData = {
+      senderId: studentId,
+      receiverId:teacherId,
+      message: msg,
+    };
+    socket.emit("send_message", messageData); //emit the message to the server
+    setmessages((prev = []) => [...prev, { ...messageData, timestamp: new Date() }]);
+    setmsg("");
+  };
+
   return (
     <>
-      <div className="student-chat-container">
-        <h3 className="chat-heading">Chat with Teacher ID : {teacherId}</h3>
+      <div className="chat-container">
+      <h3 className="chat-heading">Chat with user ID : {studentId}</h3>
+      <div
+        ref={messageRef}
+        style={{
+          height: "500px",
+          width: "700px",
+          overflowY: "scroll",
+          border: "1px solid gray",
+          borderRadius: "20px",
+          margin: "10px auto",
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          padding: "20px",
+          backgroundColor: "#f0f2f5"
+        }}
+      >
+        {messages?.map((m, i) => {
+          const isSender = (m.senderId?.toString() === teacherId?.toString()) || (m.sender_id?.toString() === teacherId?.toString());
+          const isReceiver=(m.receiverId?.toString() === studentId?.toString()) || (m.receiver_id?.toString() === studentId?.toString());
+          return (
+            <div
+              key={i}
+              style={{
+                alignSelf: isReceiver ? "flex-start" : "flex-end",
+                backgroundColor: isReceiver ? "#ffffff" : "#dcf8c6",
+                padding: "10px 15px",
+                borderRadius: "15px",
+                maxWidth: "70%",
+                boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
+                wordWrap: "break-word",
+                position: "relative"
+              }}
+            >
+              {m.message}
+            </div>
+          );
+        })}
       </div>
+      <div className="send-message" style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
+        <input
+          value={msg}
+          onChange={(e) => setmsg(e.target.value)}
+          className="chat-input"
+          style={{
+            padding: "10px",
+            width: "60%",
+            borderRadius: "20px",
+            border: "1px solid #ccc",
+            marginRight: "10px"
+          }}
+        />
+        <button
+          onClick={sendMessage}
+          className="chat-send-btn"
+          style={{
+            padding: "10px 20px",
+            borderRadius: "20px",
+            backgroundColor: "#0b93f6",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer"
+          }}
+        >
+          Send
+        </button>
+      </div>
+    </div>
     </>
   );
 };
