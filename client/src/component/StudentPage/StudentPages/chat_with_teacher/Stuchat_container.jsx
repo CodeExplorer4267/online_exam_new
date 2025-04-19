@@ -1,7 +1,8 @@
 import React from 'react'
 import Stuchat_sidebar from './Stuchat_sidebar'
 import Stuchat from './Stuchat'
-
+// import Chat from '../../../TeacherPage/teacher_pages/chat_with_stu/Chat'
+import { Routes,Route } from 'react-router-dom'
 const Stuchat_container = () => {
   return (
     <>

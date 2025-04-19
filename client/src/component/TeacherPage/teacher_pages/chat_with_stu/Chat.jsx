@@ -27,6 +27,7 @@ const Chat = () => {
     })
     // return socket.disconnect(); //cleanup function to disconnect the socket when the component unmounts
   }, [studentId,teacherId]);
+  
   useEffect(() => {
     if (messageRef.current) {
       messageRef.current.scrollTop = messageRef.current.scrollHeight;

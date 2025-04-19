@@ -8,7 +8,8 @@ import StudentMarks from './StudentPages/StudentMarks'
 import "./Student.css"
 import StudentExamQuestions from './StudentPages/StudentExamQuestions'
 import StudentResultDetails from './StudentPages/StudentResultDetails'
-import Chat from '../TeacherPage/teacher_pages/chat_with_stu/Chat'
+import Stuchat_container from './StudentPages/chat_with_teacher/Stuchat_container'
+
 const StudentPage = () => {
   
   return (
@@ -19,7 +20,7 @@ const StudentPage = () => {
           <Routes>
              <Route path='exam' element={<StudentExam/>}/>
              <Route path='stu-result' element={<StudentResult/>}/>
-             <Route path='chat' element={<Chat/>}/>
+             <Route path='/chat/*' element={<Stuchat_container/>}/>
              <Route path='exam/:examId' element={<StudentExamQuestions/>}/>
              <Route path='stu-result/:examId/:studentId' element={<StudentResultDetails/>}/>
           </Routes>

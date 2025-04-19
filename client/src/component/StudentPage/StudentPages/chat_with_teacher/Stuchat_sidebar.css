@@ -1,0 +1,23 @@
+.available-teacher img{
+    height:35px
+}
+.stuchat-sidebar-container{
+    width:20%;
+    height:100vh;
+    border-right: 1px solid black;
+    padding: 3px;
+}
+.stuchat-heading{
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 1rem 0;
+   text-align: center;
+}
+.available-teacher{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 0;
+    cursor: pointer;
+}
