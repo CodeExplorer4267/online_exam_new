@@ -10,6 +10,7 @@ const Chat = () => {
   const userId=teacherId;
   const [msg, setmsg] = useState("");
   const messageRef = useRef(null);
+
   useEffect(() => {
     socket.emit("register", userId); //register the user with the socket id
     socket.on("receive_message", (data) => {
