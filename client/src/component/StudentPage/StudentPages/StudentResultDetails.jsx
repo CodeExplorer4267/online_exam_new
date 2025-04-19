@@ -67,7 +67,7 @@ const StudentResultDetails = () => {
                 color:"#00203FFF",
                 fontSize:"25px",
             }}>Total Marks in this exam : {studentMarks} out of {exam_total_marks}</h2>
-            <MarksCircle percentage={(studentMarks/exam_total_marks)*100} />
+            <MarksCircle percentage={parseFloat((studentMarks / exam_total_marks * 100).toFixed(2))} />
         </div>
     </div>
     </>
