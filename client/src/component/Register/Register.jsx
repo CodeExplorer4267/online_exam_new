@@ -13,39 +13,44 @@ const Register = () => {
   const [role,setrole]=useState('')
 
   const _500=useMediaQuery("(max-width:500px)")
-  const data={ 
-     username,
-     email,
-     password,
-     role
-  }
  
   const changeLogin=()=>{
     // age jevalue t a chilo seta toggle hye jabe
     setlogin((prev)=>!prev)
   }
-  const handleSubmit=async()=>{
-     if(!login){
-        const res=await axios.post('http://localhost:5000/online-exam/register',data);
-        if(res.data.role==='student'){
-         navigate('/student')
-      }
-      else{
-         navigate('/teacher')
-      }
+  const handleSubmit = async () => {
+   try {
+     if (!login) {
+       // Register
+       const res = await axios.post('http://localhost:5000/online-exam/register', {
+         username,
+         email,
+         password,
+         role
+       });
+       if (res.data.role === 'student') {
+         navigate('/student');
+       } else {
+         navigate('/teacher');
+       }
+     } else {
+       // Login
+       const res = await axios.post('http://localhost:5000/online-exam/login', {
+         email,
+         password
+       });
+       localStorage.setItem("studentId", res.data.studentId);
+       if (res.data.role === 'student') {
+         navigate('/student');
+       } else {
+         navigate('/teacher');
+       }
      }
-     else{
-      const res=await axios.post('http://localhost:5000/online-exam/login',data);
-      localStorage.setItem("studentId", res.data.studentId);
-         if(res.data.role==='student'){
-            navigate('/student')
-         }
-         else{
-            navigate('/teacher')
-         }
-     }
-  }
-  
+   } catch (error) {
+     console.error("Error during authentication:", error);
+     alert("Something went wrong! Please try again.");
+   }
+ };
   return (
     <Stack flexDirection={'row'}
     justifyContent={'center'}

@@ -8,6 +8,7 @@ const router=express.Router();
 //user routes
 router.post('/register',register) //done
 router.post('/login',login)  //done
+
 router.get('/exams',getAllExams)  //done
 router.get('/get-teachers',getAllTeachers)
 //student routes
