@@ -28,6 +28,11 @@ const SidebarTeacher = () => {
             <div className={`option ${activeoption==='chat' ? 'active':''}`} onClick={()=>{
                handleNavigation('chat')
             }}>Message</div>
+            <div className={`option ${activeoption==='material' ? 'active':''}`} onClick={()=>{
+               handleNavigation('material')
+            }}>
+                Material
+            </div>
         </div>
     </div>
   )
