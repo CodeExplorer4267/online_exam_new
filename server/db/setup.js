@@ -147,6 +147,7 @@ export const createMaterialsTable=async()=>{
           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
         `)
+        console.log("Materials table created or already exists")
     } catch (error) {
        console.log("Error while creating materials table",error)
     }

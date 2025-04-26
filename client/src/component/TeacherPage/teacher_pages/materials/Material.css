@@ -1,0 +1,31 @@
+#material-heading{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(9, 12, 51);
+}
+.material-container{
+    width:80%;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+.material-input{
+    width: 30%;
+}
+.material-container form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+#material-upload-btn{
+    width: 10%;
+    place-self: center;
+    height: 40px;
+    background-color: rgb(9, 12, 51);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
