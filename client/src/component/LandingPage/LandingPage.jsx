@@ -10,7 +10,7 @@ const LandingPage = () => {
     <div className="landing-page">
       <header className="header">
         <div className="container">
-          <h1 className="logo">ExamHub</h1>
+          <h1 className="logo">ExamSphere</h1>
           <nav className="nav">
             <a href="#features" className="nav-link">Features</a>
             <a href="#about" className="nav-link">About</a>
@@ -23,7 +23,7 @@ const LandingPage = () => {
         <section className="hero">
           <h2 className="hero-title">Revolutionize Your Exam Preparation</h2>
           <p className="hero-subtitle">
-            With ExamHub, you can access a wide range of exams, track your progress, and improve your scores, all in one place.
+            With ExamSphere, you can access a wide range of exams, track your progress, and improve your scores, all in one place.
           </p>
           <button className="cta-button" onClick={()=>{
             navigate('/stuadmin')
@@ -31,7 +31,7 @@ const LandingPage = () => {
         </section>
 
         <section id="features" className="features">
-          <h3 className="section-title">Why Choose ExamHub?</h3>
+          <h3 className="section-title">Why Choose ExamSphere?</h3>
           <div className="features-grid">
             <div className="feature-card">
               <h4 className="feature-title">Personalized Exams</h4>
@@ -57,7 +57,7 @@ const LandingPage = () => {
         <section id="about" className="about">
           <h3 className="section-title">About Us</h3>
           <p className="about-description">
-            ExamHub is dedicated to providing an efficient and innovative platform for students and professionals to enhance their exam readiness. Our goal is to simplify the process of preparation by offering a seamless and user-friendly experience.
+          ExamSphere is dedicated to providing an efficient and innovative platform for students and professionals to enhance their exam readiness. Our goal is to simplify the process of preparation by offering a seamless and user-friendly experience.
           </p>
         </section>
 
