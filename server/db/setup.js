@@ -127,13 +127,29 @@ export const createMessageTable=async()=>{
   message TEXT,
   timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
-  FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
 );
         `)
         console.log("Mesaage table created or already exists")
      } catch (error) {
         console.log("Error while creating message table",error)
      }
+}
+
+export const createMaterialsTable=async()=>{
+    try {
+      await pool.query(`
+        CREATE TABLE IF NOT EXISTS materials(
+          id INT PRIMARY KEY AUTO_INCREMENT,
+          title VARCHAR(255) NOT NULL,
+          file_name VARCHAR(255) NOT NULL,
+          teacher_name VARCHAR(255) NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        `)
+    } catch (error) {
+       console.log("Error while creating materials table",error)
+    }
 }
 
 export default createUsersTable;

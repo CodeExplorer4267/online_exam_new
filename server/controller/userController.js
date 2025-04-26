@@ -43,6 +43,17 @@ export const register=async(req,res)=>{
       }
 }
 
+// In register:
+
+//  correctly validate username, email, password, role.
+
+//  check if role is either "student" or "teacher".
+
+// check if the user already exists (great job).
+
+// hash the password with bcrypt before saving (perfect security).
+// On success, you return userId and role
+
 //login user
 export const login=async(req,res)=>{
   const { email, password,role} = req.body;
@@ -83,7 +94,7 @@ export const login=async(req,res)=>{
       //   email: user.email,
       //   role: user.role,
       // },
-      role:role,
+      role:user.role,
       studentId:user.id
     });
   } catch (error) {
@@ -91,6 +102,16 @@ export const login=async(req,res)=>{
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }
+
+// You validate email and password.
+
+// You check if user exists.
+
+// You compare the entered password with hashed password using bcrypt.compare.
+
+// You generate a JWT token (nice job for authentication).
+
+// You return token, role, and studentId to the frontend.
 
 //get the studentlist
 export const getStudentList=async(req,res)=>{
