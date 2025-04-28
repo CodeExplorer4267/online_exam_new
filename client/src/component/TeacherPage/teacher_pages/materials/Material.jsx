@@ -15,11 +15,16 @@ const Material = () => {
       }
       const formData = new FormData();
       formData.append("title", title.current.value);
-      formData.append("name", name.current.value);
+      formData.append("teacher_name", name.current.value);
       formData.append("file", file.current.files[0]);
 
       const res = await axios.post(
-        "http://localhost:5000/online-exam/upload-material".formData
+        "http://localhost:5000/online-exam/upload-material",formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        }
       );
       if (res.data.success) {
         alert(res.data.message);
@@ -38,7 +43,7 @@ const Material = () => {
   return (
     <div className="material-container">
       <h1 id="material-heading">Upload Material</h1>
-      <form action="">
+      <form action="" onSubmit={handleUpload}>
         <input
           type="text"
           placeholder="Enter title of the material"
@@ -57,7 +62,7 @@ const Material = () => {
           className="material-input"
           ref={file}
         />
-        <button id="material-upload-btn" onClick={handleUpload}>
+        <button id="material-upload-btn" type="submit">
           Upload
         </button>
       </form>
