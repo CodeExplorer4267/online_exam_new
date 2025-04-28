@@ -32,7 +32,8 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 // Parse JSON bodies (for incoming requests)
 app.use(express.json());
-
+// Serve static files
+app.use('/uploads', express.static('uploads'));
 app.use('/online-exam',router);
 
 // Create the users table if it doesn't exist
