@@ -9,6 +9,7 @@ import "./Student.css"
 import StudentExamQuestions from './StudentPages/StudentExamQuestions'
 import StudentResultDetails from './StudentPages/StudentResultDetails'
 import Stuchat_container from './StudentPages/chat_with_teacher/Stuchat_container'
+import StudentMaterial from './StudentPages/StudentMaterial'
 
 const StudentPage = () => {
   
@@ -23,6 +24,7 @@ const StudentPage = () => {
              <Route path='/chat/*' element={<Stuchat_container/>}/>
              <Route path='exam/:examId' element={<StudentExamQuestions/>}/>
              <Route path='stu-result/:examId/:studentId' element={<StudentResultDetails/>}/>
+             <Route path='student-material' element={<StudentMaterial/>}/>
           </Routes>
       </div>
     </div>

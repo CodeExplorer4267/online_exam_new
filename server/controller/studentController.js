@@ -80,3 +80,16 @@ export const getAllTeachers=async(req,res)=>{
         res.status(400).json({success:false,message:error.message})
     }
 }
+//get all materials uploaded by teachers
+export const getAllMaterials=async(req,res)=>{
+    try {
+        const [files]=await pool.query("SELECT * FROM materials ORDER BY created_at DESC")
+        if(files.length===0){
+            return res.status(404).json({success:false,message:"No materials found"})
+        }
+        res.status(201).json({files})
+      } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+      }
+}
