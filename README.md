@@ -8,3 +8,8 @@ https://github.com/user-attachments/assets/4c8756ae-4025-45ff-8cf2-65d81cf453d9
 <p>This is create exam page where a teacher create an exam with answers and each question give a marks. They can add as many questions as they want and total marks will be shown below.</p>
 <br/>
 <p>Also results can be a shown . Teacher can see each student answers and give marks. if no students attempts the exam then the table will be blank.</p>
+
+<img width="1853" height="912" alt="teacher_page_demo6" src="https://github.com/user-attachments/assets/fb3457a4-9540-4454-bf7d-cc5937456a33" />
+<img width="1852" height="907" alt="teacher_page_demo7" src="https://github.com/user-attachments/assets/600a33b5-8f2a-46cb-86e1-9cc4f686d404" />
+<p>Teacher can give marks to each student but one time only.</p>
+<br/>
