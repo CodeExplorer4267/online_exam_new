@@ -1,5 +1,28 @@
 <h2>I built a Online Examination Website using the MERN stack + MySQL, designed to streamline the examination process with real-time interaction, AI integration, and automated result handling. This project offers distinct functionalities for teachers and students, ensuring a seamless and interactive exam experience.</h2>
 <br/>
+<p>👨‍🏫 Teacher Features:
+✅ View student list and manage exam participants.
+✅Create exams with custom duration and question-based marking (SAQs only).
+✅Assign marks individually to each question after the exam (one-time evaluation).
+✅Track who attempted the exam and view detailed results.
+✅Use an AI-powered Question Generator to create questions based on difficulty (Easy, Medium, Hard).
+✅Real-time chat with enrolled students during the exam for guidance and communication.
+
+👨‍🎓 Student Features:
+✅Attend exams with a timer – auto-submit triggers when time runs out.
+✅View their submitted answers, marks, and overall percentage after the exam.
+✅ Engage in real-time chatting with teachers for support during the exam.
+
+🛠️ Tech Stack:
+✴️Frontend: React.js, Axios, CSS
+✴️Backend: Node.js, Express.js, Socket.IO
+✴️Database: MySQL
+✴️AI Integration: OpenRouter API for question generation)
+✴️Authentication: JWT-based secure login for Teachers and Students.
+
+💡 Highlight: Integrated AI to assist teachers in question creation and built a real-time chat system using Socket.IO to enhance the examination environment with live communication and monitoring.
+
+</p>
 <p>Teacher features : </p>
 <br/>
 <img width="1853" height="916" alt="teacher_page_demo5" src="https://github.com/user-attachments/assets/3e1abd87-4260-4cfa-bdbe-72152e6bc4af" />
