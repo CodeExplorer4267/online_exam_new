@@ -1,0 +1,28 @@
+.student-material-container{
+    width: 80%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.material-heading{
+     font-size: 1.4rem;
+     text-align: center;
+     color: black;
+}
+.material-table{
+    width: 70%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin: 10px auto;
+}
+.material-table th, .material-table td{
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+}
+.material-table th{
+    font-weight: bold;
+    background-color: #00203FFF;
+    color: #ADEFD1FF;
+}

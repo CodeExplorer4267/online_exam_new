@@ -6,7 +6,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate('/stuadmin');
+    navigate('/register');
   };
 
   const handleContactSubmit = (e) => {

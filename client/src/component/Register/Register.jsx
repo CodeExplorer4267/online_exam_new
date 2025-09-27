@@ -59,7 +59,7 @@ const Register = () => {
     m={0}
     p={0}
     >
-     <Stack width={_500?"100%":"50%"} 
+     <Stack width={"100%"} 
      height={'100vh'}
      sx={{
         backgroundImage:'url("register_background.jpg")',
@@ -71,7 +71,7 @@ const Register = () => {
      alignItems={'center'}
      >
          <Stack flexDirection={'column'}
-          width={_500?"65%":"50%"}
+          width={"25%"}
           gap={_500?3:2}
           bgcolor={'white'}
           height={'55vh'}
@@ -114,7 +114,7 @@ const Register = () => {
            }}>Login Here</span></p>}
          </Stack>
      </Stack>
-     <Stack width={_500?"0%":"50%"} 
+     {/* <Stack width={_500?"0%":"50%"} 
      height={'100vh'}
       sx={
         {
@@ -125,7 +125,7 @@ const Register = () => {
       }
      >
         
-     </Stack>
+     </Stack> */}
     </Stack>
   )
 }

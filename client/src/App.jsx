@@ -1,6 +1,6 @@
 import React from 'react'
 import LandingPage from './component/LandingPage/LandingPage'
-import StudentAdminPage from './component/AdStu/AdStu'
+
 import { Route, Router, Routes } from 'react-router-dom'
 import StudentPage from './component/StudentPage/Student'
 import TeacherPage from './component/TeacherPage/Teacher'
@@ -12,7 +12,6 @@ const App = () => {
     <div>
        <Routes>
           <Route path='/' element={<LandingPage/>}/>
-          <Route path='/stuadmin' element={<StudentAdminPage/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/student/*' element={<StudentPage/>}/>
           <Route path='/teacher/*' element={<TeacherPage/>}/>
