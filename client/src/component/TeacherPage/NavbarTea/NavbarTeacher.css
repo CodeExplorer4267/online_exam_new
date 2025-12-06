@@ -1,12 +1,70 @@
-.container{
-  height: 75px;
-   display:flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-   padding:20px;
-}
-body{
-  background: white;
+.nav-teacher {
+  width: 94%;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #141414;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+
+.logo-icon {
+  font-size: 3.5rem;
+  color: #7dbbff;
+  filter: drop-shadow(0 0 8px rgba(125, 187, 255, 0.5));
+}
+
+.title {
+  font-size: 2rem;
+  color: #fff;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.avatar-wrapper {
+  cursor: pointer;
+}
+
+.avatar {
+  height: 50px !important;
+  width: 50px !important;
+  border: 2px solid #ffffff33;
+  box-shadow: 0 0 10px rgba(100, 200, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.avatar:hover {
+  box-shadow: 0 0 15px rgba(100, 200, 255, 0.8);
+}
+
+.divider {
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .logo-icon {
+    font-size: 2.8rem;
+  }
+
+  .nav-teacher {
+    padding: 12px 20px;
+  }
+}

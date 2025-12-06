@@ -30,7 +30,6 @@
     "react-toastify": "^11.0.5",
     "redux": "^5.0.1",
     "socket.io-client": "^4.8.1",
-    "tailwindcss": "^4.1.13",
     "yup": "^1.6.1"
   },
   "devDependencies": {
@@ -43,6 +42,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "tailwindcss": "^4.1.17",
     "vite": "^6.0.5"
   }
 }
