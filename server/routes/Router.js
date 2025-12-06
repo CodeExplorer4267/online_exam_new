@@ -1,7 +1,7 @@
 import express from 'express';
 import { getStudentList, login, register } from '../controller/userController.js';
 import { createExam, generateQuestion, getAllAnswers, getAllMessages, getAttemptedStudents, getEachStudentAnswer, getMarksSubmitOrNot, getStudentMarks, submitMarks } from '../controller/teacherController.js';
-import { deleteExam, downloadFile, getAllExams, getAllMaterials, getAllQuestions, getAllTeachers, submitExam } from '../controller/studentController.js';
+import { askQuestion, deleteExam, downloadFile, getAllExams, getAllMaterials, getAllQuestions, getAllTeachers, submitExam } from '../controller/studentController.js';
 import { upload } from '../multer-config.js';
 import pool from '../db/db.js'
 
@@ -16,6 +16,7 @@ router.get('/get-teachers',getAllTeachers)
 //student routes
 router.get('/get-all-materials',getAllMaterials)
 router.get('/download/:filename',downloadFile)
+router.post('/askme',askQuestion)
 
 //teacher routes
 router.get('/get-students',getStudentList)  //done

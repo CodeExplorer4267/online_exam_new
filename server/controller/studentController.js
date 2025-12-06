@@ -145,3 +145,36 @@ export const downloadFile=async(req,res)=>{
 // filename is the name the file will have when downloaded (can be different from filePath last segment).
 
 // ➔ The third argument is a callback function which will run after the download attempt — success or error.
+export const askQuestion=async(req,res)=>{
+    try {
+    const { question } = req.body;
+
+    const response = await axios.post(
+      "https://openrouter.ai/api/v1/chat/completions",
+      {
+        model: "openai/gpt-4o-mini", // you can change to other models like "mistralai/mistral-7b-instruct"
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are an AI assistant for an online examination system. Help students with academic/exam queries clearly and concisely.",
+          },
+          { role: "user", content: question },
+        ],
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.OPENROUTER_KEY}`,
+          "HTTP-Referer": "http://localhost:5173", // your frontend URL
+          "X-Title": "Online Exam Assistant",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    res.json({ answer: response.data.choices[0].message.content });
+  } catch (error) {
+    console.error(error?.response?.data || error.message);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+}
