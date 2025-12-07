@@ -208,3 +208,33 @@ export const getAllMessages=async(req,res)=>{
         res.status(400).json({success:false,message:error.message})
     }
 }
+//get all students by semester
+export const getStudentsByYear = async (req, res) => {
+  const { year } = req.params;
+
+  if (!year) {
+    return res.status(400).json({
+      success: false,
+      message: "year is required",
+      students: []
+    });
+  }
+
+  try {
+    const query = `SELECT name,email,phone_no FROM students WHERE year=?`;
+    const [students] = await pool.query(query, [year]);
+
+    return res.status(200).json({
+      success: true,
+      students: students || []
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      students: []
+    });
+  }
+};
+
