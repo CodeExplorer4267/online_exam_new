@@ -4,11 +4,48 @@ import axios from 'axios'
 import {ToastContainer,toast} from 'react-toastify'
 import { MdOutgoingMail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa6";
+import { FaRegWindowClose } from "react-icons/fa";
+
 
 const StudentList = () => {
   const [selectedYear, setSelectedYear] = useState("1st");
   const [students, setStudents] = useState([]);
   const yearButtons = ["1st", "2nd", "3rd", "4th"];
+  const [mailFormVisible, setMailFormVisible] = useState(false);
+  
+  const [senderEmail, setSenderEmail] = useState("");
+  const [recieverEmail, setRecieverEmail] = useState("");
+  const [emailSubject, setEmailSubject] = useState("");
+  const [emailBody, setEmailBody] = useState("");
+
+  const openMailForm=(studentEmail)=>{
+      setRecieverEmail(studentEmail);
+      setMailFormVisible(true);
+  }
+
+  const handleMailSubmit=async(e)=>{
+    e.preventDefault()
+      try {
+        
+        const res=await axios.post('http://localhost:5000/online-exam/sendmail',{
+           senderEmail,
+           recieverEmail,
+           emailSubject,
+           emailBody
+        })
+        if(res.status===200){
+           toast.success(res.data.message)
+           setMailFormVisible(false);
+           setEmailSubject("");
+           setEmailBody("");
+        }
+        else{
+           toast.error(res.data.message)
+        }
+      } catch (error) {
+         toast.error("Error while submitting the form")
+      }
+  }
   return (
     <>
     <div className="student-list-wrapper">
@@ -39,11 +76,11 @@ const StudentList = () => {
       </div>
 
       {/* STUDENT LIST */}'
-      <div className="w-[70%] flex flex-col gap-[12px] h-auto overflow-y-scroll mx-auto">
+      <div className="w-[70%] flex flex-col gap-3 h-auto overflow-y-scroll mx-auto">
         {students.length===0 ? <div className="text-center mt-10 text-gray-500">No students found for {selectedYear} year</div> : students.map((student, index) => (
           <div
             key={index}
-            className="flex justify-evenly items-center p-4 bg-[#141414] rounded-[10px] shadow-md text-[#7dbbff]"
+            className="flex justify-evenly items-center p-4 bg-[#141414] rounded-[10px] shadow-md text-[#7dbbff] h-[50px]"
             style={{
               fontSize:'14px'
             }}
@@ -55,14 +92,132 @@ const StudentList = () => {
               <p className="font-bold flex items-center"><FaPhone style={{
                 marginRight:'4px'
               }}/> {student.phone_no}</p>
-              <button className="h-[40px] w-[100px] p-3 bg-[#46eaea] text-black rounded-[10px] text-[14px]" style={{
+              <button className="h-8 w-[100px] p-1 bg-[#46eaea] text-black rounded-[10px] text-[14px]" style={{
                 fontWeight:'bold'
-              }}>Send mail</button>
+              }} onClick={()=>openMailForm(student.email)}>Send mail</button>
           </div>
         ))}
       </div>
-
     </div>
+
+    {
+  mailFormVisible && (
+    <div className="
+      fixed inset-0 flex items-center justify-center 
+      bg-black/60 backdrop-blur-sm z-50
+    ">
+      <div className="
+        w-[420px] p-6 rounded-2xl shadow-2xl 
+        bg-[#0d0d0d]/80 border border-[#3ce0e0]/40 
+        animate-scaleIn
+      ">
+        <h2 className="text-3xl font-semibold mb-4 text-[#96e0e4] tracking-wide">
+          Send Email
+        </h2>
+        <span className="text-white absolute top-30 left-[920px] cursor-pointer" onClick={()=>setMailFormVisible(false)}>X</span>
+        <form className="flex flex-col gap-3">
+
+          {/* Sender Email */}
+          <label className="text-[#96e0e4] text-sm font-medium">
+            Your Email
+          </label>
+          <input
+            id="senderEmail"
+            type="email"
+            placeholder="Enter sender email"
+            value={senderEmail}
+            onChange={(e) => setSenderEmail(e.target.value)}
+            className="
+               rounded-lg bg-[white] text-gray-900 
+              border border-[#3ce0e0]/30 focus:border-[#3ce0e0] 
+              outline-none transition"
+              style={{
+                 height:'40px',
+                 padding:'16px'
+              }}
+          />
+
+          {/* Receiver Email */}
+          <label className="text-[#96e0e4] text-sm font-medium">
+            Recipient's Email
+          </label>
+          <input
+            id="recieverEmail"
+            type="email"
+            placeholder="Enter receiver email"
+            value={recieverEmail}
+            onChange={(e) => setRecieverEmail(e.target.value)}
+            className="
+              p-2.5 rounded-lg bg-white text-gray-900 
+              border border-[#3ce0e0]/30 focus:border-[#3ce0e0] 
+              outline-none transition
+            "
+            style={{
+                 height:'40px',
+                 padding:'16px'
+              }}
+          />
+
+          {/* Subject */}
+          <label className="text-[#96e0e4] text-sm font-medium">
+            Subject
+          </label>
+          <input
+            id="subject"
+            type="text"
+            placeholder="Enter subject"
+            value={emailSubject}
+            onChange={(e) => setEmailSubject(e.target.value)}
+            className="
+              p-2.5 rounded-lg bg-white text-gray-900 
+              border border-[#3ce0e0]/30 focus:border-[#3ce0e0] 
+              outline-none transition
+            "
+            style={{
+                 height:'40px',
+                 padding:'16px'
+              }}
+          />
+
+          {/* Message */}
+          <label className="text-[#96e0e4] text-sm font-medium">
+            Message
+          </label>
+          <textarea
+            id="message"
+            placeholder="Type your message..."
+            rows="4"
+            value={emailBody}
+            onChange={(e) => setEmailBody(e.target.value)}
+            className="
+              p-3 rounded-lg bg-white text-gray-900
+              border border-[#3ce0e0]/30 focus:border-[#3ce0e0] 
+              outline-none transition resize-none
+            "
+          />
+
+          {/* Send Button */}
+          <button
+            className="
+              mt-4 px-5 py-2.5 rounded-xl
+              bg-[#46eaea] text-black font-semibold
+              hover:bg-[#32dcdc]
+              shadow-[0_0_15px_#46eaea80]
+              hover:shadow-[0_0_25px_#46eaea]
+              transition-all duration-300
+              w-fit self-center
+            "
+            onClick={handleMailSubmit}
+          >
+            Send
+          </button>
+        </form>
+      </div>
+    </div>
+  )
+}
+
+
     <ToastContainer /> 
     </>
   );

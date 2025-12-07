@@ -5,7 +5,10 @@ import db from '../db/db.js';
 import e from 'express';
 import axios from 'axios';
 import dotenv from 'dotenv';
+import nodemailer from "nodemailer";
 dotenv.config();
+
+
 //to create exam
 export const createExam = async (req, res) => {
     try {
@@ -237,4 +240,29 @@ export const getStudentsByYear = async (req, res) => {
     });
   }
 };
-
+//send mail to student
+export const sendMail=async(req,res)=>{
+    try {
+        const {senderEmail,recieverEmail,emailSubject,emailBody}=req.body
+        if(!senderEmail || !recieverEmail || !emailSubject || !emailBody){
+            return res.status(400).json({success:false,message:'Please fill each of the field'})
+        }
+        const transporter=nodemailer.createTransport({
+            service: "gmail",
+           auth: {
+        user: senderEmail,
+        pass:process.env.GOOGLE_APP_PASSWORD,
+      },
+        })
+        await transporter.sendMail({
+      from: senderEmail,
+      to: recieverEmail,
+      subject:emailSubject,
+      text: emailBody,
+    });
+    res.status(200).json({ message: "Mail sent successfully" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Mail sending failed" });
+    }
+}
