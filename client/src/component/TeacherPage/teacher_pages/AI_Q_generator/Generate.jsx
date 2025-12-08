@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import jsPDF from "jspdf";
 
 const Generate = () => {
   const [topic, setTopic] = useState("");
@@ -9,6 +10,35 @@ const Generate = () => {
   const [difficulty, setDifficulty] = useState("Medium");
   const [questionPaper, setQuestionPaper] = useState("");
   const [loading, setLoading] = useState(false);
+
+const handleDownloadPDF = () => {
+  if (!questionPaper) return;
+
+  const doc = new jsPDF("p", "pt", "a4");
+  const margin = 40;
+  const maxWidth = 515; 
+  const lineHeight = 18;
+  const pageHeight = doc.internal.pageSize.height;
+
+  let y = margin;
+
+  // Split long text into lines that fit maxWidth
+  const lines = doc.splitTextToSize(questionPaper, maxWidth);
+
+  lines.forEach((line) => {
+    // If writing the next line exceeds the page, add a new page
+    if (y + lineHeight > pageHeight - margin) {
+      doc.addPage();
+      y = margin;
+    }
+
+    doc.text(line, margin, y);
+    y += lineHeight;
+  });
+
+  doc.save("question-paper.pdf");
+};
+
 
   const handleGenerate = async () => {
     setLoading(true);
@@ -133,8 +163,18 @@ const Generate = () => {
             Generated questions will appear here →
           </p>
         )}
+        {questionPaper && !loading && (
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    onClick={handleDownloadPDF}
+    className="mt-4 px-6 py-2 bg-[#0EF09F] text-black font-bold rounded-lg shadow hover:bg-[#1affae] transition"
+  >
+    Download as PDF
+  </motion.button>
+)}
       </motion.div>
-
+      
     </div>
   </div>
 );
