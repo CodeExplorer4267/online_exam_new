@@ -1,7 +1,7 @@
 import React, { useRef, useState,useEffect } from 'react'
 import "./CreateExam.css"
 import axios from 'axios'
-
+import {motion} from 'framer-motion'
 
 const CreateExam = () => {
   const [Name,setname]=useState(()=>localStorage.getItem('Name')|| "");
@@ -101,56 +101,157 @@ const resetForm = () => {
 };
 
 
-  return ( 
-    <div className='create_exam_container'>
-       <h2 id='teacher_create_exam'>
-          Create Exam
-       </h2>
-       <form onSubmit={handleSubmit}>
-          <div className="exam_name_dur">
-             <input type="text" value={Name} placeholder='Enter Exam Name' onChange={(e)=>setname(e.target.value)} required/>
-             <input type="Number" value={duration} placeholder='Enter Exam Duration(minutes)' onChange={(e)=>setduration(e.target.value)} required/>
-          </div>
-        
-          <h3 style={{
-            textAlign: "center",
-            fontSize:"1.7rem",
-            color: "00203fff"
-          }}>Questions</h3>
-          {questions.map((q, index) => (
-          <div key={index} className='question_container'>
-            <textarea type="text" ref={textarearef} placeholder="Question" value={q.question_text} rows={2}
-            style={{ resize: "none", width: "100%",borderRadius:"5px",padding:"3px"}}
-            onChange={(e) => handleQuestionChange(index, "question_text", e.target.value)} required />
-            <input type="text" placeholder="Answer" value={q.answer} onChange={(e) => handleQuestionChange(index, "answer", e.target.value)} required />
-            <input
-              type="number"
-              placeholder="Enter Marks"
-              value={q.marks}
-              onChange={(e) => handleQuestionChange(index, "marks", e.target.value)}
+  return (
+  <div className="min-h-screen w-full bg-white flex items-start justify-center py-10 px-4">
+    
+    <div className="w-full max-w-3xl bg-[#141414] backdrop-blur-md rounded-xl shadow-2xl p-8 
+    border border-[#27e8e8]/20 animate-fadeIn">
+
+      {/* TITLE */}
+      <h2 className="text-4xl font-bold text-center text-[#27e8e8] drop-shadow-md mb-6 tracking-wide">
+        Create Exam
+      </h2>
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+
+        {/* Exam Name + Duration */}
+        <div className="flex gap-4 max-sm:flex-col">
+          <input
+            type="text"
+            value={Name}
+            placeholder="Enter Exam Name"
+            onChange={(e) => setname(e.target.value)}
+            required
+            className="flex-1 px-4 py-3 bg-[#1a1a1a] rounded-lg border border-[#27e8e8]/30 
+            text-white placeholder-gray-400 focus:border-[#27e8e8] outline-none
+            transition-all duration-300 shadow-md focus:shadow-[#27e8e855]"
+            style={{
+              // backgroundColor:'white',
+              color:'gray',
+              height:'40px',
+              border:'1px solid #27e8e8'
+            }}
+          />
+          <input
+            type="number"
+            value={duration}
+            placeholder="Duration (minutes)"
+            onChange={(e) => setduration(e.target.value)}
+            required
+            className="px-4 py-3 bg-[#1a1a1a] rounded-lg border border-[#27e8e8]/30 
+            text-white placeholder-gray-400 focus:border-[#27e8e8] outline-none
+            transition-all duration-300 shadow-md focus:shadow-[#27e8e855]"
+            style={{
+              // backgroundColor:'white',
+              color:'gray',
+              height:'40px',
+              width:'400px',
+              border:'1px solid #27e8e8'
+            }}
+          />
+        </div>
+
+        {/* Questions Title */}
+        <h3 className="text-center text-2xl font-semibold text-[#27e8e8] mt-1">
+          Questions
+        </h3>
+
+        {/* Question Blocks */}
+        {questions.map((q, index) => (
+          <div
+            key={index}
+            className="bg-[#141414] p-4 rounded-lg border border-[#27e8e8]/20 shadow-lg 
+            hover:shadow-[#27e8e870] transition-all duration-300 animate-scaleIn"
+          >
+            <textarea
+              ref={textarearef}
+              placeholder="Question"
+              value={q.question_text}
+              rows={1}
+              onChange={(e) =>
+                handleQuestionChange(index, "question_text", e.target.value)
+              }
               required
+              className="w-full bg-[#1a1a1a] text-white placeholder-gray-400 rounded-md p-3 
+              border border-[#27e8e8]/30 focus:border-[#27e8e8] outline-none transition-all
+              mb-3 resize-none shadow-inner"
             />
-            <button style={{
-               height:"30px",
-                width:"50px",
-                backgroundColor:"#00203FFF",
-                color:"#ADEFD1FF",
-                borderRadius:"10px"
-            }} onClick={()=>deleteQuestion(index)}>Delete</button>
+            <div className="flex items-center justify-between">
+              <p className='text-[#27e8e8]'>Marks:</p>
+              <input
+                type="number"
+                placeholder="Marks"
+                value={q.marks}
+                required
+                onChange={(e) => handleQuestionChange(index, "marks", e.target.value)}
+                className="w-40 bg-[#1a1a1a] text-white placeholder-gray-400 rounded-md p-3 
+                border border-[#27e8e8]/30 focus:border-[#27e8e8] outline-none transition-all"
+              />
+
+              <motion.button
+                type="button"
+                onClick={() => deleteQuestion(index)}
+                className="px-4 py-2 rounded-md bg-red-600 hover:bg-red-500 text-white 
+                shadow-md hover:shadow-red-500/50 transition-all duration-300"
+                whileHover={{
+    scale: 1.08,
+    transition: { type: "spring", stiffness: 300    },
+  }}
+              whileTap={{
+    scale: 0.92,
+  }}
+              >
+                Delete
+              </motion.button>
+            </div>
           </div>
         ))}
-        <h3 style={{
-            textAlign: "center",
-            fontSize:"1.4rem",
-            color: "00203fff"
-          }}>Total Marks: {totalMarks}</h3>
-          <div className="btns">
-          <button className='create_exam_btn' type='button' onClick={()=>{addQuestions()}}>Add Questions</button>
-          <button className='create_exam_btn' type='submit'>Create Exam</button>
-          </div>           
-       </form>
+
+        {/* Total Marks */}
+        <h3 className="text-xl text-[#27e8e8] font-semibold text-center">
+          Total Marks: {totalMarks}
+        </h3>
+
+        {/* Buttons */}
+        <div className="flex justify-center gap-6 mt-4">
+          <motion.button
+  type="button"
+  onClick={addQuestions}
+  className="px-6 py-3 bg-[#27e8e8] text-black font-semibold rounded-lg shadow-md"
+  whileHover={{
+    scale: 1.08,
+    boxShadow: "0px 0px 15px rgba(39, 232, 232, 0.7)",
+    transition: { type: "spring", stiffness: 300 },
+  }}
+  whileTap={{
+    scale: 0.92,
+    boxShadow: "0px 0px 8px rgba(39, 232, 232, 0.5)",
+  }}
+>
+  Add Question
+</motion.button>
+
+          <motion.button
+  type="submit"
+  className="px-6 py-3 bg-[#0ef09f] text-black font-semibold rounded-lg shadow-md"
+  whileHover={{
+    scale: 1.08,
+    boxShadow: "0px 0px 15px rgba(14, 240, 159, 0.7)",
+    transition: { type: "spring", stiffness: 300 },
+  }}
+  whileTap={{
+    scale: 0.92,
+    boxShadow: "0px 0px 8px rgba(14, 240, 159, 0.5)",
+  }}
+>
+  Create Exam
+</motion.button>
+        </div>
+      </form>
     </div>
-  )
+  </div>
+);
+
 }
 
 export default CreateExam
