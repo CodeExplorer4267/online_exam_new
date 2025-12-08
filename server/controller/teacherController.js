@@ -24,8 +24,8 @@ export const createExam = async (req, res) => {
         const examId = examResult.insertId; // ✅ Get exam ID
 
         // Insert questions linked to this examId
-        const questionQuery = "INSERT INTO questions (exam_id, question_text, answer, marks) VALUES ?";
-        const questionData = questions.map(q => [examId, q.question_text, q.answer, q.marks]);
+        const questionQuery = "INSERT INTO questions (exam_id, question_text, marks) VALUES ?";
+        const questionData = questions.map(q => [examId, q.question_text, q.marks]);
 
         await pool.query(questionQuery, [questionData]); // ✅ Batch insert questions
 

@@ -1,131 +1,144 @@
-import React from "react";
-import { useState } from "react";
+
+import React, { useState } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
+
 const Generate = () => {
   const [topic, setTopic] = useState("");
   const [totalmarks, setTotalMarks] = useState(0);
   const [difficulty, setDifficulty] = useState("Medium");
   const [questionPaper, setQuestionPaper] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleGenerate = async () => {
+    setLoading(true);
+    setQuestionPaper(""); 
+
     try {
       const res = await axios.post(
         "http://localhost:5000/online-exam/generate",
         {
-          topic: topic,
-          totalmarks: totalmarks,
-          difficulty: difficulty,
-        }, // This is the request body
+          topic,
+          totalmarks,
+          difficulty,
+        },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true, // Configuration goes here
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
         }
       );
+
       setQuestionPaper(res.data.questionPaper);
     } catch (error) {
-      console.log("Error while generating question paper:", error.message);
+      setQuestionPaper("❌ Error generating question paper. Check console.");
+      console.log("Error:", error.message);
     }
+
+    setLoading(false);
   };
+
   return (
-    <>
-      <div
-        className="question_generate_container"
-        style={{
-          width: "81%",
-        }}
+  <div className="w-[81%] mx-auto p-6 mt-5">
+
+    <motion.h2
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="text-4xl text-center font-extrabold text-[#27e8e8]"
+    >
+      AI Question Generator
+    </motion.h2>
+
+    {/* FLEX CONTAINER → FORM LEFT, OUTPUT RIGHT */}
+    <div className="flex flex-col lg:flex-row gap-8 mt-10 justify-center">
+
+      {/* LEFT: Form Section */}
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        className="bg-[#141414] p-6 rounded-xl shadow-lg w-full lg:w-[45%]
+                   border border-[#04364A]"
       >
-        <h2 style={{
-          fontSize: "30px",
-          fontWeight: "bold",
-          textAlign:"center"
-        }}>AI Question Generator</h2>
-        <div className="question" style={{
-          display:"flex",
-          flexDirection:"column",
-          justifyContent:"center",
-          alignItems:"center",
-          gap:"20px",
-          width:"50%",
-          margin:"10px auto"
-        }}>
-          <input
+        <div className="flex flex-col gap-5 items-center">
+
+          <motion.input
+            whileFocus={{ scale: 1.03 }}
             type="text"
             value={topic}
+            placeholder="Enter topic..."
             onChange={(e) => setTopic(e.target.value)}
-            placeholder="Enter topic"
-            style={{
-              width:"60%"
-            }}
+            className="w-[90%] px-4 py-3 rounded-lg bg-[#002b45] border border-[#044868]
+                       text-[#ADEFD1] focus:outline-none"
           />
-          <input
+
+          <motion.input
+            whileFocus={{ scale: 1.03 }}
             type="number"
             value={totalmarks}
+            placeholder="Total Marks..."
             onChange={(e) => setTotalMarks(Number(e.target.value))}
-            style={{
-              width:"60%"
-            }}
+            className="w-[90%] px-4 py-3 rounded-lg bg-[#002b45] border border-[#044868]
+                       text-[#ADEFD1]"
           />
-          <select
+
+          <motion.select
+            whileFocus={{ scale: 1.03 }}
             value={difficulty}
             onChange={(e) => setDifficulty(e.target.value)}
-            style={{
-              width: "102px",
-              backgroundColor: "#00203F",
-              color: "#ADEFD1",
-              height: "40px",
-              padding:"11px",
-              borderRadius:"16px",
-              fontWeight: "bold"
-            }}
+            className="w-[50%] px-4 py-3 rounded-lg bg-[#044868] text-[#ADEFD1] font-semibold"
           >
             <option>Easy</option>
             <option>Medium</option>
             <option>Hard</option>
-          </select>
-          <button onClick={handleGenerate} style={{
-            backgroundColor: "#4CAF50",
-            color: "white",
-            border: "none",
-            padding: "10px 20px",
-            textAlign: "center",
-            textDecoration: "none",
-            display: "inline-block",
-            fontSize: "16px",
-            marginTop: "20px",
-            cursor: "pointer",
-            borderRadius: "10px",
-          }}>Generate</button>
-          <div
-            className="response"
-            style={{
-              width: "100%",
-              maxWidth: "700px",
-              padding: "1rem",
-              backgroundColor: "#00203F",
-              color: "#ADEFD1",
-              borderRadius: "8px",
-              overflowX: "auto",
-              whiteSpace: "pre-wrap", // important!
-              wordWrap: "break-word", // optional but helpful
-              marginTop: "20px",
-            }}
+          </motion.select>
+
+          <motion.button
+            disabled={loading}
+            onClick={handleGenerate}
+            whileHover={{ scale: 1.07 }}
+            whileTap={{ scale: 0.95 }}
+            className={`px-8 py-3 rounded-lg text-lg font-bold transition-all
+            ${
+              loading ? "bg-gray-600 cursor-not-allowed"
+                      : "bg-[#0EF09F] text-black hover:bg-[#15ffae]"
+            }`}
           >
-            <pre
-              style={{
-                whiteSpace: "pre-wrap",
-                wordWrap: "break-word",
-                margin: 0,
-              }}
+            {loading ? "Generating..." : "Generate"}
+          </motion.button>
+
+          {loading && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-4 flex justify-center"
             >
-              {questionPaper}
-            </pre>
-          </div>
+              <div className="loader border-t-4 border-[#0EF09F] w-10 h-10 rounded-full animate-spin"></div>
+            </motion.div>
+          )}
         </div>
-      </div>
-    </>
-  );
+      </motion.div>
+
+      {/* RIGHT: Generated Output */}
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="bg-[#141414] p-5 rounded-xl shadow-lg w-full lg:w-[50%]
+                   border border-[#044868] max-h-[500px] overflow-y-auto"
+      >
+        {questionPaper ? (
+          <pre className="whitespace-pre-wrap text-[#27e8e8] text-sm">
+            {questionPaper}
+          </pre>
+        ) : (
+          <p className="text-[#7abdbf] text-center">
+            Generated questions will appear here →
+          </p>
+        )}
+      </motion.div>
+
+    </div>
+  </div>
+);
+
 };
 
 export default Generate;

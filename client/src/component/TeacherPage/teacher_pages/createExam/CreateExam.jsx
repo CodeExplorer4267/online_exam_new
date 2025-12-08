@@ -8,7 +8,7 @@ const CreateExam = () => {
   const [duration,setduration]=useState(()=>localStorage.getItem('duration')|| "");
   const [questions, setquestions] = useState(() => {
     const savedQuestions = localStorage.getItem("questions");
-    return savedQuestions ? JSON.parse(savedQuestions) : [{ question_text: "", answer: "", marks: 0 }];
+    return savedQuestions ? JSON.parse(savedQuestions) : [{ question_text: "", marks: 0 }];
   });
   // Load saved totalMarks or set default value
   const [totalMarks, setTotalMarks] = useState(() => {
@@ -49,7 +49,7 @@ const CreateExam = () => {
    setTotalMarks(total);
  };
  const addQuestions=()=>{
-   setquestions([...questions,{question_text:"",answer:"",marks:0}])
+   setquestions([...questions,{question_text:"",marks:0}])
  }
 
  const deleteQuestion=(index)=>{
