@@ -1,0 +1,296 @@
+%PDF-1.3
+%ºß¬à
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 4 0 R
+>>
+endobj
+4 0 obj
+<<
+/Length 2900
+>>
+stream
+0.200025 w
+0 G
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 801.8899999999999864 Td
+( Below is a 6-mark exam paper on "Database Management Systems) Tj
+T* (\(DBMS\)" with short answer questions. The difficulty level is medium, and) Tj
+T* (the total marks add up to 6. Answers are provided for each question.) Tj
+T* () Tj
+T* (### **Exam Paper: Database Management Systems \(DBMS\) \(6) Tj
+T* (Marks\)**) Tj
+T* () Tj
+T* (#### **Instructions:**) Tj
+T* (- Answer all questions.) Tj
+T* (- Each question carries 6 marks.) Tj
+T* () Tj
+T* (#### **Questions:**) Tj
+T* () Tj
+T* (1. **What is a relational database? Explain with an example.** \(2 marks\)) Tj
+T* (   **Answer:**) Tj
+T* (   A relational database is a type of database that stores data in tables) Tj
+T* (\(relations\) and defines relationships between tables using keys. It is) Tj
+T* (based on the relational model introduced by E.F. Codd.) Tj
+T* (   **Example:** A database for a university may have tables like) Tj
+T* (`Students`, `Courses`, and `Enrollments`, where `Enrollments` links) Tj
+T* (`Students` and `Courses` using foreign keys.) Tj
+T* () Tj
+T* (2. **Define the term "primary key" with an example.** \(1 mark\)) Tj
+T* (   **Answer:**) Tj
+T* (   A primary key is a column \(or set of columns\) in a table that uniquely) Tj
+T* (identifies each row. It cannot contain null values.) Tj
+T* (   **Example:** In a `Students` table, the `StudentID` column can be the) Tj
+T* (primary key.) Tj
+T* () Tj
+T* (3. **What is normalization? Mention the first normal form \(1NF\) rule.** \(1) Tj
+T* (mark\)) Tj
+T* (   **Answer:**) Tj
+T* (   Normalization is the process of organizing data in a database to) Tj
+T* (minimize redundancy and improve data integrity.) Tj
+T* (   **1NF Rule:** Each table cell must contain a single value \(atomicity\),) Tj
+T* (and all entries in a column must be of the same data type.) Tj
+T* () Tj
+T* (4. **Explain the difference between SQL and NoSQL databases.** \(2) Tj
+T* (marks\)) Tj
+T* (   **Answer:**) Tj
+T* (   - **SQL \(Relational\) Databases:** Use structured tables, follow a) Tj
+T* (schema, and support complex queries \(e.g., MySQL, PostgreSQL\).) Tj
+T* (   - **NoSQL \(Non-relational\) Databases:** Store unstructured or) Tj
+T* (semi-structured data \(e.g., JSON, key-value pairs\) and are schema-less) Tj
+T* (\(e.g., MongoDB, Cassandra\).) Tj
+T* () Tj
+T* (5. **What is a foreign key? Give an example.** \(1 mark\)) Tj
+T* (   **Answer:**) Tj
+T* (   A foreign key is a column in one table that references the primary key) Tj
+T* (in another table, establishing a relationship between them.) Tj
+T* (   **Example:** In an `Orders` table, the `CustomerID` column can be a) Tj
+T* (foreign key referencing the `CustomerID` in the `Customers` table.) Tj
+T* () Tj
+T* (**Total Marks: 6**) Tj
+T* (---) Tj
+T* (This exam paper tests fundamental concepts in DBMS with a mix of) Tj
+T* (conceptual and applied questions.) Tj
+ET
+endstream
+endobj
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R ]
+/Count 1
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+6 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/BaseFont /Courier
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Roman
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Italic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/BaseFont /Times-BoldItalic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/BaseFont /ZapfDingbats
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+18 0 obj
+<<
+/Type /Font
+/BaseFont /Symbol
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 5 0 R
+/F2 6 0 R
+/F3 7 0 R
+/F4 8 0 R
+/F5 9 0 R
+/F6 10 0 R
+/F7 11 0 R
+/F8 12 0 R
+/F9 13 0 R
+/F10 14 0 R
+/F11 15 0 R
+/F12 16 0 R
+/F13 17 0 R
+/F14 18 0 R
+>>
+/XObject <<
+>>
+>>
+endobj
+19 0 obj
+<<
+/Producer (jsPDF 3.0.4)
+/CreationDate (D:20251208204304+05'30')
+>>
+endobj
+20 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+/OpenAction [3 0 R /FitH null]
+/PageLayout /OneColumn
+>>
+endobj
+xref
+0 21
+0000000000 65535 f 
+0000003104 00000 n 
+0000004921 00000 n 
+0000000015 00000 n 
+0000000152 00000 n 
+0000003161 00000 n 
+0000003286 00000 n 
+0000003416 00000 n 
+0000003549 00000 n 
+0000003686 00000 n 
+0000003809 00000 n 
+0000003938 00000 n 
+0000004070 00000 n 
+0000004206 00000 n 
+0000004334 00000 n 
+0000004461 00000 n 
+0000004590 00000 n 
+0000004723 00000 n 
+0000004825 00000 n 
+0000005169 00000 n 
+0000005255 00000 n 
+trailer
+<<
+/Size 21
+/Root 20 0 R
+/Info 19 0 R
+/ID [ <DA6080D4540A22D4298A08996F060023> <DA6080D4540A22D4298A08996F060023> ]
+>>
+startxref
+5359
+%%EOF
