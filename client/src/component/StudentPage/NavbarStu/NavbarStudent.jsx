@@ -1,28 +1,24 @@
 import React from 'react'
 import { PiStudentFill } from "react-icons/pi";
 import { Avatar } from '@mui/material';
-import "./NavbarStudent.css"
+import { FaChalkboardUser } from "react-icons/fa6";
 
 const NavbarStudent = () => {
   return (
     <>
-    <div className='container'>
-       <PiStudentFill style={{
-        fontSize:"4rem"
-       }}/>
-       <p style={{
-          fontSize:"2rem",
-          fontWeight:"bold",
-          fontFamily:"serif"
-       }}>Welcome Student</p>
-       <Avatar 
-        sx={{
-          height:50,
-          width:50
-        }}
-       />
+    <div className='w-full h-[100px] bg-[#141414] text-[#7dbbff] flex justify-evenly items-center p-5'>
+       <div className='flex justify-center items-center gap-5'>
+         <FaChalkboardUser style={{
+           color:'#7dbbff'
+         }}
+         size={50}
+         />
+         <span className='text-white font-bold text-[30px]'>Student Dashboard</span>
+       </div>
+      <div className='rounded-full w-10 h-auto flex justify-center'>
+         <Avatar className='border 2 border-[#7dbbff]'/>
+      </div> 
     </div>
-    <hr />
     </>
   )
 }
