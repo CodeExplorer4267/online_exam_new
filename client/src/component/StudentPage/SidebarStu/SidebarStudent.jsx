@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import "./SidebarStudent.css"
 import {useNavigate} from 'react-router-dom'
 
 const SidebarStudent = () => {
@@ -11,23 +10,8 @@ const SidebarStudent = () => {
   }
   
   return (
-    <div className='sidebar-teacher'>
-        <div className="options">
-            <div className={`option ${activeoption==='exam' ? 'active':''}`} onClick={()=>{
-               handleNavigation('exam')
-            }}>Exam</div>
-            <div className={`option ${activeoption==='stu-result' ? 'active':''}`} onClick={()=>{
-               handleNavigation('stu-result')
-            }}>Result</div>
-            <div className={`option ${activeoption==='chat' ? 'active':''}`} onClick={()=>{
-               handleNavigation('chat')
-            }}>Chat</div>
-            <div className={`option ${activeoption==='student-material' ? 'active':''}`} onClick={()=>{
-               handleNavigation('student-material')
-            }}>Materials</div>
-            
+    <div className='bg-[#141414] w-[300px]'>
 
-        </div>
     </div>
   )
 }
