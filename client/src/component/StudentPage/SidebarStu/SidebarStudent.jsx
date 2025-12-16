@@ -10,8 +10,8 @@ const SidebarStudent = () => {
   }
   
   return (
-    <div className='bg-[#141414] w-[300px]'>
-
+    <div className='bg-[#141414] w-[250px] min-h-screen'>
+       
     </div>
   )
 }
