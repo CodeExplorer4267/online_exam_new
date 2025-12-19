@@ -3,6 +3,14 @@ import { FaLaptopCode, FaUserGraduate, FaShieldAlt } from "react-icons/fa";
 import { PiExamFill } from "react-icons/pi";
 import { IoChatbubbles } from "react-icons/io5";
 import { SiGoogledocs } from "react-icons/si";
+import { FaLocationDot } from "react-icons/fa6";
+import { SiGmail } from "react-icons/si";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+
 const features = [
   {
     title:"Create Exams",
@@ -136,6 +144,54 @@ const LandingPage = () => {
             Create Free Account
           </button>
         </motion.div>
+      </section>
+
+      {/* footer section */}
+      <section className="mt-6 p-4 bg-linear-to-r from-cyan-500 to-blue-500 text-black w-full h-[300px]"> 
+         <footer className="p-6 flex justify-center items-center gap-10">
+           <div className="flex flex-col gap-4 font-bold items-start w-[33%]">
+             <h2>Get in touch</h2>
+             <div className="flex justify-center items-center gap-4">
+              <FaLocationDot/>
+              <p>Barasat, Kolkata, WestBengal, India</p>
+             </div>
+             <div className="flex justify-center items-center gap-4">
+              <SiGmail/>
+              <p>rupambhadra478@gmail.com</p>
+             </div>
+             <div className="flex justify-center items-center gap-4">
+              <FaPhoneAlt/>
+              <p>+1 123456789</p>
+             </div>
+           </div>
+           <div className="flex flex-col gap-4 w-[34%] items-center">
+            <div className="flex gap-5 justify-center items-center">
+              <FaFacebook size={24}/>
+              <FaInstagram size={24}/>
+              <FaLinkedin size={24}/>
+              <FaXTwitter size={24}/>
+            </div>
+            <div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, nobis voluptatem atque quos, reiciendis maiores sint dolor accusantium itaque laudantium at, repudiandae nihil minima iusto nisi odio error hic illo! Hic assumenda ipsa incidunt!
+              </p>
+            </div>
+           </div>
+           <div className="flex flex-col items-center gap-4 w-[33%] font-bold">
+              <h2>
+                Join a newsletter
+              </h2>
+              <p>Your email</p>
+              <input type="text" placeholder="Enter your email" style={
+                {
+                  backgroundColor:'#0b0b0f',
+                  color:'#1cffea',
+                  padding:'10px'
+                }
+              }/>
+              <button className="bg-black h-[40px] w-[100px] rounded-[10px] text-cyan-400">Subscribe</button>
+           </div>
+         </footer>
       </section>
     </div>
 
