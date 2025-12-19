@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MdSpaceDashboard } from "react-icons/md"
+import { PiExamFill } from "react-icons/pi";
+import { FaChartBar,FaBook } from 'react-icons/fa';
 
 const SidebarStudent = () => {
   const navigate = useNavigate()
@@ -20,7 +22,7 @@ const SidebarStudent = () => {
      }`
 
   return (
-    <div className='bg-[#141414] w-[250px] min-h-screen p-3 flex flex-col gap-4'>
+    <div className='bg-[#141414] w-[17%] min-h-screen p-3 flex flex-col gap-4'>
 
       {/* DASHBOARD */}
       <div
@@ -44,7 +46,7 @@ const SidebarStudent = () => {
         {activeoption === 'exam' && (
           <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] w-[4px] bg-[#4ea2ff] rounded-full" />
         )}
-        <MdSpaceDashboard size={28} color="#4ea2ff" />
+        <PiExamFill size={28} color="#4ea2ff" />
         <span className='text-white font-medium'>Exam</span>
       </div>
 
@@ -56,7 +58,7 @@ const SidebarStudent = () => {
         {activeoption === 'result' && (
           <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] w-[4px] bg-[#4ea2ff] rounded-full" />
         )}
-        <MdSpaceDashboard size={28} color="#4ea2ff" />
+        <FaChartBar size={28} color="#4ea2ff" />
         <span className='text-white font-medium'>Result</span>
       </div>
 
@@ -68,7 +70,7 @@ const SidebarStudent = () => {
         {activeoption === 'material' && (
           <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] w-[4px] bg-[#4ea2ff] rounded-full" />
         )}
-        <MdSpaceDashboard size={28} color="#4ea2ff" />
+        <FaBook size={28} color="#4ea2ff" />
         <span className='text-white font-medium'>Material</span>
       </div>
 
