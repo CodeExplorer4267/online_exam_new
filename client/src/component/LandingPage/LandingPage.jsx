@@ -186,7 +186,8 @@ const LandingPage = () => {
                 {
                   backgroundColor:'#0b0b0f',
                   color:'#1cffea',
-                  padding:'10px'
+                  padding:'10px',
+                  borderRadius:'10px'
                 }
               }/>
               <button className="bg-black h-[40px] w-[100px] rounded-[10px] text-cyan-400">Subscribe</button>

@@ -1,132 +1,77 @@
-import { Stack,Typography,Button, useMediaQuery } from '@mui/material'
-import React, { useContext, useState } from 'react'
-import "./Register.css"
-import axios from 'axios'
-import {useNavigate} from "react-router-dom"
+import React, { useState } from 'react'
 
 const Register = () => {
-  const navigate=useNavigate()
-  const [login,setlogin]=useState(false)
-  const [username,setusername]=useState('')
-  const [email,setemail]=useState('')
-  const [password,setpassword]=useState('')
-  const [role,setrole]=useState('')
 
-  const _500=useMediaQuery("(max-width:500px)")
- 
-  const changeLogin=()=>{
-    // age jevalue t a chilo seta toggle hye jabe
-    setlogin((prev)=>!prev)
-  }
-  const handleSubmit = async () => {
-   try {
-     if (!login) {
-       // Register
-       const res = await axios.post('http://localhost:5000/online-exam/register', {
-         username,
-         email,
-         password,
-         role
-       });
-       if (res.data.role === 'student') {
-         navigate('/student');
-       } else {
-         navigate('/teacher');
-       }
-     } else {
-       // Login
-       const res = await axios.post('http://localhost:5000/online-exam/login', {
-         email,
-         password
-       });
-       localStorage.setItem("studentId", res.data.studentId);
-       if (res.data.role === 'student') {
-         navigate('/student');
-       } else {
-         navigate('/teacher');
-       }
-     }
-   } catch (error) {
-     console.error("Error during authentication:", error);
-     alert("Something went wrong! Please try again.");
-   }
- };
+  const [isLogin,setisLogin]=useState(false)
+  
+
   return (
-    <Stack flexDirection={'row'}
-    justifyContent={'center'}
-    alignItems={'center'}
-    height={'100vh'}
-    m={0}
-    p={0}
-    >
-     <Stack width={"100%"} 
-     height={'100vh'}
-     sx={{
-        backgroundImage:'url("register_background.jpg")',
-        backgroundRepeat:'no-repeat',
-        backgroundSize:'cover'
-     }}
-     flexDirection={'column'}
-     justifyContent={'center'}
-     alignItems={'center'}
-     >
-         <Stack flexDirection={'column'}
-          width={"25%"}
-          gap={_500?3:2}
-          bgcolor={'white'}
-          height={'55vh'}
-          border={'2px solid black'}
-          borderRadius={'30px'}
-          p={'20px'}
-         >
-           <Typography variant='h5' 
-           alignSelf={'center'}
-           p={'20px'}
-           fontWeight={'bold'}
-           color='#5d12a3'
-           >
-              {login?"Login with Email":"Register with Email"}
-           </Typography>
-           {!login? <><input type="text" placeholder='Enter your name' onChange={(e)=>{
-              setusername(e.target.value)
-           }}/>
-           </>
-           :<></>
+    <div className="relative min-h-screen w-full bg-[#0b0b0f] overflow-hidden">
+      
+      {/* Top blur */}
+      <div className="
+        absolute 
+        w-[500px] h-[500px] 
+        rounded-full 
+        bg-cyan-800 
+        -top-[200px] -left-[200px] 
+        blur-[200px]
+      " />
+
+      {/* Bottom blur */}
+      <div className="
+        absolute 
+        w-[500px] h-[500px] 
+        rounded-full 
+        bg-cyan-800 
+        -bottom-[200px] -right-[200px] 
+        blur-[200px]
+      " />
+       
+       <div className='mx-auto mt-[50px] flex flex-col justify-center items-center gap-10'>
+        <div className='font-extrabold'>
+            <h1 className='text-5xl text-white'>
+          Welcome to <span className='text-cyan-400'>Examify</span>
+         </h1>
+        </div>
+        <div className='flex flex-col justify-start items-center h-[500px] w-[400px] rounded-[20px] border border-cyan-500 p-5 gap-4' style={{
+          backgroundColor:'rgb(28, 27, 27)'
+         }}>
+           {
+            isLogin ? <h1 className='text-white font-bold text-[20px]'>Login in your <span className='text-cyan-400'>account</span></h1> : <h1 className='text-white font-bold text-[20px]'>Create new <span className='text-cyan-400'>account</span></h1>
            }
-           <input type="text" placeholder='Enter your role:Teacher/Student' onChange={(e)=>{
-            setrole(e.target.value)
-         }}/>
-           <input type="email" placeholder='Enter your email' onChange={(e)=>{
-              setemail(e.target.value)
-           }}/>
-           <input type="password" placeholder='Enter password' onChange={(e)=>{
-              setpassword(e.target.value)
-           }}/>
-           {login?<button id='register_btn' onClick={()=>{
-              handleSubmit()
-           }}>Login</button>:<button id='register_btn' onClick={()=>{
-             handleSubmit()
-           }}>Sign Up</button>}
-           {login? <p className='register_login'>Create a new account?<span className='login' onClick={()=>{
-            changeLogin()
-           }}>Register Here</span></p>:<p className='register_login'>Already have an account?<span className='login' onClick={()=>{
-            changeLogin()
-           }}>Login Here</span></p>}
-         </Stack>
-     </Stack>
-     {/* <Stack width={_500?"0%":"50%"} 
-     height={'100vh'}
-      sx={
-        {
-            backgroundImage:'url("register_side.png")',
-            backgroundRepeat:'no-repeat',
-            backgroundSize:'cover'
-        }
-      }
-     >
-        
-     </Stack> */}
-    </Stack>
+           {
+             !isLogin ?<> <div className='text-white text-[16px] flex w-full justify-start'>
+            Name
+           </div>
+           <input type="text" placeholder='Enter your name' className='w-full p-4 bg-black text-cyan-200 h-10
+           rounded-xl'/></> : <></>
+           }        
+           <div className='text-white text-[16px] flex w-full justify-start'>
+            Email
+           </div>
+           <input type="text" placeholder='Enter your email' className='w-full p-4 bg-black text-cyan-200 h-10
+           rounded-xl'/>
+           <div className='text-white text-[16px] flex w-full justify-between'>
+            <p>Password</p>
+            <p>Forgot your Password?</p>
+           </div>
+           <input type="text" placeholder='Enter your password' className='w-full p-4 bg-black text-cyan-200 h-10
+           rounded-xl'/>
+           {
+             isLogin ? <button className='h-10 w-[120px] bg-black text-cyan-400 mt-3 rounded-[10px]'>Login</button> : <button className='h-10 w-[120px] bg-black text-cyan-400 mt-3 rounded-[10px]'>Sign Up</button>
+           }
+           {
+            isLogin ? <p className='text-white'>New User? <span className='text-cyan-300 cursor-pointer' onClick={()=>{
+            setisLogin(false)
+           }}>Register Here</span></p> : <p className='text-white'>Already have an account? <span className='text-cyan-300 cursor-pointer' onClick={()=>{
+            setisLogin(true)
+           }}>Login Here</span></p>
+           }
+         </div>
+       </div>
+
+    </div>
   )
 }
 
