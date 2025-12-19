@@ -1,5 +1,40 @@
 import { motion } from "framer-motion";
 import { FaLaptopCode, FaUserGraduate, FaShieldAlt } from "react-icons/fa";
+import { PiExamFill } from "react-icons/pi";
+import { IoChatbubbles } from "react-icons/io5";
+import { SiGoogledocs } from "react-icons/si";
+const features = [
+  {
+    title:"Create Exams",
+    desc:"Create exam with timers in just one click",
+    icon:PiExamFill,
+  },
+  {
+    title: "AI-Based Exams",
+    desc: "Automatically generate smart questions using AI.",
+    icon: FaLaptopCode,
+  },
+  {
+    title: "Student Analytics",
+    desc: "Track performance with real-time insights.",
+    icon: FaUserGraduate,
+  },
+  {
+    title: "Secure & Proctored",
+    desc: "Advanced security to prevent malpractice.",
+    icon: FaShieldAlt,
+  },
+  {
+    title:"Chat",
+    desc:"Realtime fast chat system with studnents for doubt resolve",
+    icon:IoChatbubbles
+  },
+  {
+    title:"Material",
+    desc:"Easily upload and manage study materials in one secure place.",
+    icon:SiGoogledocs
+  },
+];
 
 const LandingPage = () => {
   return (
@@ -73,7 +108,7 @@ const LandingPage = () => {
               whileHover={{ scale: 1.05 }}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.2 }}
+              transition={{ delay:0.2 }}
               viewport={{ once: true }}
               className="bg-[#14141c] border border-cyan-500/20 rounded-2xl p-8 shadow-lg hover:shadow-cyan-500/30"
             >
@@ -92,7 +127,7 @@ const LandingPage = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-cyan-500 to-blue-500 p-12 rounded-3xl inline-block"
+          className="bg-linear-to-r from-cyan-500 to-blue-500 p-12 rounded-3xl inline-block"
         >
           <h2 className="text-3xl font-bold text-black">
             Ready to Transform Online Exams?
@@ -103,25 +138,10 @@ const LandingPage = () => {
         </motion.div>
       </section>
     </div>
+
   );
 };
 
-const features = [
-  {
-    title: "AI-Based Exams",
-    desc: "Automatically generate smart questions using AI.",
-    icon: FaLaptopCode,
-  },
-  {
-    title: "Student Analytics",
-    desc: "Track performance with real-time insights.",
-    icon: FaUserGraduate,
-  },
-  {
-    title: "Secure & Proctored",
-    desc: "Advanced security to prevent malpractice.",
-    icon: FaShieldAlt,
-  },
-];
+
 
 export default LandingPage;
