@@ -5,22 +5,22 @@ import jwt from 'jsonwebtoken';
 
 //register a new user
 export const register=async(req,res)=>{
-    const { username, email, password, role } = req.body;
+    const { name, email, password, role } = req.body;
     
       // Basic validation
-      if (!username || !email || !password || !role) {
-        return res.status(400).json({ error: 'Please provide username, email, password, and role.' });
+      if (!name || !email || !password || !role) {
+        return res.status(400).json({ message: 'Please provide username, email, password, and role.' });
       }
     
       if (!['teacher', 'student'].includes(role)) {
-        return res.status(400).json({ error: 'Role must be either teacher or student.' });
+        return res.status(400).json({ message: 'Role must be either teacher or student.' });
       }
     
       try {
         // Check if the user already exists
-        const [existing] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
+        const [existing] = await pool.query('SELECT * FROM students WHERE email = ?', [email]);
         if (existing.length > 0) {
-          return res.status(400).json({ error: 'User with this email already exists.' });
+          return res.status(400).json({ message: 'User with this email already exists.' });
         }
     
         // Hash the password
@@ -28,8 +28,8 @@ export const register=async(req,res)=>{
     
         // Insert the new user into the database
         const [result] = await pool.query(
-          'INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)',
-          [username, email, hashedPassword, role]
+          'INSERT INTO students (name, email, password, role) VALUES (?, ?, ?, ?)',
+          [name, email, hashedPassword, role]
         );
         
         res.status(201).json({
@@ -39,7 +39,7 @@ export const register=async(req,res)=>{
         });
       } catch (error) {
         console.error('Registration error:', error);
-        res.status(500).json({ error: 'Internal Server Error',error:error.message });
+        res.status(500).json({ message: 'Internal Server Error',error:error.message });
       }
 }
 
@@ -65,6 +65,9 @@ export const login=async(req,res)=>{
 
   try {
     // Retrieve user by email
+    if(role==='student'){
+      
+    }
     const [rows] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
     if (rows.length === 0) {
       return res.status(400).json({ error: 'Invalid credentials.' });
