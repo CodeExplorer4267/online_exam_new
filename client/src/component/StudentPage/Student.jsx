@@ -16,6 +16,7 @@ import DashBoard from './StudentPages/dashboard/dashboard'
 const StudentPage = () => {
  
 
+
   return (
     <div>
       <NavbarStudent/>
