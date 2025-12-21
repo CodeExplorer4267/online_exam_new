@@ -3,45 +3,50 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 
+
 //register a new user
-export const register=async(req,res)=>{
-    const { name, email, password, role } = req.body;
-    
-      // Basic validation
-      if (!name || !email || !password || !role) {
-        return res.status(400).json({ message: 'Please provide username, email, password, and role.' });
-      }
-    
-      if (!['teacher', 'student'].includes(role)) {
-        return res.status(400).json({ message: 'Role must be either teacher or student.' });
-      }
-    
-      try {
-        // Check if the user already exists
-        const [existing] = await pool.query('SELECT * FROM students WHERE email = ?', [email]);
-        if (existing.length > 0) {
-          return res.status(400).json({ message: 'User with this email already exists.' });
-        }
-    
-        // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10);
-    
-        // Insert the new user into the database
-        const [result] = await pool.query(
-          'INSERT INTO students (name, email, password, role) VALUES (?, ?, ?, ?)',
-          [name, email, hashedPassword, role]
-        );
-        
-        res.status(201).json({
-          message: 'User registered successfully.',
-          userId: result.insertId,
-          role:role,
-        });
-      } catch (error) {
-        console.error('Registration error:', error);
-        res.status(500).json({ message: 'Internal Server Error',error:error.message });
-      }
-}
+export const register = async (req, res) => {
+  const { name, email, password, role } = req.body;
+
+  if (!name || !email || !password || !role) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  if (!["student", "teacher"].includes(role)) {
+    return res.status(400).json({ message: "Role must be student or teacher" });
+  }
+
+  try {
+    const table = role === "student" ? "students" : "teachers";
+
+    // Check existing user
+    const [existing] = await pool.query(
+      `SELECT id FROM ${table} WHERE email = ?`,
+      [email]
+    );
+
+    if (existing.length > 0) {
+      return res.status(400).json({ message: "Email already registered" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const [result] = await pool.query(
+      `INSERT INTO ${table} (name, email, password, role) VALUES (?, ?, ?, ?)`,
+      [name, email, hashedPassword, role]
+    );
+
+    res.status(201).json({
+      message: "Registration successful",
+      userId: result.insertId,
+      role,
+    });
+  } catch (error) {
+    console.error("Register error:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 
 // In register:
 
@@ -55,56 +60,59 @@ export const register=async(req,res)=>{
 // On success, you return userId and role
 
 //login user
-export const login=async(req,res)=>{
-  const { email, password,role} = req.body;
 
-  // Basic validation
-  if (!email || !password) {
-    return res.status(400).json({ error: 'Please provide email and password.' });
+export const login = async (req, res) => {
+  const { email, password, role } = req.body;
+
+  if (!email || !password || !role) {
+    return res.status(400).json({ error: "Email, password and role required" });
+  }
+
+  if (!["student", "teacher"].includes(role)) {
+    return res.status(400).json({ error: "Invalid role" });
   }
 
   try {
-    // Retrieve user by email
-    if(role==='student'){
-      
-    }
-    const [rows] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
+    const table = role === "student" ? "students" : "teachers";
+
+    const [rows] = await pool.query(
+      `SELECT * FROM ${table} WHERE email = ?`,
+      [email]
+    );
+
     if (rows.length === 0) {
-      return res.status(400).json({ error: 'Invalid credentials.' });
+      return res.status(401).json({ error: "Invalid credentials" });
     }
 
     const user = rows[0];
 
-    // Compare the password with the stored hash
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) {
-      return res.status(400).json({ error: 'Invalid credentials.' });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    // Optionally, create a JWT for the user
     const token = jwt.sign(
-      { id: user.id, role: user.role, email: user.email },
-      process.env.JWT_SECRET || 'yoursecretkey',
-      { expiresIn: '30d' }
+      {
+        id: user.id,
+        role: user.role,
+        email: user.email,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" }
     );
 
-    res.json({
-      message: 'Login successful.',
+    res.status(200).json({
+      message: "Login successful",
       token,
-      // user: {
-      //   id: user.id,
-      //   username: user.username,
-      //   email: user.email,
-      //   role: user.role,
-      // },
-      role:user.role,
-      studentId:user.id
+      role: user.role,
+      userId: user.id,
     });
   } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error("Login error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-}
+};
+
 
 // You validate email and password.
 

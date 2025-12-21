@@ -19,22 +19,43 @@ const createUsersTable = async () => {
   }
 };
 
+// export const createExamsTable=async()=>{
+//   try {
+//      await pool.query(`
+//      CREATE TABLE IF NOT EXISTS exams (
+//   id INT AUTO_INCREMENT PRIMARY KEY,
+//   name VARCHAR(100) NOT NULL,
+//   description TEXT,
+//   teacher_id INT,
+//   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+//   FOREIGN KEY (teacher_id) REFERENCES users(id) ON DELETE CASCADE
+// );
+//    `);
+//   console.log("Exams table created or already exists")
+//   } catch (error) {
+//      console.log("Error while creating exams table",error)
+//   }
+// }
 export const createExamsTable=async()=>{
-  try {
+   try {
      await pool.query(`
-     CREATE TABLE IF NOT EXISTS exams (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  description TEXT,
-  teacher_id INT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (teacher_id) REFERENCES users(id) ON DELETE CASCADE
+       CREATE TABLE IF NOT EXISTS exams (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    teacher_id INT NOT NULL,
+    name VARCHAR(150) NOT NULL,
+    description TEXT,
+    duration INT NOT NULL COMMENT 'Duration in minutes',
+    total_marks INT NOT NULL,
+    start_time DATETIME NOT NULL,
+    end_time DATETIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (teacher_id) REFERENCES teachers(id) ON DELETE CASCADE
 );
-   `);
-  console.log("Exams table created or already exists")
-  } catch (error) {
-     console.log("Error while creating exams table",error)
-  }
+      `)
+   } catch (error) {
+      console.log('Error while creating exams table.')
+   }
 }
 
 export const createQuestionsTable=async()=>{

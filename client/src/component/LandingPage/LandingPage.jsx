@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { FaLaptopCode, FaUserGraduate, FaShieldAlt } from "react-icons/fa";
 import { PiExamFill } from "react-icons/pi";
@@ -10,7 +11,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-
+import {useNavigate} from "react-router-dom"
 const features = [
   {
     title:"Create Exams",
@@ -44,7 +45,14 @@ const features = [
   },
 ];
 
+
+
 const LandingPage = () => {
+  const navigate=useNavigate()
+  const handleLogin=()=>{
+     navigate('/register')
+  } 
+
   return (
     <div className="bg-[#0b0b0f] text-white min-h-screen overflow-hidden">
 
@@ -55,7 +63,7 @@ const LandingPage = () => {
       {/* 🔝 Navbar */}
       <nav className="flex justify-between items-center px-10 py-6 relative z-10">
         <h1 className="text-2xl font-bold text-cyan-400">Examify</h1>
-        <button className="px-6 py-2 rounded-full bg-cyan-500 text-black font-semibold hover:scale-105 transition">
+        <button className="px-6 py-2 rounded-full bg-cyan-500 text-black font-semibold hover:scale-105 transition" onClick={handleLogin}>
           Login
         </button>
       </nav>
@@ -140,7 +148,7 @@ const LandingPage = () => {
           <h2 className="text-3xl font-bold text-black">
             Ready to Transform Online Exams?
           </h2>
-          <button className="mt-6 px-10 py-3 rounded-full bg-black text-cyan-400 font-semibold hover:scale-105 transition">
+          <button className="mt-6 px-10 py-3 rounded-full bg-black text-cyan-400 font-semibold hover:scale-105 transition" onClick={handleLogin}>
             Create Free Account
           </button>
         </motion.div>
