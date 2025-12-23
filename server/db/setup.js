@@ -53,6 +53,7 @@ export const createExamsTable=async()=>{
     FOREIGN KEY (teacher_id) REFERENCES teachers(id) ON DELETE CASCADE
 );
       `)
+      console.log('Exams table created or already exists')
    } catch (error) {
       console.log('Error while creating exams table.')
    }

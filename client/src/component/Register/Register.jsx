@@ -20,18 +20,23 @@ const Register = () => {
         role,
         password
       })
+
+      
+
       if(res.status==201){
-        toast.success(res.data.message)
-      }
-      else{
-         toast.error(res.data.message)
-      }
-      if(res.data.role==='student'){
+        
+        if(res.data.role==='student'){
+          toast.success(res.data.message)
           navigate('/student')
       }
       else if(res.data.role==='teacher'){
+        toast.success(res.data.message)
          navigate('/teacher')
       }
+      }
+      else{
+         toast.error(res.data.message)
+      }  
       setname("")
       setemail("")
       setrole("")
@@ -50,6 +55,10 @@ const Register = () => {
         password,
         role
       })
+      localStorage.setItem("token",res.data.token)
+      localStorage.setItem("role",res.data.role)
+      localStorage.setItem("userId",res.data.userId)
+      
       if(res.status==201){
         toast.success(res.data.message)
       }

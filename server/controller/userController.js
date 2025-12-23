@@ -65,11 +65,11 @@ export const login = async (req, res) => {
   const { email, password, role } = req.body;
 
   if (!email || !password || !role) {
-    return res.status(400).json({ error: "Email, password and role required" });
+    return res.status(400).json({ message: "Email, password and role required" });
   }
 
   if (!["student", "teacher"].includes(role)) {
-    return res.status(400).json({ error: "Invalid role" });
+    return res.status(400).json({ message: "Invalid role" });
   }
 
   try {
@@ -81,14 +81,14 @@ export const login = async (req, res) => {
     );
 
     if (rows.length === 0) {
-      return res.status(401).json({ error: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
     const user = rows[0];
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ error: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
     const token = jwt.sign(
@@ -109,7 +109,7 @@ export const login = async (req, res) => {
     });
   } catch (error) {
     console.error("Login error:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 

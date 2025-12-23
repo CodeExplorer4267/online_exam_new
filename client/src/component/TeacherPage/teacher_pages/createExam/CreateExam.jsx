@@ -202,59 +202,63 @@ const CreateExam = () => {
           <h3 className="text-center text-2xl font-semibold text-[#27e8e8] mt-1">
             Questions
           </h3>
-
-          {/* Question Blocks */}
-          {questions.map((q, index) => (
-            <div
-              key={index}
-              className="bg-[#141414] p-4 rounded-lg border border-[#27e8e8]/20 shadow-lg 
+          <div
+            className="flex flex-col gap-4 overflow-y-auto pr-2"
+            style={{ maxHeight: "300px" }}
+          >
+            {/* Question Blocks */}
+            {questions.map((q, index) => (
+              <div
+                key={index}
+                className="bg-[#141414] p-4 rounded-lg border border-[#27e8e8]/20 shadow-lg 
             hover:shadow-[#27e8e870] transition-all duration-300 animate-scaleIn"
-            >
-              <textarea
-                ref={textarearef}
-                placeholder="Question"
-                value={q.question_text}
-                rows={1}
-                onChange={(e) =>
-                  handleQuestionChange(index, "question_text", e.target.value)
-                }
-                required
-                className="w-full bg-[#1a1a1a] text-white placeholder-gray-400 rounded-md p-3 
+              >
+                <textarea
+                  ref={textarearef}
+                  placeholder="Question"
+                  value={q.question_text}
+                  rows={1}
+                  onChange={(e) =>
+                    handleQuestionChange(index, "question_text", e.target.value)
+                  }
+                  required
+                  className="w-full bg-[#1a1a1a] text-white placeholder-gray-400 rounded-md p-3 
               border border-[#27e8e8]/30 focus:border-[#27e8e8] outline-none transition-all
               mb-3 resize-none shadow-inner"
-              />
-              <div className="flex items-center justify-between">
-                <p className="text-[#27e8e8]">Marks:</p>
-                <input
-                  type="number"
-                  placeholder="Marks"
-                  value={q.marks}
-                  required
-                  onChange={(e) =>
-                    handleQuestionChange(index, "marks", e.target.value)
-                  }
-                  className="w-40 bg-[#1a1a1a] text-white placeholder-gray-400 rounded-md p-3 
-                border border-[#27e8e8]/30 focus:border-[#27e8e8] outline-none transition-all"
                 />
+                <div className="flex items-center justify-between">
+                  <p className="text-[#27e8e8]">Marks:</p>
+                  <input
+                    type="number"
+                    placeholder="Marks"
+                    value={q.marks}
+                    required
+                    onChange={(e) =>
+                      handleQuestionChange(index, "marks", e.target.value)
+                    }
+                    className="w-40 bg-[#1a1a1a] text-white placeholder-gray-400 rounded-md p-3 
+                border border-[#27e8e8]/30 focus:border-[#27e8e8] outline-none transition-all"
+                  />
 
-                <motion.button
-                  type="button"
-                  onClick={() => deleteQuestion(index)}
-                  className="px-4 py-2 rounded-md bg-red-600 hover:bg-red-500 text-white 
+                  <motion.button
+                    type="button"
+                    onClick={() => deleteQuestion(index)}
+                    className="px-4 py-2 rounded-md bg-red-600 hover:bg-red-500 text-white 
                 shadow-md hover:shadow-red-500/50 transition-all duration-300"
-                  whileHover={{
-                    scale: 1.08,
-                    transition: { type: "spring", stiffness: 300 },
-                  }}
-                  whileTap={{
-                    scale: 0.92,
-                  }}
-                >
-                  Delete
-                </motion.button>
+                    whileHover={{
+                      scale: 1.08,
+                      transition: { type: "spring", stiffness: 300 },
+                    }}
+                    whileTap={{
+                      scale: 0.92,
+                    }}
+                  >
+                    Delete
+                  </motion.button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
 
           {/* Total Marks */}
           <h3 className="text-xl text-[#27e8e8] font-semibold text-center">
