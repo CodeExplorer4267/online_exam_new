@@ -10,7 +10,7 @@ const Register = () => {
   const [email,setemail]=useState("")
   const [role,setrole]=useState("")
   const [password,setpassword]=useState("")
- 
+  
   const handleSignUp=async(e)=>{
     e.preventDefault()
     try {
@@ -20,23 +20,13 @@ const Register = () => {
         role,
         password
       })
-
-      
-
       if(res.status==201){
-        
-        if(res.data.role==='student'){
-          toast.success(res.data.message)
-          navigate('/student')
-      }
-      else if(res.data.role==='teacher'){
-        toast.success(res.data.message)
-         navigate('/teacher')
-      }
+         toast.success("Registration Successful. Please Login")
+         setisLogin(true)
       }
       else{
          toast.error(res.data.message)
-      }  
+      } 
       setname("")
       setemail("")
       setrole("")
@@ -55,12 +45,12 @@ const Register = () => {
         password,
         role
       })
-      localStorage.setItem("token",res.data.token)
+      
+      if(res.status==200){
+        toast.success(res.data.message)
+        localStorage.setItem("token",res.data.token)
       localStorage.setItem("role",res.data.role)
       localStorage.setItem("userId",res.data.userId)
-      
-      if(res.status==201){
-        toast.success(res.data.message)
       }
       else{
          toast.error(res.data.message)
@@ -79,7 +69,7 @@ const Register = () => {
        console.log("Error:",error)
     }
   }
-  
+ 
   return (
     <div className="relative min-h-screen w-full bg-[#0b0b0f] overflow-hidden">
       
@@ -142,7 +132,7 @@ const Register = () => {
             <p>Password</p>
             <p>Forgot your Password?</p>
            </div>
-           <input type="text" placeholder='Enter your password' className='w-full p-4 bg-black text-cyan-200 h-10
+           <input type="password" placeholder='Enter your password' className='w-full p-4 bg-black text-cyan-200 h-10
            rounded-xl' onChange={(e)=>{
               setpassword(e.target.value)
            }}/>
