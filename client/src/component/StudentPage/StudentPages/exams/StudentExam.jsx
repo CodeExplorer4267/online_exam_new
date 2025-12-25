@@ -41,7 +41,7 @@ const StudentExam = () => {
         ⏱ Duration: {exam.duration} mins
       </p>
       <p className="text-gray-400">
-        📝 Total Marks: {exam.total_Marks}
+        📝 Total Marks: {exam.total_marks}
       </p>
 
       {active ? (
@@ -62,7 +62,7 @@ const StudentExam = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#0b0b0f] p-8 text-white">
+    <div className="min-h-screen bg-[#0b0b0f] p-8 text-white w-[83%]">
       <h1 className="text-3xl font-bold text-center text-[#ADEFD1FF] mb-10">
         Student Exams
       </h1>

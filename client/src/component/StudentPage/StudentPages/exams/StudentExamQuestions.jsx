@@ -12,7 +12,7 @@ const StudentExamQuestions = () => {
   const [timeLeft, setTimeLeft] = useState(duration * 60);
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
-  const studentId = localStorage.getItem("studentId");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     axios.get(`http://localhost:5000/online-exam/exam/${examId}`)
@@ -64,7 +64,7 @@ const StudentExamQuestions = () => {
     ).padStart(2, "0")}`;
 
   return (
-    <div className="min-h-screen bg-[#0b0b0f] text-white px-6 py-24">
+    <div className="min-h-screen bg-[#0b0b0f] text-white px-6 py-5 w-[83%]">
       {/* Timer */}
       <div className="fixed top-0 left-0 right-0 bg-[#141414] py-4 text-center shadow-md z-50">
         <p className="text-lg text-[#ADEFD1FF]">
