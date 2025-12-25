@@ -4,6 +4,7 @@ import { createExam, generateQuestion, getAllAnswers, getAllMessages, getAttempt
 import { askQuestion, deleteExam, downloadFile, getAllExams, getAllMaterials, getAllQuestions, getAllTeachers, submitExam } from '../controller/studentController.js';
 import { upload } from '../multer-config.js';
 import pool from '../db/db.js'
+import { verifyToken } from '../auth/auth.js';
 
 const router=express.Router();
 

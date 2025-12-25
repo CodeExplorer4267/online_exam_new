@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import "./CreateExam.css";
 import axios from "axios";
 import { motion } from "framer-motion";
-
+import { toast } from "react-toastify";
 const CreateExam = () => {
   const [Name, setname] = useState(() => localStorage.getItem("Name") || "");
   const [duration, setduration] = useState(
@@ -19,7 +19,7 @@ const CreateExam = () => {
     return Number(localStorage.getItem("totalMarks")) || 0;
   });
   const textarearef = useRef(null);
-  const teacherId = localStorage.getItem("teacherId") || 1;
+  const teacherId = localStorage.getItem("userId");
   const [startTime, setStartTime] = useState(
     () => localStorage.getItem("startTime") || ""
   );
@@ -32,7 +32,7 @@ const CreateExam = () => {
       textarearef.current.style.height = "auto"; // Reset height
       textarearef.current.style.height = `${textarearef.current.scrollHeight}px`; // Adjust to content
     }
-  }, [questions.question_text]); // Runs when text changes
+  }, [questions]); // Runs when text changes
 
   useEffect(() => {
     localStorage.setItem("Name", Name);
@@ -100,16 +100,19 @@ const CreateExam = () => {
           duration,
           total_Marks: totalMarks,
           questions,
+          startTime,
+          endTime,
+          teacherId
         }
       );
 
       console.log("Exam Response:", res.data);
 
       if (res.data.success) {
-        alert(res.data.message);
+        toast.success(res.data.message);
         resetForm(); // ✅ Reset form fields
       } else {
-        alert("Exam creation failed.");
+        toast.error("Exam creation failed.");
       }
     } catch (error) {
       console.error(
@@ -123,9 +126,14 @@ const CreateExam = () => {
   const resetForm = () => {
     setname("");
     setduration("");
-    setquestions([{ question_text: "", answer: "", marks: 0 }]);
+    setquestions([{ question_text: "", marks: 0 }]);
     setTotalMarks(0);
-    localStorage.clear();
+    localStorage.removeItem("Name")
+    localStorage.removeItem("duration")
+    localStorage.removeItem("questions")
+    localStorage.removeItem("totalMarks")
+    localStorage.removeItem("startTime")
+    localStorage.removeItem("endTime")
   };
 
   return (

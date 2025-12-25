@@ -12,15 +12,22 @@ dotenv.config();
 //to create exam
 export const createExam = async (req, res) => {
     try {
-        const { Name, duration, total_Marks, questions } = req.body;
+        const { Name, duration, total_Marks, questions, startTime, endTime,teacherId } = req.body;
+        
+        if (!teacherId) {
+  return res.status(401).json({
+    success: false,
+    message: "Unauthorized: Teacher ID missing"
+  });
+}
 
-        if (!Name || !duration || !total_Marks || !Array.isArray(questions) || questions.length === 0) {
+        if (!Name || !duration || !total_Marks || !Array.isArray(questions) || questions.length === 0 || !startTime || !endTime) {
             return res.status(400).json({ success: false, message: "All fields are required, including questions" });
         }
 
         // Insert exam and get the generated ID
-        const examQuery = "INSERT INTO exams (name, duration, total_marks) VALUES (?, ?, ?)";
-        const [examResult] = await pool.query(examQuery, [Name, duration, total_Marks]);
+        const examQuery = "INSERT INTO exams (teacher_id,name,duration,total_marks,start_time,end_time) VALUES (?, ?, ?,?,?,?)";
+        const [examResult] = await pool.query(examQuery, [teacherId, Name, duration,total_Marks,startTime,endTime]);
         const examId = examResult.insertId; // ✅ Get exam ID
 
         // Insert questions linked to this examId

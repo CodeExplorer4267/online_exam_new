@@ -2,9 +2,9 @@
 import express, { Router } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import createUsersTable, { createAnswersTable, createMarksSubmitTable, createMaterialsTable, createMessageTable } from './db/setup.js';
+import { createQuestionsTable, createStudentsTable, createTeachersTable } from './db/setup.js';
 import router from './routes/Router.js';
-import { createExamsTable,createQuestionsTable,createMarksTable } from './db/setup.js';
+import { createExamsTable } from './db/setup.js';
 import http from 'http';
 import pool from './db/db.js'
 import {Server} from 'socket.io'; //server is a class in socket.io
@@ -37,14 +37,11 @@ app.use('/uploads', express.static('uploads'));
 app.use('/online-exam',router);
 
 // Create the users table if it doesn't exist
-createUsersTable();
+createStudentsTable();
+createTeachersTable();
 createExamsTable();
-createQuestionsTable();
-createAnswersTable()
-createMarksTable()
-createMarksSubmitTable()
-createMessageTable()
-createMaterialsTable()
+createQuestionsTable()
+
 const onlineusers=new Map() //map to track online users
 
 // Create a Socket.IO server
