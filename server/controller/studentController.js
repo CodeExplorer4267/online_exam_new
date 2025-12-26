@@ -98,31 +98,47 @@ export const getAllMaterials=async(req,res)=>{
         res.status(500).send('Server error');
       }
 }
-//download file
-export const downloadFile=async(req,res)=>{
-    try {
-        const filename = req.params.filename;
-        const filePath = path.join(__dirname,'..', 'uploads', filename); // uploads folder
-        // Check if file exists
-        if (!fs.existsSync(filePath)) {
-            return res.status(404).json({ success: false, message: 'File not found' });
-        }
+export const downloadFile = async (req, res) => {
+  try {
+    const { filename } = req.params;
 
-        // If exists, download
-        return res.download(filePath, filename, (err) => {
-            if (err) {
-                console.error('Error during download:', err);
-                if (!res.headersSent) {
-                    return res.status(500).json({ success: false, message: 'Error downloading file' });
-                }
-            }
-        });
-
-    } catch (error) {
-        console.error('Server error:', error);
-        return res.status(500).json({ success: false, message: 'Server error' });
+    // Prevent directory traversal attack
+    if (filename.includes("..")) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid file name"
+      });
     }
-}
+
+    const filePath = path.join(__dirname, "..", "uploads", filename);
+
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({
+        success: false,
+        message: "File not found"
+      });
+    }
+
+    res.download(filePath, filename, (err) => {
+      if (err) {
+        console.error("Download error:", err);
+        if (!res.headersSent) {
+          res.status(500).json({
+            success: false,
+            message: "Error downloading file"
+          });
+        }
+      }
+    });
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+};
+
 //fs.existsSync(filepath)
 // // This line checks whether the file is physically present on your server.
 

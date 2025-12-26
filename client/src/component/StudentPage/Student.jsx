@@ -9,8 +9,8 @@ import StudentMarks from './StudentPages/StudentMarks'
 import "./Student.css"
 import StudentResultDetails from './StudentPages/StudentResultDetails'
 import Stuchat_container from './StudentPages/chat_with_teacher/Stuchat_container'
-import StudentMaterial from './StudentPages/StudentMaterial'
 import DashBoard from './StudentPages/dashboard/dashboard'
+import StudentMaterials from './StudentPages/StudentMaterial'
 // import ChatAsk from './askQuestion/chatAsk'
 
 const StudentPage = () => {
@@ -26,11 +26,12 @@ const StudentPage = () => {
             <Route path='dashboard' element={<DashBoard/>}/>
             <Route path='exam' element={<StudentExam/>}/>
             <Route path='exam/:examId' element={<StudentExamQuestions/>}/>
+            <Route path='material' element={<StudentMaterials/>}/>
              {/* <Route path='stu-result' element={<StudentResult/>}/>
              <Route path='/chat/*' element={<Stuchat_container/>}/>
              
              <Route path='stu-result/:examId/:studentId' element={<StudentResultDetails/>}/>
-             <Route path='student-material' element={<StudentMaterial/>}/>
+             
              <Route path='/ask' element={<ChatAsk/>}/> */}
           </Routes>
       </div>
