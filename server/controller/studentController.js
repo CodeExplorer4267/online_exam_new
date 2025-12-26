@@ -194,3 +194,19 @@ export const askQuestion=async(req,res)=>{
     res.status(500).json({ error: "Something went wrong" });
   }
 }
+
+export const updateStudentProfile=async(req,res)=>{
+   try {
+    const {year,phone,id}=req.body
+    if(!id){
+       return res.status(401).json({sucess:false,message:"Student Id not found"})
+    }
+    if(!year || !phone){
+        return res.status(400).json({success:false,message:"Year and Phone number are required"})
+    }
+    const [result]=await pool.query("UPDATE students SET year=?, phone=? WHERE id=?",[year,phone,id])
+    return res.status(200).json({success:true,message:"Profile updated successfully"})
+   } catch (error) {
+      return res.status(500).json({success:false,message:"Failed to update profile:",error:error.message})
+   }
+}
