@@ -13,6 +13,19 @@ const StudentMaterials = () => {
       .catch(err => console.error(err));
   }, []);
 
+  const handleDownload=async(filename)=>{
+     const res=await axios.get(`http://localhost:5000/online-exam/download/${filename}`,{
+      responseType:'blob'
+     })
+     const url = window.URL.createObjectURL(new Blob([res.data]));
+  const link = document.createElement("a");
+  link.href = url;
+  link.setAttribute("download", filename);
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  }
+
   return (
     <div className="min-h-screen bg-[#0b0b0f] p-8 w-[83%] text-white">
       {/* Page Title */}
@@ -60,15 +73,14 @@ const StudentMaterials = () => {
                   Uploaded by: {mat.teacher_name}
                 </span>
 
-                <a
-                  href={mat.file_url}
-                  download
+                <button
+                  onClick={()=>handleDownload(mat.file_name)}
                   className="flex items-center gap-2 bg-[#27e8e8] text-black px-4 py-2 
-                             rounded-lg font-semibold hover:opacity-90 transition"
+                             rounded-lg font-semibold hover:opacity-90 transition cursor-pointer"
                 >
-                  <FaDownload />
+                  <FaDownload/>
                   Download
-                </a>
+                </button>
               </div>
             </motion.div>
           ))
