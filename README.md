@@ -1,20 +1,21 @@
-<h2>I built a Online Examination Website using the MERN stack + MySQL, designed to streamline the examination process with real-time interaction, AI integration, and automated result handling. This project offers distinct functionalities for teachers and students, ensuring a seamless and interactive exam experience.</h2>
+<h2>I built a Online Examination Website using the MERN stack + MySQL, designed to streamline the examination process with real-time interaction, AI integration and doubt solving. This project offers distinct functionalities for teachers and students, ensuring a seamless and interactive exam experience.</h2>
 <br/>
 <p>👨‍🏫 Teacher Features:
-✅ View student list and manage exam participants.
-✅Create exams with custom duration and question-based marking (SAQs only).
+✅ View student list yearwise.Teacher can send email regarding anything to any student.
+✅Create exams with custom duration, timing and question-based marking (SAQs only).
 ✅Assign marks individually to each question after the exam (one-time evaluation).
 ✅Track who attempted the exam and view detailed results.
-✅Use an AI-powered Question Generator to create questions based on difficulty (Easy, Medium, Hard).
+✅Use an AI-powered Question Generator to create questions based on difficulty (Easy, Medium, Hard).Can download the response in a pdf format for future reference.
 ✅Real-time chat with enrolled students during the exam for guidance and communication.
-
+✅Upload study materials for students.
 👨‍🎓 Student Features:
-✅Attend exams with a timer – auto-submit triggers when time runs out.
+✅Student have a detailed dashboard regarding everything.
+✅Attend exams with a timer – auto-submit triggers when time runs out.Prevent browser refresh during examination
 ✅View their submitted answers, marks, and overall percentage after the exam.
 ✅ Engage in real-time chatting with teachers for support during the exam.
-
+✅Can download materials uploaded by teachers.
 🛠️ Tech Stack:
-✴️Frontend: React.js, Axios, CSS
+✴️Frontend: React.js, Axios, Tailwind CSS, CSS
 ✴️Backend: Node.js, Express.js, Socket.IO
 ✴️Database: MySQL
 ✴️AI Integration: OpenRouter API for question generation)
