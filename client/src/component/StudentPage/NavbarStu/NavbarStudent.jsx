@@ -8,7 +8,7 @@ import axios from "axios";
 import {toast} from "react-toastify"
 const NavbarStudent = () => {
   const [profileEdit, setprofileEdit] = useState(false);
-  const [year,setYear]=useState("")
+  const [year,setYear]=useState(0)
   const [phone,setPhone]=useState("")
   const studentId=localStorage.getItem("userId")
   const updateProfile=async()=>{

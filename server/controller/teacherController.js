@@ -221,7 +221,6 @@ export const getAllMessages=async(req,res)=>{
 //get all students by semester
 export const getStudentsByYear = async (req, res) => {
   const { year } = req.params;
-
   if (!year) {
     return res.status(400).json({
       success: false,
@@ -231,7 +230,7 @@ export const getStudentsByYear = async (req, res) => {
   }
 
   try {
-    const query = `SELECT name,email,phone_no FROM students WHERE year=?`;
+    const query = `SELECT name,email,phone FROM students WHERE year=?`;
     const [students] = await pool.query(query, [year]);
 
     return res.status(200).json({

@@ -79,7 +79,7 @@ export const createQuestionsTable=async()=>{
     console.log('Questions table created or already exists')
    } catch (error) {
      console.log('Error while creating questions table')
-   }
+   }  
 }
 // export const createQuestionsTable=async()=>{
 //     try {
