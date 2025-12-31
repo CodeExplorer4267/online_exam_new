@@ -1,14 +1,15 @@
 import axios from "axios"
 import React, { useEffect, useRef, useState } from "react"
 import { Send, Search } from "lucide-react"
-
+import { socket } from "./socket"
+import { useEffectEvent } from "react"
 const StudentChat = () => {
   const [teachers, setTeachers] = useState([])
   const [activeTeacher, setActiveTeacher] = useState(null)
   const [messages, setMessages] = useState([])
   const [text, setText] = useState("")
   const chatEndRef = useRef(null)
-
+  
   useEffect(() => {
     const fetchTeachers = async () => {
       const res = await axios.get(
@@ -23,11 +24,74 @@ const StudentChat = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
 
-  const sendMessage = () => {
-    if (!text.trim()) return
-    setMessages([...messages, { sender: "me", text }])
-    setText("")
+  useEffect(() => {
+  const studentId = localStorage.getItem("userId") // or from auth
+
+  if (studentId) {
+    socket.emit("register", studentId)
   }
+
+  return () => {
+    socket.off()
+  }
+}, [])
+
+useEffect(() => {
+  socket.on("receive_message", (data) => {
+    setMessages((prev) => [
+      ...prev,
+      {
+        sender: "other",
+        text: data.message,
+        senderId: data.senderId,
+      },
+    ])
+  })
+
+  return () => {
+    socket.off("receive_message")
+  }
+}, [])
+
+  const sendMessage=()=>{
+     if(!text.trim() || !activeTeacher){
+      return
+     }
+     const studentId=localStorage.getItem("userId")
+     setMessages((prev)=>[...prev,{sender:"me",text}])
+
+     socket.emit("send_message",{
+      senderId:studentId,
+      receiverId:activeTeacher.id,
+      message:text
+     })
+
+     setText("")
+  }
+
+ useEffect(() => {
+  if (!activeTeacher) return
+
+  const fetchMessages = async () => {
+    const studentId = localStorage.getItem("userId")
+
+    const res = await axios.get(
+      `http://localhost:5000/online-exam/get-all-messages/${activeTeacher.id}/${studentId}`
+    )
+
+    if (res.data.success) {
+      setMessages(
+        res.data.messages.map((m) => ({
+          sender: m.sender_id == studentId ? "me" : "other",
+          text: m.message,
+        }))
+      )
+    }
+  }
+
+  fetchMessages()
+}, [activeTeacher])
+
 
   return (
     <div className="w-[83%] h-screen bg-[#0b0f19] flex text-white overflow-hidden">
