@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { MdSpaceDashboard } from "react-icons/md"
 import { PiExamFill } from "react-icons/pi";
 import { FaChartBar,FaBook } from 'react-icons/fa';
+import { IoChatbubbleSharp } from "react-icons/io5";
 
 const SidebarStudent = () => {
   const navigate = useNavigate()
@@ -72,6 +73,18 @@ const SidebarStudent = () => {
         )}
         <FaBook size={28} color="#4ea2ff" />
         <span className='text-white font-medium'>Material</span>
+      </div>
+
+      {/* CHAT */}
+      <div
+        className={itemStyle('chat')}
+        onClick={() => handleNavigation('chat')}
+      >
+        {activeoption === 'chat' && (
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] w-[4px] bg-[#4ea2ff] rounded-full" />
+        )}
+        <IoChatbubbleSharp size={28} color="#4ea2ff" />
+        <span className='text-white font-medium'>Chat</span>
       </div>
 
     </div>

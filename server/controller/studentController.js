@@ -80,7 +80,7 @@ export const getAllTeachers=async(req,res)=>{
         if(teachers.length===0){
             return res.status(404).json({success:false,message:"No teachers found"})
         }
-        res.status(200).json({teachers})
+        res.status(200).json({success:true,teachers})
     } catch (error) {
         res.status(400).json({success:false,message:error.message})
     }
