@@ -52,5 +52,12 @@
 <br/>
 
 https://github.com/user-attachments/assets/f784756f-1acf-46b7-8b96-8144d33101cf
+<br/>
+3. Teachers can generate questions on any topic, any difficulty using an Ai question generator. They can also download the response as a pdf for future reference.
+<br/>
+4. Teachers can upload material so that student can download it.
+<br/>
+<br/>
+https://github.com/user-attachments/assets/57d09384-8d19-4fb6-a43b-8466dc66da37
 
 
