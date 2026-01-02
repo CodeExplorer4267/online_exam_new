@@ -51,7 +51,7 @@ io.on('connection',(socket)=>{
     
     socket.on('register', (userId) => {
       onlineusers.set(userId, socket.id); //map userID with current socket id of te user
-      io.emit('update_online_users', Array.from(onlineusers.keys()));
+      // io.emit('update_online_users', Array.from(onlineusers.keys()));
     }); 
 
     //Now, after a client connects, we expect them to send their userId (student or teacher) to identify who they are.

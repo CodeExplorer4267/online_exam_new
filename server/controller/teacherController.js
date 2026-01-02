@@ -212,7 +212,7 @@ export const getAllMessages = async (req, res) => {
       SELECT * FROM messages
       WHERE (sender_id = ? AND receiver_id = ?)
          OR (sender_id = ? AND receiver_id = ?)
-      ORDER BY created_at ASC
+      ORDER BY timestamp ASC
     `
 
     const [messages] = await pool.query(query, [

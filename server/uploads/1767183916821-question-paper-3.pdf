@@ -1,0 +1,693 @@
+%PDF-1.3
+%ºß¬à
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 4 0 R
+>>
+endobj
+4 0 obj
+<<
+/Length 4320
+>>
+stream
+0.200025 w
+0 G
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 801.8899999999999864 Td
+( <ans> **Exam Paper: Object Oriented Programming \(OOP\) \(Total: 15) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 783.8899999999999864 Td
+(Marks\)**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 747.8899999999999864 Td
+(### **Section A: Short Answer Questions \(Total: 15 Marks\)**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 711.8899999999999864 Td
+(#### **Q1. Define the term "Encapsulation" in OOP. \(2 Marks\)**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 693.8899999999999864 Td
+(**Answer:**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 675.8899999999999864 Td
+(Encapsulation is an OOP concept that binds data \(attributes\) and) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 657.8899999999999864 Td
+(methods \(functions\) into a single unit \(class\) while restricting direct) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 639.8899999999999864 Td
+(access to some of the object's components. It helps in data hiding and) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 621.8899999999999864 Td
+(protecting the internal state of an object.) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 585.8899999999999864 Td
+(#### **Q2. What is Polymorphism? Explain with an example. \(2 Marks\)**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 567.8899999999999864 Td
+(**Answer:**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 549.8899999999999864 Td
+(Polymorphism allows objects of different classes to be treated as objects) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 531.8899999999999864 Td
+(of a common superclass. It can be achieved through method overloading) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 513.8899999999999864 Td
+(\(compile-time\) or method overriding \(runtime\).) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 495.8899999999999864 Td
+(**Example:**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 477.8899999999999864 Td
+(```java) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 459.8899999999999864 Td
+(class Animal {) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 441.8899999999999864 Td
+(    void sound\(\) { System.out.println\("Animal sound"\); }) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 423.8899999999999864 Td
+(}) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 405.8899999999999864 Td
+(class Dog extends Animal {) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 387.8899999999999864 Td
+(    @Override) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 369.8899999999999864 Td
+(    void sound\(\) { System.out.println\("Bark"\); }) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 351.8899999999999864 Td
+(}) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 333.8899999999999864 Td
+(```) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 297.8899999999999864 Td
+(#### **Q3. Differentiate between "Abstract Class" and "Interface" in) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 279.8899999999999864 Td
+(Java. \(3 Marks\)**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 261.8899999999999864 Td
+(**Answer:**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 243.8899999999999864 Td
+(| **Abstract Class** | **Interface** |) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 225.8899999999999864 Td
+(|--------------------|--------------|) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 207.8899999999999864 Td
+(| Can have abstract and concrete methods. | Only abstract methods) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 189.8899999999999864 Td
+(\(before Java 8\). |) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 171.8899999999999864 Td
+(| Can have constructors. | No constructors. |) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 153.8899999999999864 Td
+(| Supports single and multiple inheritance. | Supports multiple) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 135.8899999999999864 Td
+(inheritance. |) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 117.8899999999999864 Td
+(| Variables are non-final by default. | Variables are always `public static) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 99.8899999999999864 Td
+(final`. |) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 63.8899999999999864 Td
+(#### **Q4. What is the "Diamond Problem" in Inheritance? How does) Tj
+ET
+endstream
+endobj
+5 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 6 0 R
+>>
+endobj
+6 0 obj
+<<
+/Length 2967
+>>
+stream
+0.200025 w
+0 G
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 801.8899999999999864 Td
+(Java resolve it? \(3 Marks\)**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 783.8899999999999864 Td
+(**Answer:**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 765.8899999999999864 Td
+(The Diamond Problem occurs when a class inherits from two classes) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 747.8899999999999864 Td
+(that have a common superclass, leading to ambiguity in method) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 729.8899999999999864 Td
+(resolution. Java resolves it by:) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 711.8899999999999864 Td
+(- Not supporting multiple inheritance for classes \(only interfaces\).) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 693.8899999999999864 Td
+(- Using `default` methods in interfaces with explicit overriding.) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 657.8899999999999864 Td
+(#### **Q5. Explain the concept of "Method Overloading" with an) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 639.8899999999999864 Td
+(example. \(3 Marks\)**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 621.8899999999999864 Td
+(**Answer:**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 603.8899999999999864 Td
+(Method overloading allows multiple methods with the same name but) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 585.8899999999999864 Td
+(different parameters \(type or number\) in the same class.) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 567.8899999999999864 Td
+(**Example:**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 549.8899999999999864 Td
+(```java) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 531.8899999999999864 Td
+(class Calculator {) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 513.8899999999999864 Td
+(    int add\(int a, int b\) { return a + b; }) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 495.8899999999999864 Td
+(    double add\(double a, double b\) { return a + b; }) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 477.8899999999999864 Td
+(}) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 459.8899999999999864 Td
+(```) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 423.8899999999999864 Td
+(#### **Q6. What is the purpose of the `final` keyword in Java? \(2) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 405.8899999999999864 Td
+(Marks\)**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 387.8899999999999864 Td
+(**Answer:**) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 369.8899999999999864 Td
+(- When applied to a variable: Makes it a constant \(immutable\).) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 351.8899999999999864 Td
+(- When applied to a method: Prevents method overriding.) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 333.8899999999999864 Td
+(- When applied to a class: Prevents inheritance.) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+40. 297.8899999999999864 Td
+(</ans>) Tj
+ET
+endstream
+endobj
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R 5 0 R ]
+/Count 2
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/BaseFont /Courier
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Roman
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Italic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+18 0 obj
+<<
+/Type /Font
+/BaseFont /Times-BoldItalic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+19 0 obj
+<<
+/Type /Font
+/BaseFont /ZapfDingbats
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+20 0 obj
+<<
+/Type /Font
+/BaseFont /Symbol
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 7 0 R
+/F2 8 0 R
+/F3 9 0 R
+/F4 10 0 R
+/F5 11 0 R
+/F6 12 0 R
+/F7 13 0 R
+/F8 14 0 R
+/F9 15 0 R
+/F10 16 0 R
+/F11 17 0 R
+/F12 18 0 R
+/F13 19 0 R
+/F14 20 0 R
+>>
+/XObject <<
+>>
+>>
+endobj
+21 0 obj
+<<
+/Producer (jsPDF 3.0.4)
+/CreationDate (D:20251231175443+05'30')
+>>
+endobj
+22 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+/OpenAction [3 0 R /FitH null]
+/PageLayout /OneColumn
+>>
+endobj
+xref
+0 23
+0000000000 65535 f 
+0000007680 00000 n 
+0000009505 00000 n 
+0000000015 00000 n 
+0000000152 00000 n 
+0000004524 00000 n 
+0000004661 00000 n 
+0000007743 00000 n 
+0000007868 00000 n 
+0000007998 00000 n 
+0000008131 00000 n 
+0000008269 00000 n 
+0000008393 00000 n 
+0000008522 00000 n 
+0000008654 00000 n 
+0000008790 00000 n 
+0000008918 00000 n 
+0000009045 00000 n 
+0000009174 00000 n 
+0000009307 00000 n 
+0000009409 00000 n 
+0000009755 00000 n 
+0000009841 00000 n 
+trailer
+<<
+/Size 23
+/Root 22 0 R
+/Info 21 0 R
+/ID [ <217BCA8067E5B56FA02FCC6C55A0D643> <217BCA8067E5B56FA02FCC6C55A0D643> ]
+>>
+startxref
+9945
+%%EOF
