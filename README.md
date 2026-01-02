@@ -46,3 +46,18 @@
 </p>
 <p>Teacher features : </p>
 <br/>
+1. Here i implemented secure authentication using JWT.After successful login, a teacher can see student list yearwise(1st, 2nd, 3rd, 4th). There is a mail feature so that for any query teacher can send mail to that registered student's mail. 
+<br/>
+2. They can create examination with name, duration and start_time and end_time. Each student can take those exam anytime between start_time and end_time. Teacher can create as many questions as they want , they can provide indivitual question marks.
+<br/>
+
+https://github.com/user-attachments/assets/f784756f-1acf-46b7-8b96-8144d33101cf
+<br/>
+3. Teachers can generate questions on any topic, any difficulty using an Ai question generator. They can also download the response as a pdf for future reference.
+<br/>
+4. Teachers can upload material so that student can download it.
+<br/>
+<br/>
+https://github.com/user-attachments/assets/57d09384-8d19-4fb6-a43b-8466dc66da37
+
+
