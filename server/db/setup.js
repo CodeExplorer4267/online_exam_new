@@ -81,6 +81,28 @@ export const createQuestionsTable=async()=>{
      console.log('Error while creating questions table')
    }  
 }
+
+
+export const createMessageTable=async()=>{
+     try {
+       await pool.query(`
+         CREATE TABLE IF NOT EXISTS messages (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  sender_id INT,
+  receiver_id INT,
+  message TEXT,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
+);
+        `)
+        console.log("Mesaage table created or already exists")
+     } catch (error) {
+        console.log("Error while creating message table",error)
+     }
+}
+
+
 // export const createQuestionsTable=async()=>{
 //     try {
 //       await pool.query(` 
@@ -161,24 +183,6 @@ export const createQuestionsTable=async()=>{
 //      }
 // }
 
-// export const createMessageTable=async()=>{
-//      try {
-//        await pool.query(`
-//          CREATE TABLE IF NOT EXISTS messages (
-//   id INT PRIMARY KEY AUTO_INCREMENT,
-//   sender_id INT,
-//   receiver_id INT,
-//   message TEXT,
-//   timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-//   FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
-//   FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
-// );
-//         `)
-//         console.log("Mesaage table created or already exists")
-//      } catch (error) {
-//         console.log("Error while creating message table",error)
-//      }
-// }
 
 // export const createMaterialsTable=async()=>{
 //     try {

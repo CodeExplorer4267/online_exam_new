@@ -2,13 +2,14 @@
 import express, { Router } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import { createQuestionsTable, createStudentsTable, createTeachersTable } from './db/setup.js';
+import { createMessageTable, createQuestionsTable, createStudentsTable, createTeachersTable } from './db/setup.js';
 import router from './routes/Router.js';
 import { createExamsTable } from './db/setup.js';
 import http from 'http';
 import pool from './db/db.js'
-import {Server} from 'socket.io'; //server is a class in socket.io
+import { Server } from 'socket.io';
 dotenv.config();
+
 
 const app = express();
 const server=http.createServer(app)
@@ -19,6 +20,7 @@ const io=new Server(server,{   //connection that we are creating is a socket.io 
     credentials:true
   }
 }) //socket.io server created   
+
 
 const PORT = process.env.PORT || 5000;
  
@@ -36,11 +38,14 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 app.use('/online-exam',router);
 
+
 // Create the users table if it doesn't exist
 createStudentsTable();
 createTeachersTable();
 createExamsTable();
 createQuestionsTable()
+createMessageTable()
+
 
 const onlineusers=new Map() //map to track online users
 

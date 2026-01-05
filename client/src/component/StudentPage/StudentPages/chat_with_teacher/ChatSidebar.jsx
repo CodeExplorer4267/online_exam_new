@@ -1,11 +1,13 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Search } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
-const ChatSidebar = ({ activeTeacher, setActiveTeacher }) => {
+const ChatSidebar = () => {
   const [teachers, setTeachers] = useState([])
   const [search, setSearch] = useState("")
-
+  const [activeTeacher, setActiveTeacher] = useState(null)
+  const navigate=useNavigate();
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
@@ -22,12 +24,9 @@ const ChatSidebar = ({ activeTeacher, setActiveTeacher }) => {
     fetchTeachers()
   }, [])
 
-  const filteredTeachers = teachers.filter((t) =>
-    t.username.toLowerCase().includes(search.toLowerCase())
-  )
 
   return (
-    <aside className="w-[26%] h-screen bg-[#0e1323] border-r border-white/10 flex flex-col text-white">
+    <aside className="w-[30%] h-screen bg-[#0e1323] border-r border-white/10 flex flex-col text-white">
 
       {/* ===== Header ===== */}
       <div className="p-5 border-b border-white/10">
@@ -53,16 +52,19 @@ const ChatSidebar = ({ activeTeacher, setActiveTeacher }) => {
       {/* ===== Teacher List ===== */}
       <div className="flex-1 overflow-y-auto px-3 space-y-2 scrollbar-thin scrollbar-thumb-white/10">
 
-        {filteredTeachers.length === 0 && (
+        {teachers.length === 0 && (
           <p className="text-center text-gray-500 mt-6 text-sm">
             No teachers found
           </p>
         )}
 
-        {filteredTeachers.map((teacher) => (
+        {teachers.map((teacher) => (
           <div
             key={teacher.id}
-            onClick={() => setActiveTeacher(teacher)}
+            onClick={() => {
+              navigate(`/student/chat/${teacher.id}`)
+              setActiveTeacher(teacher)
+            }}
             className={`p-4 rounded-xl cursor-pointer transition-all
               ${
                 activeTeacher?.id === teacher.id
@@ -74,7 +76,7 @@ const ChatSidebar = ({ activeTeacher, setActiveTeacher }) => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium text-gray-100">
-                  {teacher.username}
+                  {teacher.name}
                 </p>
                 <p className="text-xs text-gray-400 mt-1">
                   Click to chat

@@ -76,7 +76,7 @@ export const deleteExam=async(req,res)=>{
 //get all available teachers
 export const getAllTeachers=async(req,res)=>{
     try {
-        const [teachers]=await pool.query("SELECT id,username FROM users WHERE role=?",['teacher'])
+        const [teachers]=await pool.query("SELECT * FROM teachers")
         if(teachers.length===0){
             return res.status(404).json({success:false,message:"No teachers found"})
         }
