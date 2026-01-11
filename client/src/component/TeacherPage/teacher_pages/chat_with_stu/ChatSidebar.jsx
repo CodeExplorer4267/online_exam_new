@@ -4,10 +4,14 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { PiStudentFill } from "react-icons/pi";
 import { FaUser } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const ChatSidebar = () => {
 
     const [students,setStudents]=useState([])
+    const [activeStudent, setActiveStudent] = useState(null);
+    const navigate=useNavigate()
+    
     useEffect(()=>{
       const fetchStudents=async()=>{
          try {
@@ -23,7 +27,7 @@ const ChatSidebar = () => {
          }
       }
       fetchStudents()
-    },[students])
+    },[])
 
   return (
     <div className='w-[30%] h-screen bg-[#0f172a] border-r border-white/10 flex flex-col items-center'>
@@ -38,7 +42,14 @@ const ChatSidebar = () => {
                 <p className='text-white text-center mt-5'>No students found</p>
             ):(
                students.map((stu)=>{
-                 return <div key={stu.id} className='w-[90%] border-white border h-[60px] flex justify-start items-center rounded-lg cursor-pointer hover:bg-white/10 pl-[30px]'>
+                 return <div key={stu.id} className={`w-[90%] border-white border h-[60px] flex justify-start items-center rounded-lg cursor-pointer hover:bg-white/10 pl-[30px] ${
+                activeStudent?.id === stu.id
+                  ? "bg-blue-600/20 border-2 border-blue-500"
+                  : "hover:bg-white/5"
+              }`} onClick={()=>{
+                    setActiveStudent(stu)
+                    navigate(`/teacher/chat/${stu.id}`)
+                 }}>
                   <FaUser size={20} className="text-[#62c4ff] mr-4"/>
                   <p>{stu.name}</p>
                  </div>
