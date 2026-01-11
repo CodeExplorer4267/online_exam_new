@@ -88,15 +88,13 @@ export const createMessageTable=async()=>{
        await pool.query(`
          CREATE TABLE IF NOT EXISTS messages (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  sender_id INT,
-  receiver_id INT,
+  sender_id INT NOT NULL,
+  receiver_id INT NOT NULL,
   message TEXT,
-  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
-  FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
 );
         `)
-        console.log("Mesaage table created or already exists")
+        console.log("Message table created or already exists")
      } catch (error) {
         console.log("Error while creating message table",error)
      }

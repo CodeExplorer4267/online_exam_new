@@ -31,21 +31,55 @@ const Chatwindow = () => {
   socket.emit("send_message", messageData);
 
   // show message instantly in UI
-  setmessages(prev => [...prev, messageData]);
   setuserMessage("");
 };
+
+useEffect(()=>{
+    const fetchMessages=async()=>{
+       try {
+          const res=await axios.get('http://localhost:5000/online-exam/get-all-messages/'+teacherId+'/'+studentId)
+          if(res.data.success){
+             setmessages(res.data.messages)
+          }
+          else{
+              console.log("Failed to fetch messages")
+          }
+       } catch (error) {
+          console.log("Error while fetching messages:",error)
+       }
+    }
+    fetchMessages()
+},[teacherId,studentId])
 
   return (
     <div className='w-[100%] flex flex-col justify-center items-center'>
        <h1 className='text-white text-3xl text-center mb-3'>Chat With Teacher</h1>
        <hr className='text-white w-[100%]'/>
-       <div className='p-5 overflow-y-scroll h-[80vh] scrollbar-thin scrollbar-thumb-white/10'>
+       <div className='p-5 overflow-y-scroll h-[80vh] scrollbar-thin scrollbar-thumb-white/10 flex flex-col w-[90%] mt-3 mb-3'>
          {
             messages.length===0 ? (
               <p className='text-white text-center mt-5'>No messages yet. Start the conversation!</p>
             ):(
                messages.map((msg)=>{
-                  return <div className='text-white'>{msg.message}</div>
+                  const isMe=msg.sender_id.toString()===studentId.toString()
+                  return (
+        <div
+          key={msg.id}
+          className={`w-full flex mb-2 ${
+            isMe ? "justify-end" : "justify-start"
+          }`}
+        >
+          <div
+            className={`max-w-[60%] px-4 py-2 rounded-2xl text-white ${
+              isMe
+                ? "bg-blue-500 rounded-br-none"
+                : "bg-gray-700 rounded-bl-none"
+            }`}
+          >
+            {msg.message}
+          </div>
+        </div>
+      );
                })
             )
          }
