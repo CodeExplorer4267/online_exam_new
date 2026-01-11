@@ -26,10 +26,10 @@ const ChatSidebar = () => {
 
 
   return (
-    <aside className="w-[30%] h-screen bg-[#0e1323] border-r border-white/10 flex flex-col text-white">
+    <aside className="w-[30%] h-screen bg-[#0e1323] border-r border-white flex flex-col text-white">
 
       {/* ===== Header ===== */}
-      <div className="p-5 border-b border-white/10">
+      <div className="p-5 border-b border-white">
         <h2 className="text-xl font-semibold">Teachers</h2>
         <p className="text-xs text-gray-400 mt-1">
           Available for doubt solving

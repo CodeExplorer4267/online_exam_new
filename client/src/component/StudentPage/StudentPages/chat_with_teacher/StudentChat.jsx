@@ -3,6 +3,7 @@ import ChatSidebar from './ChatSidebar'
 import {Routes,Route} from 'react-router-dom'
 import Chatwindow from './Chatwindow'
 const StudentChat = () => {
+  
   return (
     <div className='w-[83%] flex'>
       <ChatSidebar />
