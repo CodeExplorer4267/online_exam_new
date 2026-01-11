@@ -1,10 +1,16 @@
 import React from 'react'
+import ChatSidebar from './ChatSidebar'
+import { Routes,Route } from 'react-router-dom'
+import Chatwindow from './Chatwindow'
 
 const TeacherChat = () => {
   return (
-    <div>
-      This is the teacher chat page
-    </div>
+      <div className='flex w-[83%]'>
+         <ChatSidebar/>
+         <Routes>
+            <Route path=':studentId' element={<Chatwindow/>}/>
+         </Routes>
+      </div>
   )
 }
 

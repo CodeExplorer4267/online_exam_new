@@ -288,3 +288,15 @@ export const sendMail=async(req,res)=>{
         res.status(500).json({ message: "Mail sending failed" });
     }
 }
+export const getAllStudents=async(req,res)=>{
+    try {
+       const [students]=await pool.query("SELECT id,name FROM students")
+       if(students.length===0){
+          return res.status(404).json({success:false,message:"No students found"})
+       }
+       res.status(200).json({success:true,students})
+    } catch (error) {
+      console.log("Error while fetching students:",error)
+      res.status(500).json({ success: false, message: "Server Error" });
+    }
+}
