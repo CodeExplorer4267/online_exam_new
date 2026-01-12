@@ -100,6 +100,22 @@ export const createMessageTable=async()=>{
      }
 }
 
+export const createUniqueIdTable=async()=>{
+   try {
+     await pool.query(`
+      CREATE TABLE IF NOT EXISTS unique_ids(
+        id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  role ENUM('student','teacher') NOT NULL,
+  unique_10_digit_id CHAR(10) NOT NULL UNIQUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+      `)
+      console.log("Unique id table created or already exists")
+   } catch (error) {
+     console.log("Error while creating unique id table",error)
+   }
+}
 
 // export const createQuestionsTable=async()=>{
 //     try {

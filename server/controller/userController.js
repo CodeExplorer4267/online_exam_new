@@ -2,7 +2,11 @@ import pool from '../db/db.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-
+function generate10DigitId() {
+  const timePart = Date.now().toString().slice(-6);
+  const randomPart = Math.floor(1000 + Math.random() * 9000);
+  return timePart + randomPart; // 10 digits
+}
 
 //register a new user
 export const register = async (req, res) => {
@@ -15,35 +19,52 @@ export const register = async (req, res) => {
   if (!["student", "teacher"].includes(role)) {
     return res.status(400).json({ message: "Role must be student or teacher" });
   }
-
+  
+  const table = role === "student" ? "students" : "teachers";
+  const connection=await pool.getConnection()
   try {
-    const table = role === "student" ? "students" : "teachers";
+    await connection.beginTransaction()
 
-    // Check existing user
-    const [existing] = await pool.query(
-      `SELECT id FROM ${table} WHERE email = ?`,
-      [email]
-    );
-
-    if (existing.length > 0) {
-      return res.status(400).json({ message: "Email already registered" });
+    const [existingUser]=await connection.query(`SELECT id from ${table} WHERE email=?`,[email])
+    if(existingUser.length > 0){
+      return res.status(400).json({success:false,message:"User with this email already exists"})
     }
-
+    
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const [result] = await pool.query(
-      `INSERT INTO ${table} (name, email, password, role) VALUES (?, ?, ?, ?)`,
+    // Insert user
+    const [result] = await connection.query(
+      `INSERT INTO ${table} (name, email, password, role)
+       VALUES (?, ?, ?, ?)`,
       [name, email, hashedPassword, role]
     );
+    const userId=result.insertId;
+    let unique10DigitId;
+    let exists=true
+    while(exists){
+       unique10DigitId=generate10DigitId()
+       const [rows]=await connection.query("SELECT 1 FROM unique_ids WHERE  unique_10_digit_id=?",[unique10DigitId])
+       exists=rows.length > 0
+    }
 
-    res.status(201).json({
+   await connection.query(`
+      INSERT INTO unique_ids(user_id,role,unique_10_digit_id) VALUES(?,?,?)
+    `,[userId,role,unique10DigitId])
+
+   await connection.commit()
+   res.status(201).json({
       message: "Registration successful",
-      userId: result.insertId,
+      userId,
       role,
+      uniqueId: unique10DigitId
     });
+
   } catch (error) {
-    console.error("Register error:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+     await connection.rollback()
+     console.log("Registration error:",error)
+  }
+  finally{
+    connection.close()
   }
 };
 
