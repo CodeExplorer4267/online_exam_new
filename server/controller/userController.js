@@ -134,3 +134,19 @@ export const getStudentList=async(req,res)=>{
       res.status(400).json({success:false,error:error.message})
    }
 }
+
+export const getUniqueId=async(req,res)=>{
+    try {
+       const {userId}=req.params
+       if(!userId){
+          return res.status(400).json({success:false,message:"User id is required"})
+       }
+       const [rows]=await pool.query("SELECT unique_10_digit_id  FROM unique_ids WHERE user_id=?",[userId])
+       if(rows.length===0){
+        return res.status(404).json({success:false,message:"Unique Id not found for this user"})
+       }
+       res.status(200).json({success:true,uniqueId:rows[0].unique_10_digit_id})
+    } catch (error) {
+      res.status(400).json({success:false,error:error.message})
+    }
+}

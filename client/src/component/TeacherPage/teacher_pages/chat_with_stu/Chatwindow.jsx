@@ -14,42 +14,60 @@ const Chatwindow = () => {
   const teacherId=localStorage.getItem("userId")
   const [messages,setmessages]=useState([])
   const [userMessage,setuserMessage]=useState("")
+  const [uniqueTeacherId,setUniqueTeacherId]=useState(null)
+
+
+  useEffect(() => {
+  const fetchTeacherUniqueId = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5000/online-exam/get-unique-id/${teacherId}`
+      );
+      setUniqueTeacherId(res.data.uniqueId);
+    } catch (error) {
+      console.log("Error fetching teacher unique ID", error);
+    }
+  };
+
+  fetchTeacherUniqueId();
+}, [teacherId]);
+
 
   useEffect(()=>{
      socket.emit("register",studentId)
   },[studentId])
 
- const handleSubmit = () => {
-  if (!userMessage.trim()) return;
+const handleSubmit = () => {
+  if (!userMessage.trim() || !uniqueTeacherId) return;
 
-  const messageData = {
-    senderId: teacherId,
+  socket.emit("send_message", {
+    senderId: uniqueTeacherId,
     receiverId: studentId,
-    message: userMessage
-  };
+    message: userMessage,
+  });
 
-  socket.emit("send_message", messageData);
-
-  // show message instantly in UI
   setuserMessage("");
 };
 
-useEffect(()=>{
-    const fetchMessages=async()=>{
-       try {
-          const res=await axios.get('http://localhost:5000/online-exam/get-all-messages/'+teacherId+'/'+studentId)
-          if(res.data.success){
-             setmessages(res.data.messages)
-          }
-          else{
-              console.log("Failed to fetch messages")
-          }
-       } catch (error) {
-          console.log("Error while fetching messages:",error)
-       }
+useEffect(() => {
+  if (!uniqueTeacherId || !studentId) return;
+
+  const fetchMessages = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5000/online-exam/get-all-messages/${uniqueTeacherId}/${studentId}`
+      );
+
+      if (res.data.success) {
+        setmessages(res.data.messages);
+      }
+    } catch (error) {
+      console.log("Error while fetching messages:", error);
     }
-    fetchMessages()
-},[teacherId,studentId])
+  };
+
+  fetchMessages();
+}, [uniqueTeacherId, studentId]);
 
   return (
     <div className='w-[100%] flex flex-col justify-center items-center bg-[#080c18]'>

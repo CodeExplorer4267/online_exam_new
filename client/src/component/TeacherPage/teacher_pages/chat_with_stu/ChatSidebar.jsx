@@ -12,6 +12,15 @@ const ChatSidebar = () => {
     const [activeStudent, setActiveStudent] = useState(null);
     const navigate=useNavigate()
     
+    const getUniqueId=async(id)=>{
+      try {
+        const res=await axios.get(`http://localhost:5000/online-exam/get-unique-id/${id}`)
+        return res.data.uniqueId
+      } catch (error) {
+        console.log("Error while getting unique id:",error)
+      }
+    }
+
     useEffect(()=>{
       const fetchStudents=async()=>{
          try {
@@ -46,9 +55,10 @@ const ChatSidebar = () => {
                 activeStudent?.id === stu.id
                   ? "bg-blue-600/20 border-2 border-blue-500"
                   : "hover:bg-white/5"
-              }`} onClick={()=>{
+              }`} onClick={async()=>{
                     setActiveStudent(stu)
-                    navigate(`/teacher/chat/${stu.id}`)
+                    const id=await getUniqueId(stu.id)
+                    navigate(`/teacher/chat/${id}`)
                  }}>
                   <FaUser size={20} className="text-[#62c4ff] mr-4"/>
                   <p>{stu.name}</p>

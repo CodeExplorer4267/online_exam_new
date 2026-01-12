@@ -88,8 +88,8 @@ export const createMessageTable=async()=>{
        await pool.query(`
          CREATE TABLE IF NOT EXISTS messages (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  sender_id INT NOT NULL,
-  receiver_id INT NOT NULL,
+  sender_id BIGINT NOT NULL,
+  receiver_id BIGINT NOT NULL,
   message TEXT,
   timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
 );

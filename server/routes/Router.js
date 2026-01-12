@@ -1,5 +1,5 @@
 import express from 'express';
-import { login, register } from '../controller/userController.js';
+import { getUniqueId, login, register } from '../controller/userController.js';
 import { createExam, generateQuestion, getAllAnswers, getAllMessages, getAllStudents, getAttemptedStudents, getEachStudentAnswer, getMarksSubmitOrNot, getStudentMarks, getStudentsByYear, sendMail, submitMarks } from '../controller/teacherController.js';
 import { askQuestion, deleteExam, downloadFile, getAllExams, getAllMaterials, getAllQuestions, getAllTeachers, submitExam, updateStudentProfile } from '../controller/studentController.js';
 import { upload } from '../multer-config.js';
@@ -29,6 +29,8 @@ router.post('/update-marks',submitMarks)
 router.post('/generate',generateQuestion)
 router.get('/get-all-messages/:teacherId/:studentId',getAllMessages)
 router.post('/sendmail',sendMail)
+
+router.get('/get-unique-id/:userId',getUniqueId)
 
 router.post('/upload-material', upload.single('file'), async (req, res) => {
     try {

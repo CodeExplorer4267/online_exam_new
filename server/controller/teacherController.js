@@ -198,12 +198,12 @@ Make sure to include the answer for each question.
 }
 
 export const getAllMessages = async (req, res) => {
-  const { teacherId, studentId } = req.params
+  const { uniqueTeacherId, studentId } = req.params
 
-  if (!teacherId || !studentId) {
+  if (!uniqueTeacherId || !studentId) {
     return res.status(400).json({
       success: false,
-      message: "teacherId and studentId are required",
+      message: "uniqueTeacherId and studentId are required",
     })
   }
 
@@ -216,10 +216,10 @@ export const getAllMessages = async (req, res) => {
     `
 
     const [messages] = await pool.query(query, [
-      teacherId,
+      uniqueTeacherId,
       studentId,
       studentId,
-      teacherId,
+      uniqueTeacherId,
     ])
 
     return res.status(200).json({
