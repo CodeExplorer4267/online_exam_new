@@ -11,7 +11,9 @@ const ChatSidebar = () => {
     const [students,setStudents]=useState([])
     const [activeStudent, setActiveStudent] = useState(null);
     const navigate=useNavigate()
-    
+    const teacherId=localStorage.getItem("userId")
+    const [uniqueTeacherId,setUniqueTeacherId]=useState(null)
+
     const getUniqueId=async(id)=>{
       try {
         const res=await axios.get(`http://localhost:5000/online-exam/get-unique-id/${id}`)
@@ -38,6 +40,21 @@ const ChatSidebar = () => {
       fetchStudents()
     },[])
 
+    useEffect(() => {
+      const fetchTeacherUniqueId = async () => {
+        try {
+          const res = await axios.get(
+            `http://localhost:5000/online-exam/get-unique-id/${teacherId}`
+          );
+          setUniqueTeacherId(res.data.uniqueId);
+        } catch (error) {
+          console.log("Error fetching teacher unique ID", error);
+        }
+      };
+    
+      fetchTeacherUniqueId();
+    }, [teacherId]);
+
   return (
     <div className='w-[30%] h-screen bg-[#0f172a] border-r border-white/10 flex flex-col items-center'>
       <div className='flex w-full justify-center items-center'>
@@ -58,7 +75,7 @@ const ChatSidebar = () => {
               }`} onClick={async()=>{
                     setActiveStudent(stu)
                     const id=await getUniqueId(stu.id)
-                    navigate(`/teacher/chat/${id}`)
+                    navigate(`/teacher/chat/${id}/${uniqueTeacherId}`)
                  }}>
                   <FaUser size={20} className="text-[#62c4ff] mr-4"/>
                   <p>{stu.name}</p>

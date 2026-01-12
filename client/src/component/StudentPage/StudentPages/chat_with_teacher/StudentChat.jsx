@@ -9,7 +9,7 @@ const StudentChat = () => {
       <ChatSidebar />
       <div className='w-[70%] bg-[#0d101a]'>
         <Routes>
-           <Route path=':teacherId' element={<Chatwindow/>}/>
+           <Route path=':teacherId/:studentId' element={<Chatwindow/>}/>
         </Routes>
       </div>
     </div>

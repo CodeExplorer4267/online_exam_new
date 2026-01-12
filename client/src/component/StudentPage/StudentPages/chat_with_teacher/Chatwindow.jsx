@@ -10,8 +10,7 @@ const socket = io("http://localhost:5000", {
 });
 
 const Chatwindow = () => {
-  const {teacherId}=useParams()
-  const studentId=localStorage.getItem("userId")
+  const {teacherId,studentId}=useParams()
   const [messages,setmessages]=useState([])
   const [userMessage,setuserMessage]=useState("")
 
@@ -33,6 +32,16 @@ const Chatwindow = () => {
   // show message instantly in UI
   setuserMessage("");
 };
+
+useEffect(() => {
+  socket.on("receive_message", (msg) => {
+    setmessages((prev) => [...prev, msg]);
+  });
+
+  return () => {
+    socket.off("receive_message");
+  };
+}, []);
 
 useEffect(()=>{
     const fetchMessages=async()=>{

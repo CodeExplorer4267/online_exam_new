@@ -8,6 +8,34 @@ const ChatSidebar = () => {
   const [search, setSearch] = useState("")
   const [activeTeacher, setActiveTeacher] = useState(null)
   const navigate=useNavigate();
+  const studentId=localStorage.getItem("userId")
+  const [uniqueStudentId,setUniqueStudentId]=useState(null)
+  
+  //get the unique id of the student
+  useEffect(() => {
+      const fetchStudentUniqueId = async () => {
+        try {
+          const res = await axios.get(
+            `http://localhost:5000/online-exam/get-unique-id/${studentId}`
+          );
+          setUniqueStudentId(res.data.uniqueId);
+        } catch (error) {
+          console.log("Error fetching student unique ID", error);
+        }
+      };
+
+      fetchStudentUniqueId();
+    }, [studentId]);
+
+   const getUniqueId=async(id)=>{
+      try {
+        const res=await axios.get(`http://localhost:5000/online-exam/get-unique-id/${id}`)
+        return res.data.uniqueId
+      } catch (error) {
+        console.log("Error while getting unique id:",error)
+      }
+    }
+
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
@@ -61,9 +89,10 @@ const ChatSidebar = () => {
         {teachers.map((teacher) => (
           <div
             key={teacher.id}
-            onClick={() => {
-              navigate(`/student/chat/${teacher.id}`)
+            onClick={async() => {
               setActiveTeacher(teacher)
+              const id=await getUniqueId(teacher.id)
+              navigate(`/student/chat/${id}/${uniqueStudentId}`)
             }}
             className={`p-4 rounded-xl cursor-pointer transition-all
               ${

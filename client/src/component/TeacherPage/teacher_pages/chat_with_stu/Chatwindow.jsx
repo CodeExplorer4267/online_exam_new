@@ -10,32 +10,30 @@ const socket = io("http://localhost:5000", {
 });
 
 const Chatwindow = () => {
-  const {studentId}=useParams()
-  const teacherId=localStorage.getItem("userId")
+  const {studentId,teacherId}=useParams()
+  const uniqueTeacherId=teacherId
   const [messages,setmessages]=useState([])
   const [userMessage,setuserMessage]=useState("")
-  const [uniqueTeacherId,setUniqueTeacherId]=useState(null)
-
+  
+  
 
   useEffect(() => {
-  const fetchTeacherUniqueId = async () => {
-    try {
-      const res = await axios.get(
-        `http://localhost:5000/online-exam/get-unique-id/${teacherId}`
-      );
-      setUniqueTeacherId(res.data.uniqueId);
-    } catch (error) {
-      console.log("Error fetching teacher unique ID", error);
-    }
+  if (!uniqueTeacherId || !studentId) return;
+
+  socket.emit("register", uniqueTeacherId);
+  socket.emit("register", studentId);
+
+}, [uniqueTeacherId, studentId]);
+
+useEffect(() => {
+  socket.on("receive_message", (msg) => {
+    setmessages((prev) => [...prev, msg]);
+  });
+
+  return () => {
+    socket.off("receive_message");
   };
-
-  fetchTeacherUniqueId();
-}, [teacherId]);
-
-
-  useEffect(()=>{
-     socket.emit("register",studentId)
-  },[studentId])
+}, []);
 
 const handleSubmit = () => {
   if (!userMessage.trim() || !uniqueTeacherId) return;
@@ -79,7 +77,7 @@ useEffect(() => {
               <p className='text-white text-center mt-5'>No messages yet. Start the conversation!</p>
             ):(
                messages.map((msg)=>{
-                  const isMe=msg.sender_id.toString()===teacherId.toString()
+                  const isMe=msg.sender_id?.toString()===uniqueTeacherId?.toString()
                   return (
         <div
           key={msg.id}

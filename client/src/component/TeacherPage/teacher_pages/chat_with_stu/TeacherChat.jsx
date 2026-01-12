@@ -8,7 +8,7 @@ const TeacherChat = () => {
       <div className='flex w-[83%]'>
          <ChatSidebar/>
          <Routes>
-            <Route path=':studentId' element={<Chatwindow/>}/>
+            <Route path=':studentId/:teacherId' element={<Chatwindow/>}/>
          </Routes>
       </div>
   )
