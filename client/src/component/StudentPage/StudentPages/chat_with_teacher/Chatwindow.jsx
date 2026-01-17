@@ -33,6 +33,7 @@ const Chatwindow = () => {
   setuserMessage("");
 };
 
+
 useEffect(() => {
   socket.on("receive_message", (msg) => {
     setmessages((prev) => [...prev, msg]);
@@ -42,6 +43,7 @@ useEffect(() => {
     socket.off("receive_message");
   };
 }, []);
+
 
 useEffect(()=>{
     const fetchMessages=async()=>{

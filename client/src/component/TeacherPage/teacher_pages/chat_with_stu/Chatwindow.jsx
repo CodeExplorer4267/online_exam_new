@@ -15,7 +15,6 @@ const Chatwindow = () => {
   const [messages,setmessages]=useState([])
   const [userMessage,setuserMessage]=useState("")
   
-  
 
   useEffect(() => {
   if (!uniqueTeacherId || !studentId) return;
@@ -24,6 +23,7 @@ const Chatwindow = () => {
   socket.emit("register", studentId);
 
 }, [uniqueTeacherId, studentId]);
+
 
 useEffect(() => {
   socket.on("receive_message", (msg) => {
