@@ -135,28 +135,30 @@ export const createUniqueIdTable=async()=>{
 //     }
 // }
 
-// export const createAnswersTable=async()=>{
-//     try {
-//         await pool.query(`
-//           CREATE TABLE IF NOT EXISTS answers (
-//   id INT AUTO_INCREMENT PRIMARY KEY,
-//   student_id INT,
-//   exam_id INT,
-//   question_text TEXT,
-//   answer TEXT,
-//   marks INT DEFAULT 0,
-//   question_id INT,
-//   isSubmitted BOOLEAN DEFAULT FALSE,
-//   FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
-//   FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE,
-//   FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
-// );
-//           `);
-//         console.log("Answers table created or already exists")
-//     } catch (error) {
-//        console.log("Error while creating answers table",error)
-//     }
-// }
+export const createAnswersTable=async()=>{
+    try {
+        await pool.query(`
+          CREATE TABLE IF NOT EXISTS answers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  student_id INT,
+  exam_id INT,
+  question_text TEXT,
+  answer TEXT,
+  marks INT DEFAULT 0,
+  question_id INT,
+  isSubmitted BOOLEAN DEFAULT FALSE,
+  FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+  FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE,
+  FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
+);
+          `);
+        console.log("Answers table created or already exists")
+    } catch (error) {
+       console.log("Error while creating answers table",error)
+    }
+}
+
+
 // export const createMarksTable=async()=>{
 //    try {
 //      await pool.query(`

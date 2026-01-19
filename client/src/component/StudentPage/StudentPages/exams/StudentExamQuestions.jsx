@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
-
+import {toast} from "react-toastify";
 const StudentExamQuestions = () => {
   const { examId } = useParams();
   const { state } = useLocation();
@@ -12,7 +12,7 @@ const StudentExamQuestions = () => {
   const [timeLeft, setTimeLeft] = useState(duration * 60);
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
-  const userId = localStorage.getItem("userId");
+  const studentId = localStorage.getItem("userId");
 
   useEffect(() => {
     axios.get(`http://localhost:5000/online-exam/exam/${examId}`)
@@ -53,7 +53,7 @@ const StudentExamQuestions = () => {
       examId,
       answers: payload
     }).then(() => {
-      alert("Exam submitted!");
+      toast.success("Exam submitted!");
       navigate("/student/exams");
     });
   };
