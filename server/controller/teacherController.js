@@ -77,10 +77,10 @@ export const getAttemptedStudents=async(req,res)=>{
     const {examId}=req.params;
     try {
         const query = `
-            SELECT DISTINCT answers.student_id,users.username
+            SELECT DISTINCT answers.student_id,students.name,students.email
             FROM answers 
-            INNER JOIN users
-            ON answers.student_id = users.id
+            INNER JOIN students
+            ON answers.student_id = students.id
             WHERE answers.exam_id = ?
         `;
         const [students] = await pool.query(query, [examId]);
