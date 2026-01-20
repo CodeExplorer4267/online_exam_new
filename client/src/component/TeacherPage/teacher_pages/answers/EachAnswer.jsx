@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {motion} from 'framer-motion'
+import { toast } from 'react-toastify';
 const EachAnswer = () => {
     const { examId, studentId } = useParams();
     const [answers, setAnswers] = useState([]);
     const [total,setTotal]=useState(0)
     const [evaluated,setevaluated]=useState({})
+    const [examMarks,setexamMarks]=useState(0)
+    const navigate=useNavigate()
 
     const handleinputChange=(index,value,marks)=>{
        if(value < 0 || value > marks){
@@ -24,6 +27,21 @@ const EachAnswer = () => {
     const handleGiveMarks=()=>{
          setTotal(Object.values(evaluated).reduce((acc,sum)=>acc+sum,0))
     }
+    const handleUploadMarks=async()=>{
+       const res=await axios.post('http://localhost:5000/online-exam/update-marks',{
+          studentId,
+          examId,
+          marks:total,
+          total_marks:examMarks
+       })
+       if(res.data.success){
+           toast.success(res.data.message)
+           navigate(`/teacher/result`)
+       }
+       else{
+          toast.error(res.data.error)
+       }
+    }
     useEffect(()=>{
         const fetchAnswers=async()=>{
             try {
@@ -33,7 +51,16 @@ const EachAnswer = () => {
                 console.error("Error while fetching answers:",error)
             }
         }
+        const fetchExamMarks=async()=>{
+            try {
+                const res=await axios.get(`http://localhost:5000/online-exam/exam-marks/${examId}`)
+                setexamMarks(res.data.marks[0].total_marks)
+            } catch (error) {
+                console.log("Error while fetching exam marks.")
+            }
+        }
         fetchAnswers()
+        fetchExamMarks()
     },[examId,studentId])
 
   return (
@@ -76,10 +103,16 @@ const EachAnswer = () => {
        })
     }
       </div>
-      <div className='mt-4 text-center'>
+      <div className='mt-4 text-center flex flex-col justify-center items-center gap-2'>
         <p className='text-white text-3xl'>Total Marks: {total}</p>
+        <motion.button whileHover={{
+            scale:1.08
+        }} whileTap={{
+            scale:0.96,
+            transition:{type:'spring',stiffness:300}
+        }} className='bg-cyan-400 text-black px-2 py-1 rounded-xl' onClick={handleUploadMarks}>Upload marks</motion.button>
       </div>
-
+      
     </div>
   )
 }

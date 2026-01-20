@@ -158,24 +158,27 @@ export const createAnswersTable=async()=>{
     }
 }
 
-
-// export const createMarksTable=async()=>{
-//    try {
-//      await pool.query(`
-//        CREATE TABLE IF NOT EXISTS marks_submit (
-//   id INT AUTO_INCREMENT PRIMARY KEY,
-//   student_id INT,
-//   exam_id INT,
-//   isSubmitted BOOLEAN DEFAULT FALSE,
-//   FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
-//   FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE
-// );
-//        `) 
-//        console.log("Marks table created or already exists")
-//    } catch (error) {
-//        console.log("Error while creating marks table",error)
-//    }
-// }
+export const createMarksTable=async()=>{
+    try {
+      await pool.query(
+        `
+        CREATE TABLE IF NOT EXISTS marks(
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        exam_id INT,
+        student_id INT,
+        marks INT,
+        total_marks INT,
+        isSubmitted BOOLEAN DEFAULT FALSE,
+        FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE,
+        FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
+        )
+        `
+      )
+      console.log('Marks table created or already exists')
+    } catch (error) {
+       console.log("Error while creating marks table",error)
+    }
+}
 
 // export const createMarksSubmitTable=async()=>{
 //      try {

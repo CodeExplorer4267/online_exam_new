@@ -59,15 +59,22 @@ export const getAllAnswers=async(req,res)=>{
 //update or submit marks
 export const submitMarks=async(req,res)=>{
     try {
-        const {studentId,examId,marks}=req.body;
-        if (!studentId || !examId || !marks) {
-            return res.status(400).json({ success: false, error: "Missing required fields" });
-        }
-        const MarksQuery="INSERT INTO marks(student_id,exam_id,exam_marks) VALUES (?,?,?)"
-        const SubmitQuery="INSERT INTO marks_submit(student_id,exam_id,isSubmitted) VALUES (?,?,?)"
-        const [marksResult]=await pool.query(MarksQuery,[studentId,examId,marks])
-        const [submitResult]=await pool.query(SubmitQuery,[studentId,examId,true])
-        res.status(201).json({success:true,message:"Marks uploaded successfully",marksId:marksResult.insertId,submitId:submitResult.insertId})
+        const {studentId,examId,marks,total_marks}=req.body;
+        if (
+  studentId == null ||
+  examId == null ||
+  marks == null ||
+  total_marks == null
+) {
+  return res.status(400).json({
+    success: false,
+    error: "Missing required fields"
+  });
+}
+        const MarksQuery="INSERT INTO marks(student_id,exam_id,marks,total_marks,isSubmitted) VALUES (?,?,?,?,?)"
+        
+        const [marksResult]=await pool.query(MarksQuery,[studentId,examId,marks,total_marks,true])
+        res.status(201).json({success:true,message:"Marks uploaded successfully",marksId:marksResult.insertId})
     } catch (error) {
         res.status(400).json({success:false,error:error.message})
     }
@@ -299,4 +306,21 @@ export const getAllStudents=async(req,res)=>{
       console.log("Error while fetching students:",error)
       res.status(500).json({ success: false, message: "Server Error" });
     }
+}
+
+export const getExamMarks=async(req,res)=>{
+   try {
+     const {examId}=req.params;
+     if(!examId){
+        return res.status(404).json({success:false,message:"ExamId not found"})
+     }
+     const [marks]=await pool.query("SELECT total_marks from exams where id=?",[examId])
+     if(marks.length===0){
+        return res.status(404).json({success:false,message:"Exam not found"})
+     }
+     res.status(200).json({success:true,marks})
+   } catch (error) {
+     console.log("Error while fetching exam Marks",error)
+     res.status(500).json({success:false,message:"Server Error"})
+   }
 }

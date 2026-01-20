@@ -2,7 +2,7 @@
 import express, { Router } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import { createAnswersTable, createMessageTable, createQuestionsTable, createStudentsTable, createTeachersTable, createUniqueIdTable } from './db/setup.js';
+import { createAnswersTable, createMarksTable, createMessageTable, createQuestionsTable, createStudentsTable, createTeachersTable, createUniqueIdTable } from './db/setup.js';
 import router from './routes/Router.js';
 import { createExamsTable } from './db/setup.js';
 import http from 'http';
@@ -47,7 +47,7 @@ createQuestionsTable()
 createMessageTable()
 createUniqueIdTable()
 createAnswersTable()
-
+createMarksTable()
 
 const onlineusers=new Map() //map to track online users
 
