@@ -6,7 +6,7 @@ const AttemptedStudents = () => {
   const { examId } = useParams();
   const navigate = useNavigate();
   const [students, setStudents] = useState([]);
-
+  const [marksStatus,setMarksStatus]=useState({}) 
   useEffect(() => {
     const fetchStudents = async () => {
       const res = await axios.get(
@@ -14,9 +14,20 @@ const AttemptedStudents = () => {
       );
       setStudents(res.data?.students || []);
     };
-    fetchStudents();
-  }, [examId]);
 
+    const checkIsSubmitOrnot=async()=>{
+       const res=await axios.get(`http://localhost:5000/online-exam/marks-status/${examId}`)
+       const map={}
+       res.data.data.forEach((item)=>{
+          map[item.student_id]=item
+       })
+       setMarksStatus(map)
+    }
+
+    fetchStudents();
+    checkIsSubmitOrnot()
+  }, [examId]);
+  
   return (
     <div className="min-h-screen w-full bg-[#020617] px-6 py-10">
       <h1 className="text-center text-3xl font-bold text-cyan-400 mb-10">
@@ -46,15 +57,30 @@ const AttemptedStudents = () => {
                 </td>
                 <td className="px-6 py-4">{stu.email}</td>
                 <td className="px-6 py-4 text-cyan-300 font-bold">
-                  0
+                  {
+                    marksStatus[stu.student_id]?.marks > 0 ? marksStatus[stu.student_id]?.marks : 0
+                  }
                 </td>
                 <td className="px-6 py-4">
-                  <span className="px-3 py-1 rounded-full text-xs bg-green-500/20 text-green-400">
+                  {/* <span className="px-3 py-1 rounded-full text-xs bg-green-500/20 text-green-400">
                     Submitted
-                  </span>
+                  </span> */}
+                  {
+                     marksStatus[stu.student_id]?.isSubmitted ? <span className="px-3 py-1 rounded-full text-xs bg-green-500/20 text-green-400">
+                    Marks Submitted
+                  </span> : <span className="px-3 py-1 rounded-full text-xs bg-red-500/20 text-red-400">
+                    Not Submitted
+                  </span> 
+                  }
                 </td>
                 <td className="px-6 py-4">
-                  <button
+                  {
+                    marksStatus[stu.student_id]?.isSubmitted ? <button
+                    disabled
+                    className="px-4 py-2 rounded-lg bg-green-500 text-black font-semibold transition"
+                  >
+                    Marks Uploaded
+                  </button> : <button
                     onClick={() =>
                       navigate(`/teacher/result/${examId}/${stu.student_id}`)
                     }
@@ -62,6 +88,8 @@ const AttemptedStudents = () => {
                   >
                     View Result
                   </button>
+                  }
+                  
                 </td>
               </tr>
             ))}

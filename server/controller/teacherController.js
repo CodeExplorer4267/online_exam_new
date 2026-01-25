@@ -324,3 +324,25 @@ export const getExamMarks=async(req,res)=>{
      res.status(500).json({success:false,message:"Server Error"})
    }
 }
+
+export const getMarksStatusByExam=async(req,res)=>{
+    try {
+    const { examId } = req.params;
+
+    const [rows] = await pool.query(
+      "SELECT student_id, isSubmitted, marks FROM marks WHERE exam_id = ?",
+      [examId]
+    );
+
+    res.status(200).json({
+      success: true,
+      data: rows
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+}
