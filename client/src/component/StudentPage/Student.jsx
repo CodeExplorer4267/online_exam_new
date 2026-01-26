@@ -23,16 +23,14 @@ const StudentPage = () => {
       <div className="student-container">
           <SidebarStudent/>
           <Routes>
-            <Route path='dashboard' element={<DashBoard/>}/>
+            {/* <Route path='dashboard' element={<DashBoard/>}/> */}
             <Route path='exam' element={<StudentExam/>}/>
             <Route path='exam/:examId' element={<StudentExamQuestions/>}/>
             <Route path='material' element={<StudentMaterials/>}/>
             <Route path='/chat/*' element={<StudentChat/>}/>
-             {/* <Route path='stu-result' element={<StudentResult/>}/>
-             
-             <Route path='stu-result/:examId/:studentId' element={<StudentResultDetails/>}/>
-             
-             <Route path='/ask' element={<ChatAsk/>}/> */}
+            <Route path='result' element={<StudentResult/>}/>     
+            <Route path='stu-result/:examId/:studentId' element={<StudentResultDetails/>}/>
+             {/* <Route path='/ask' element={<ChatAsk/>}/>  */}
           </Routes>
       </div>
     </div>

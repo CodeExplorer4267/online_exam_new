@@ -25,19 +25,18 @@ const SidebarStudent = () => {
   return (
     <div className='bg-[#141414] w-[17%] min-h-screen p-3 flex flex-col gap-4'>
 
-      {/* DASHBOARD */}
-      <div
+      {/* <div
         className={itemStyle('dashboard')}
         onClick={() => handleNavigation('dashboard')}
       >
-        {/* Left glow bar */}
+    
         {activeoption === 'dashboard' && (
           <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] w-[4px] bg-[#4ea2ff] rounded-full" />
         )}
 
         <MdSpaceDashboard size={28} color="#4ea2ff" />
         <span className='text-[white] font-medium'>Dashboard</span>
-      </div>
+      </div> */}
 
       {/* EXAM */}
       <div
