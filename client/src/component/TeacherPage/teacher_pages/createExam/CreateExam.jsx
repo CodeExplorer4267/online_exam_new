@@ -135,9 +135,10 @@ const CreateExam = () => {
     localStorage.removeItem("startTime")
     localStorage.removeItem("endTime")
   };
-
+ 
+   
   return (
-    <div className="min-h-screen w-full bg-white flex items-start justify-center py-10 px-4">
+    <div className="min-h-screen w-full bg-white flex items-start justify-center py-10 px-4 backdrop-filter backdrop-blur-3xl">
       <div
         className="w-full max-w-3xl bg-[#141414] backdrop-blur-md rounded-xl shadow-2xl p-8 
     border border-[#27e8e8]/20 animate-fadeIn"

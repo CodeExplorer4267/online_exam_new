@@ -1,6 +1,9 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
-const StudentResultDetails = ({ exam, onBack }) => {
+const StudentResultDetails = () => {
+  const location=useLocation()
+  const exam = location.state?.exam || {};
   const evaluation = [
     { question: "Q1: Explain Stack", marks: "8 / 10" },
     { question: "Q2: Queue Operations", marks: "9 / 10" },
@@ -9,9 +12,8 @@ const StudentResultDetails = ({ exam, onBack }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6">
+    <div className="min-h-screen w-[83%] bg-gradient-to-br from-black via-gray-900 to-black text-white p-6">
       <button
-        onClick={onBack}
         className="mb-4 text-sm text-indigo-400 hover:underline"
       >
         ← Back to Results
@@ -41,7 +43,7 @@ const StudentResultDetails = ({ exam, onBack }) => {
         </div>
 
         <h2 className="mt-8 mb-4 text-xl font-semibold">
-          📝 Detailed Evaluation
+         Detailed Evaluation
         </h2>
 
         <div className="space-y-3">

@@ -29,7 +29,7 @@ const StudentPage = () => {
             <Route path='material' element={<StudentMaterials/>}/>
             <Route path='/chat/*' element={<StudentChat/>}/>
             <Route path='result' element={<StudentResult/>}/>     
-            <Route path='stu-result/:examId/:studentId' element={<StudentResultDetails/>}/>
+            <Route path='result/:examId' element={<StudentResultDetails/>}/>
              {/* <Route path='/ask' element={<ChatAsk/>}/>  */}
           </Routes>
       </div>
