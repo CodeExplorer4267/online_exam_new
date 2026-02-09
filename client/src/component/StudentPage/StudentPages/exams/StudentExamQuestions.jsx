@@ -9,10 +9,27 @@ const StudentExamQuestions = () => {
   const navigate = useNavigate();
 
   const duration = state?.duration || 0;
-  const [timeLeft, setTimeLeft] = useState(duration * 60);
+  const EXAM_DURATION=duration*60;
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const studentId = localStorage.getItem("userId");
+   
+  const [timeLeft, setTimeLeft] = useState(EXAM_DURATION);
+
+   const STORAGE_KEY = `exam_${examId}_startTime`;
+
+   const getRemainingTime = () => {
+    const startTime = localStorage.getItem(STORAGE_KEY);
+
+    if (!startTime) {
+      const now = Date.now();
+      localStorage.setItem(STORAGE_KEY, now);
+      return EXAM_DURATION;
+    }
+
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    return Math.max(EXAM_DURATION - elapsed, 0);
+  };
 
   useEffect(() => {
     axios.get(`http://localhost:5000/online-exam/exam/${examId}`)
@@ -31,14 +48,20 @@ const StudentExamQuestions = () => {
 
   // timer
   useEffect(() => {
-    if (timeLeft === 0) submitExam();
+    setTimeLeft(getRemainingTime());
 
     const interval = setInterval(() => {
-      setTimeLeft(t => t - 1);
+      const remaining = getRemainingTime();
+      setTimeLeft(remaining);
+
+      if (remaining <= 0) {
+        clearInterval(interval);
+        submitExam(true);
+      }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timeLeft]);
+  }, []);
 
   const submitExam = () => {
     const payload = Object.keys(answers).map(id => ({
