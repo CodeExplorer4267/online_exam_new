@@ -59,7 +59,7 @@ export const getAllAnswers=async(req,res)=>{
 //update or submit marks
 export const submitMarks=async(req,res)=>{
     try {
-        const {studentId,examId,marks,total_marks}=req.body;
+        const {studentId,examId,marks,total_marks,evaluations}=req.body;
         if (
   studentId == null ||
   examId == null ||
@@ -74,6 +74,17 @@ export const submitMarks=async(req,res)=>{
         const MarksQuery="INSERT INTO marks(student_id,exam_id,marks,total_marks,isSubmitted) VALUES (?,?,?,?,?)"
         
         const [marksResult]=await pool.query(MarksQuery,[studentId,examId,marks,total_marks,true])
+
+        // Update per-question evaluated marks in answers table
+        if(evaluations && Array.isArray(evaluations) && evaluations.length > 0){
+            for(const item of evaluations){
+                await pool.query(
+                    "UPDATE answers SET evaluated_marks=? WHERE id=?",
+                    [item.evaluatedMarks, item.answerId]
+                )
+            }
+        }
+
         res.status(201).json({success:true,message:"Marks uploaded successfully",marksId:marksResult.insertId})
     } catch (error) {
         res.status(400).json({success:false,error:error.message})
@@ -109,7 +120,7 @@ export const getEachStudentAnswer=async(req,res)=>{
     }
     try {
         const query=`
-            SELECT question_text,answer,marks,isSubmitted
+            SELECT id, question_id, question_text, answer, marks, evaluated_marks, isSubmitted
             FROM answers
             WHERE exam_id=? AND student_id=?
             `

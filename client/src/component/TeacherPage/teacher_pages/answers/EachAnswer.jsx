@@ -28,11 +28,18 @@ const EachAnswer = () => {
          setTotal(Object.values(evaluated).reduce((acc,sum)=>acc+sum,0))
     }
     const handleUploadMarks=async()=>{
+       // Build per-question evaluations array
+       const evaluations = Object.entries(evaluated).map(([index, evalMarks]) => ({
+          answerId: answers[index]?.id,
+          evaluatedMarks: evalMarks
+       })).filter(item => item.answerId != null)
+
        const res=await axios.post('http://localhost:5000/online-exam/update-marks',{
           studentId,
           examId,
           marks:total,
-          total_marks:examMarks
+          total_marks:examMarks,
+          evaluations
        })
        if(res.data.success){
            toast.success(res.data.message)

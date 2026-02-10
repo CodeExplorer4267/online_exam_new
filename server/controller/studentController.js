@@ -212,22 +212,62 @@ export const updateStudentProfile=async(req,res)=>{
 }
 
 export const getExamResults=async(req,res)=>{
-   try {
-     const {examId,studentId}=req.params;
+  try {
+    const {examId,studentId}=req.params;
      if(!examId || !studentId){
         return res.status(400).json({success:false,message:"Exam Id and Student Id are required"})
      }
-     const [questions]=await pool.query("SELECT question_text, marks FROM questions WHERE exam_id=?",[examId])
-     const [answers]=await pool.query("SELECT answer FROM answers WHERE exam_id=? AND student_id=?",[examId,studentId])
-     const [marksData]=await pool.query.query("SELECT marks as obtainedMarks FROM answers WHERE exam_id=? AND student_id=?",[examId,studentId])
-     if(questions.length===0){
-        return res.status(404).json({success:false,message:"No questions found for this exam"})
+     //fetch the exam details
+        const [examRows]=await pool.query("SELECT id, name, total_marks, duration FROM exams WHERE id=?",[examId])
+     if(examRows.length===0){
+        return res.status(404).json({success:false,message:"Exam not found"})
      }
-      if(answers.length===0){ 
-        return res.status(404).json({success:false,message:"No answers found for this student in this exam"})
+     const exam=examRows[0]
+     const [evaluation]=await pool.query(`
+         SELECT 
+           q.id as question_id,
+           q.question_text,
+           q.marks as max_marks,
+           a.answer as student_answer,
+           a.evaluated_marks,
+           a.id as answer_id
+         FROM questions q
+         LEFT JOIN answers a ON q.id = a.question_id AND a.exam_id = ? AND a.student_id = ?
+         WHERE q.exam_id = ?
+         ORDER BY q.id ASC
+     `,[examId, studentId, examId])
+
+     const [marksRows]=await pool.query("SELECT marks as obtained_marks, total_marks, isSubmitted FROM marks WHERE exam_id=? AND student_id=?",[examId,studentId])
+     
+     const isEvaluated=marksRows.length > 0 && marksRows[0].isSubmitted
+     const obtainedMarks=marksRows.length > 0 ? marksRows[0].obtained_marks : null
+     res.status(200).json({
+        success:true,
+        exam: {
+           id: exam.id,
+           name: exam.name,
+           total_marks: exam.total_marks,
+           duration: exam.duration
+        },
+        evaluation,
+        obtainedMarks,
+        isEvaluated
+     })
+  } catch (error) {
+    return res.status(500).json({success:false,message:"Failed to fetch ecxam results: Server Error",error:error.message })
+  }
+}
+
+// Get all marks for a student across all exams
+export const getStudentAllMarks=async(req,res)=>{
+   try {
+     const {studentId}=req.params;
+     if(!studentId){
+        return res.status(400).json({success:false,message:"Student Id is required"})
      }
-     res.status(200).json({success:true,questions,answers,marksData})
+     const [marks]=await pool.query("SELECT exam_id, marks as obtained_marks, total_marks, isSubmitted FROM marks WHERE student_id=?",[studentId])
+     res.status(200).json({success:true, marks})
    } catch (error) {
-     return res.status(500).json({success:false,message:"Failed to fetch exam results: Server Error",error:error.message})
+     return res.status(500).json({success:false,message:"Failed to fetch student marks",error:error.message})
    }
 }
