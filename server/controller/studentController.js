@@ -210,3 +210,24 @@ export const updateStudentProfile=async(req,res)=>{
       return res.status(500).json({success:false,message:"Failed to update profile:",error:error.message})
    }
 }
+
+export const getExamResults=async(req,res)=>{
+   try {
+     const {examId,studentId}=req.params;
+     if(!examId || !studentId){
+        return res.status(400).json({success:false,message:"Exam Id and Student Id are required"})
+     }
+     const [questions]=await pool.query("SELECT question_text, marks FROM questions WHERE exam_id=?",[examId])
+     const [answers]=await pool.query("SELECT answer FROM answers WHERE exam_id=? AND student_id=?",[examId,studentId])
+     const [marksData]=await pool.query.query("SELECT marks as obtainedMarks FROM answers WHERE exam_id=? AND student_id=?",[examId,studentId])
+     if(questions.length===0){
+        return res.status(404).json({success:false,message:"No questions found for this exam"})
+     }
+      if(answers.length===0){ 
+        return res.status(404).json({success:false,message:"No answers found for this student in this exam"})
+     }
+     res.status(200).json({success:true,questions,answers,marksData})
+   } catch (error) {
+     return res.status(500).json({success:false,message:"Failed to fetch exam results: Server Error",error:error.message})
+   }
+}

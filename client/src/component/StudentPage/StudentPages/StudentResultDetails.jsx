@@ -1,21 +1,35 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect,useState } from "react";
+import { useParams,useLocation} from "react-router-dom";
 
 const StudentResultDetails = () => {
   const location=useLocation()
-  const exam = location.state?.exam || {};
-  const evaluation = [
-    { question: "Q1: Explain Stack", marks: "8 / 10" },
-    { question: "Q2: Queue Operations", marks: "9 / 10" },
-    { question: "Q3: Linked List", marks: "7 / 10" },
-    { question: "Q4: Trees", marks: "8 / 10" },
-  ];
-
+  const exam=location.state?.exam
+  const { id } = useParams();
+  const studentId = localStorage.getItem("userId")
+  const [questions,setQuestions]=useState([])
+  const [answers,setAnswers]=useState([])
+  const [marks,setMarks]=useState(0)
+  useEffect(()=>{
+    //fetch detailed result using id and studentId
+    const fetchResultsDetails=async()=>{
+       try {
+         const res=await axios.get('http://localhost:5000/online-exam/get-student-results/'+id+'/'+studentId)
+         if(res.data.success){
+            setQuestions(res.data.questions)
+            setAnswers(res.data.answers)
+            setMarks(res.data.marks)
+         }
+       } catch (error) {
+         console.log("Error while fetching result details:",error)
+       }
+    }
+    fetchResultsDetails()
+  },[id,studentId])
+  
   return (
     <div className="min-h-screen w-[83%] bg-gradient-to-br from-black via-gray-900 to-black text-white p-6">
-      <button
-        className="mb-4 text-sm text-indigo-400 hover:underline"
-      >
+      <button className="mb-4 text-sm text-indigo-400 hover:underline">
         ← Back to Results
       </button>
 
@@ -42,23 +56,8 @@ const StudentResultDetails = () => {
           </div>
         </div>
 
-        <h2 className="mt-8 mb-4 text-xl font-semibold">
-         Detailed Evaluation
-        </h2>
+        <h2 className="mt-8 mb-4 text-xl font-semibold">Detailed Evaluation</h2>
 
-        <div className="space-y-3">
-          {evaluation.map((item, index) => (
-            <div
-              key={index}
-              className="flex justify-between bg-gray-900 rounded-xl p-4"
-            >
-              <span>{item.question}</span>
-              <span className="text-green-400 font-medium">
-                {item.marks}
-              </span>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );
